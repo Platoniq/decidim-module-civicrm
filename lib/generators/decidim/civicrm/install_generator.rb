@@ -10,7 +10,7 @@ module Decidim
 
         def copy_files
           copy_file "omniauth_civicrm.rb", "config/initializers/omniauth_civicrm.rb"
-          copy_file "civicrm_verification_on_oauth.rb", "config/initializers/civicrm_verification_on_oauth.rb"
+          copy_file "civicrm_verification.rb", "config/initializers/civicrm_verification.rb"
 
           rake "decidim_civicrm:install:migrations"
           rake "db:migrate"

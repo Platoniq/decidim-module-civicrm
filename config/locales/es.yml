@@ -1,0 +1,5 @@
+es:
+  decidim:
+    authorization_handlers:
+      civicrm_verification:
+        name: Autorización con CiViCRM

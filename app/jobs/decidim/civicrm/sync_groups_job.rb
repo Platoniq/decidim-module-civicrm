@@ -7,7 +7,7 @@ module Decidim
 
       def perform
         Group.prepare_cleanup
-        
+
         api_groups = Decidim::Civicrm::Api::ListGroups.new.result
         api_groups.each { |data| update_group(group, data) }
 

@@ -9,7 +9,7 @@ module Decidim
         data = JSON.parse(data)
 
         user = Decidim::User.find(data[:user_id])
-        
+
         return unless civicrm_user?(user)
 
         Contact.create!(

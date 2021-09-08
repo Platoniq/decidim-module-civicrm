@@ -8,21 +8,20 @@ module Decidim
       queue_as :default
 
       def perform(data)
+        data = JSON.parse(data).deep_symbolize_keys
+
         user = Decidim::User.find(data[:user_id])
-        byebug
+
         return unless civicrm_user?(user)
-        byebug
 
         handler = retrieve_handler(user)
-        byebug
+
         Decidim::Verifications::AuthorizeUser.call(handler) do
           on(:ok) do
-            byebug 
             notify_user(handler.user, :ok, handler)
           end
-          
+
           on(:invalid) do
-            byebug 
             notify_user(handler.user, :invalid, handler)
           end
         end
@@ -36,7 +35,7 @@ module Decidim
       end
 
       def notify_user(user, status, handler)
-        notification_class = status == :ok ? Decidim::Civicrm::Verifications::SuccessNotification : Decidim::Civicrm::VerificationInvalidNotification
+        notification_class = status == :ok ? Decidim::Civicrm::Verifications::SuccessNotification : Decidim::Civicrm::Verifications::InvalidNotification
         Decidim::EventsManager.publish(
           event: "decidim.events.civicrm_verification.#{status}",
           event_class: notification_class,
