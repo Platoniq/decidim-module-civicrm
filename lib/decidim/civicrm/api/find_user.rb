@@ -4,30 +4,32 @@ module Decidim
   module Civicrm
     module Api
       class FindUser < BaseQuery
-        def initialize(id)
-          request = Request.new(
+        def initialize(id, query = nil)
+          @request = Request.new(
             entity: "User",
             id: id,
-            json: json_params(query)
+            json: json_params(query || default_query)
           )
 
-          @result = parse(request.response).deep_symbolize_keys if success?
+          store_result
         end
 
-        def self.query
+        def default_query
           {
-            "api.Contact.get" => Api::Contact.query
+            "api.Contact.get" => {
+              "return" => "display_name"
+            }
           }
         end
 
         private
 
-        def parse(response)
-          response = response["values"].first
-          contact = response.delete("api.Contact.get")["values"].first
+        def parsed_response
+          user = response["values"].first
+          contact = user.delete("api.Contact.get")["values"].first
 
           {
-            user: response,
+            user: user,
             contact: contact
           }
         end

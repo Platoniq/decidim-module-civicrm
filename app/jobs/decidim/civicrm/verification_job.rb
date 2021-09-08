@@ -3,21 +3,26 @@
 module Decidim
   module Civicrm
     class VerificationJob < ApplicationJob
-      include ::ApplicationHelper
+      include CivicrmHelper
 
       queue_as :default
 
       def perform(data)
         user = Decidim::User.find(data[:user_id])
+        byebug
         return unless civicrm_user?(user)
+        byebug
 
         handler = retrieve_handler(user)
+        byebug
         Decidim::Verifications::AuthorizeUser.call(handler) do
           on(:ok) do
+            byebug 
             notify_user(handler.user, :ok, handler)
           end
-
+          
           on(:invalid) do
+            byebug 
             notify_user(handler.user, :invalid, handler)
           end
         end

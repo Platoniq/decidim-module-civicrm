@@ -14,7 +14,11 @@ module Decidim
           ).to_json
         end
 
-        def parse(response)
+        def parsed_response
+          raise NotImplementedError
+        end
+
+        def default_query
           raise NotImplementedError
         end
 
@@ -26,6 +30,10 @@ module Decidim
 
         def response
           @request.response
+        end
+
+        def store_result
+          @result = parsed_response.deep_symbolize_keys if success?
         end
       end
     end
