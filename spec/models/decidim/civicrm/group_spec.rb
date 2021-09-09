@@ -4,7 +4,9 @@ require "spec_helper"
 
 module Decidim::Civicrm
   describe Group do
-    subject { described_class.new(civicrm_group_id: 1, title: "Group") }
+    let!(:organization) { create(:organization) }
+
+    subject { described_class.new(organization: organization, civicrm_group_id: 1, title: "Group") }
 
     it { is_expected.to be_valid }
   end
