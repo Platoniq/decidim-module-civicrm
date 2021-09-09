@@ -4,18 +4,18 @@ module Decidim
   module Civicrm
     module Api
       class ListGroups < BaseQuery
-        def initialize(id)
-          request = Request.new(
+        def initialize(id, query = nil)
+          @request = Request.new(
             entity: "Group",
             id: id,
             is_active: 1,
-            json: json_params(query)
+            json: json_params(query || default_query)
           )
 
-          @result = parse(request.response).deep_symbolize_keys if success?
+          store_result
         end
 
-        def self.query
+        def default_query
           {
             options: { limit: 0 },
             return: "group_id,name,title,description,group_type"
@@ -24,7 +24,7 @@ module Decidim
 
         private
 
-        def parse(response)
+        def parsed_response
           {
             groups: response["values"]
           }

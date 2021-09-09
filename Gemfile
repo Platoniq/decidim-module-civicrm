@@ -9,6 +9,7 @@ DECIDIM_VERSION = "0.24.3"
 gemspec
 
 gem "decidim-dev", DECIDIM_VERSION
+gem "decidim-verifications", DECIDIM_VERSION
 
 gem "rake", "~> 13.0"
 gem "rspec", "~> 3.0"

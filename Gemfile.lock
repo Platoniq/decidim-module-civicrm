@@ -4,6 +4,7 @@ PATH
     decidim-civicrm (0.24)
       decidim (~> 0.24)
       decidim-core (~> 0.24)
+      decidim-verifications (~> 0.24)
 
 GEM
   remote: https://rubygems.org/
@@ -397,7 +398,7 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
-    faker (2.18.0)
+    faker (2.19.0)
       i18n (>= 1.6, < 2)
     faraday (1.7.1)
       faraday-em_http (~> 1.0)
@@ -813,6 +814,7 @@ DEPENDENCIES
   decidim-admin (~> 0.24)
   decidim-civicrm!
   decidim-dev (= 0.24.3)
+  decidim-verifications (= 0.24.3)
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop-faker (~> 1.1)

@@ -18,11 +18,15 @@ module OmniAuth
 
       info do
         {
-          name: full_info[:civicrm][:contact][:display_name],
-          nickname: full_info["preferred_username"],
-          email: full_info["email"],
-          image: full_info["picture"]
+          name: extra[:contact][:display_name],
+          nickname: raw_info["preferred_username"],
+          email: raw_info["email"],
+          image: raw_info["picture"]
         }
+      end
+
+      extra do
+        civicrm_info
       end
 
       def client
@@ -43,12 +47,8 @@ module OmniAuth
         @raw_info ||= access_token.get("/oauth2/UserInfo").parsed
       end
 
-      def full_info
-        @full_info ||= raw_info.merge(civicrm: civicrm_info)
-      end
-
       def civicrm_info
-        ::Decidim::Civicrm::Api::FindUser.new(uid).result
+        @civicrm_info ||= ::Decidim::Civicrm::Api::FindUser.new(uid).result
       end
     end
   end

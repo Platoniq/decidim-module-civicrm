@@ -4,17 +4,17 @@ module Decidim
   module Civicrm
     module Api
       class FindContact < BaseQuery
-        def initialize(id)
+        def initialize(id, query = nil)
           @request = Request.new(
             entity: "Contact",
             contact_id: id,
-            json: json_params(query)
+            json: json_params(query || default_query)
           )
 
-          @result = parse(request.response).deep_symbolize_keys if success?
+          store_result
         end
 
-        def self.query
+        def default_query
           {
             "return" => "display_name"
           }
@@ -22,11 +22,9 @@ module Decidim
 
         private
 
-        def parse(response)
-          response = response["values"].first
-
+        def parsed_response
           {
-            contact: contact
+            contact: response["values"].first
           }
         end
       end
