@@ -28,16 +28,16 @@ module Decidim
       end
 
       def update_group_memberships(id)
-        GroupMemebership.prepare_cleanup
+        GroupMembership.prepare_cleanup
 
         api_contacts_in_group = Decidim::Civicrm::Api::ContactsInGroup.new(id).result
         api_contacts_in_group.each { |data| update_group_membership(data) }
 
-        GroupMemebership.clean_up_records
+        GroupMembership.clean_up_records
       end
 
       def update_group_membership(id, data)
-        GroupMemebership.find_or_create_by(civicrm_group_id: id, civicrm_contact_id: data[:id]) do |group_membership|
+        GroupMembership.find_or_create_by(civicrm_group_id: id, civicrm_contact_id: data[:id]) do |group_membership|
           group_membership.update!(marked_for_deletion: false)
         end
       end
