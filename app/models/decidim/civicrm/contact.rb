@@ -7,7 +7,7 @@ module Decidim
 
       belongs_to :decidim_user, class_name: "Decidim::User"
 
-      has_many :group_memberships, class_name: "Decidim::Civicrm::GroupMemebership", foreign_key: "civicrm_contact_id", dependent: :destroy
+      has_many :group_memberships, class_name: "Decidim::Civicrm::GroupMembership", dependent: :destroy
       has_many :groups, class_name: "Decidim::Civicrm::Group", through: :group_memberships
     end
   end

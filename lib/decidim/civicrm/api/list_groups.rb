@@ -4,10 +4,9 @@ module Decidim
   module Civicrm
     module Api
       class ListGroups < BaseQuery
-        def initialize(id, query = nil)
+        def initialize(query = nil)
           @request = Request.new(
             entity: "Group",
-            id: id,
             is_active: 1,
             json: json_params(query || default_query)
           )
@@ -17,7 +16,7 @@ module Decidim
 
         def default_query
           {
-            options: { limit: 0 },
+            options: { limit: 10 },
             return: "group_id,name,title,description,group_type"
           }
         end
