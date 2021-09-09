@@ -2,14 +2,14 @@
 
 require "spec_helper"
 
-module Decidim::Civicrm::Api
-  describe FindUser do
-    subject { described_class.new(1) }
+describe Decidim::Civicrm::Api::FindUser, type: :class do
+  subject { described_class.new(42) }
 
-    describe "#result" do
-      it "returns a Hash with the result" do
-        # TODO
-      end
+  describe "#result" do
+    it "returns a Hash with the result" do
+      stub_user_valid_request
+      
+      expect(subject.result).to be_a Hash
     end
   end
 end

@@ -2,14 +2,14 @@
 
 require "spec_helper"
 
-module Decidim::Civicrm::Api
-  describe ContactsInGroup do
-    subject { described_class.new(1) }
+describe Decidim::Civicrm::Api::ContactsInGroup, type: :class do
+  subject { described_class.new(1) }
 
-    describe "#result" do
-      it "returns a Hash with the result" do
-        # TODO
-      end
+  describe "#result" do
+    it "returns a Hash with the result" do
+      stub_contacts_in_group_valid_request
+      
+      expect(subject.result).to be_a Hash
     end
   end
 end

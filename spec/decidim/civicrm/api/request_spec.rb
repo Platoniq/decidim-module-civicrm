@@ -2,26 +2,23 @@
 
 require "spec_helper"
 
-module Decidim::Civicrm::Api
+describe Decidim::Civicrm::Api::Request, type: :class do
   subject { described_class.new(params) }
+  let(:params) do
+    {
 
-  describe Request do
-    let(:params) do
-      {
+    }
+  end
 
-      }
+  describe "#base_params" do
+    it "returns a Hash with params" do
+      # TODO
     end
-
-    describe "#base_params" do
-      it "returns a Hash with params" do
-        # TODO
-      end
-    end
-    
-    describe "#response" do
-      it "returns a response parsed into a ruby Hash" do
-        # TODO
-      end
+  end
+  
+  describe "#response" do
+    it "returns a response parsed into a ruby Hash" do
+      # TODO
     end
   end
 end
