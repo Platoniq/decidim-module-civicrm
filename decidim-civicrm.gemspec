@@ -21,9 +21,9 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "decidim", "~> #{Decidim::Civicrm.version}"
+  s.add_dependency "decidim-admin", "~> #{Decidim::Civicrm.version}"
   s.add_dependency "decidim-core", "~> #{Decidim::Civicrm.version}"
   s.add_dependency "decidim-verifications", "~> #{Decidim::Civicrm.version}"
 
-  s.add_development_dependency "decidim-admin", "~> #{Decidim::Civicrm.version}"
   s.add_development_dependency "decidim-dev", "~> #{Decidim::Civicrm.version}"
 end

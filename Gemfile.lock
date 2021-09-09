@@ -3,6 +3,7 @@ PATH
   specs:
     decidim-civicrm (0.24)
       decidim (~> 0.24)
+      decidim-admin (~> 0.24)
       decidim-core (~> 0.24)
       decidim-verifications (~> 0.24)
 
@@ -811,7 +812,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  decidim-admin (~> 0.24)
   decidim-civicrm!
   decidim-dev (= 0.24.3)
   decidim-verifications (= 0.24.3)
