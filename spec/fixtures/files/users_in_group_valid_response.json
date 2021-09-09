@@ -1,0 +1,22 @@
+{
+  "is_error": 0,
+  "version": 3,
+  "count": 3,
+  "values": [
+    {
+      "contact_id": "9999",
+      "contact_is_deleted": "0",
+      "id": "9999"
+    },
+    {
+      "contact_id": "777",
+      "contact_is_deleted": "0",
+      "id": "777"
+    },
+    {
+      "contact_id": "6",
+      "contact_is_deleted": "0",
+      "id": "6"
+    }
+  ]
+}
