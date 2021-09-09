@@ -7,15 +7,20 @@ module Decidim
     module MarkableForDeletion
       extend ActiveSupport::Concern
 
+      included do
+        scope :to_delete, -> { where(marked_for_deletion: true) }
+        scope :to_keep, -> { where(marked_for_deletion: false) }
+      end
+
       class_methods do
         # rubocop:disable Rails/SkipsModelValidations
 
-        def self.prepare_cleanup
+        def prepare_cleanup
           update_all(marked_for_deletion: true)
         end
 
-        def self.clean_up_records
-          where(marked_for_deletion: true).destroy_all
+        def clean_up_records
+          to_delete.destroy_all
         end
 
         # rubocop:enable Rails/SkipsModelValidations

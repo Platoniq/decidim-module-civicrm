@@ -5,8 +5,8 @@ module Decidim
     class GroupMembership < ApplicationRecord
       include MarkableForDeletion
 
-      belongs_to :contact, class_name: "Decidim::Civicrm::Contact", foreign_key: "civicrm_contact_id"
-      belongs_to :group, class_name: "Decidim::Civicrm::Group", foreign_key: "civicrm_group_id"
+      belongs_to :contact, class_name: "Decidim::Civicrm::Contact"
+      belongs_to :group, class_name: "Decidim::Civicrm::Group"
     end
   end
 end

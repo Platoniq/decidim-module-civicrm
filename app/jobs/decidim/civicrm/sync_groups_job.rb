@@ -7,37 +7,56 @@ module Decidim
 
       def perform
         Group.prepare_cleanup
-
-        api_groups = Decidim::Civicrm::Api::ListGroups.new.result
-        api_groups.each { |data| update_group(group, data) }
-
-        Group.clean_up_records
-      end
-
-      def update_group(data)
-        Group.find_or_create_by(civicrm_group_id: data[:id]) do |group|
-          group.update!(
-            title: data[:title],
-            description: data[:description],
-            extra: data,
-            marked_for_deletion: false
-          )
-
-          update_group_memberships(data[:id])
-        end
-      end
-
-      def update_group_memberships(id)
         GroupMembership.prepare_cleanup
 
-        api_contacts_in_group = Decidim::Civicrm::Api::ContactsInGroup.new(id).result
-        api_contacts_in_group.each { |data| update_group_membership(data) }
+        api_groups = Decidim::Civicrm::Api::ListGroups.new.result[:groups]
 
+        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: #{api_groups.count} groups to process"
+
+        api_groups.each { |data| update_group(data) }
+
+        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: #{Group.to_delete.count} groups to delete"
+        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: #{GroupMembership.to_delete.count} group memberships to delete"
+
+        Group.clean_up_records
         GroupMembership.clean_up_records
       end
 
-      def update_group_membership(id, data)
-        GroupMembership.find_or_create_by(civicrm_group_id: id, civicrm_contact_id: data[:id]) do |group_membership|
+      def update_group(data)
+        civicrm_group_id = data[:id]
+
+        return if civicrm_group_id.blank?
+
+        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: Creating or updating Group #{data[:title]} (#{civicrm_group_id}) with data #{data}"
+
+        group = Group.find_or_initialize_by(civicrm_group_id: civicrm_group_id)
+
+        group.title = data[:title]
+        group.description = data[:description]
+        group.extra = data
+        group.marked_for_deletion = false
+
+        group.save!
+
+        update_group_memberships(group)
+      end
+
+      def update_group_memberships(group)
+        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: Updating group memberships for Group #{group.title} (#{group.civicrm_group_id})"
+
+        api_contacts_in_group = Decidim::Civicrm::Api::ContactsInGroup.new(group.civicrm_group_id).result[:contact_ids]
+
+        Contact.where(civicrm_contact_id: api_contacts_in_group).find_each do |contact|
+          update_group_membership(group.civicrm_group_id, contact)
+        end
+      end
+
+      def update_group_membership(civicrm_group_id, contact)
+        return unless contact && (group = Group.find_by(civicrm_group_id: civicrm_group_id))
+
+        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: Creating or updating membership for Contact #{contact.civicrm_contact_id} for Group #{civicrm_group_id}"
+
+        GroupMembership.find_or_create_by(contact: contact, group: group) do |group_membership|
           group_membership.update!(marked_for_deletion: false)
         end
       end

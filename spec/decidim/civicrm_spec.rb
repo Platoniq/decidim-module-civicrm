@@ -6,6 +6,6 @@ RSpec.describe Decidim::Civicrm do
   end
 
   it "does something useful" do
-    expect(false).to eq(true)
+    expect(Decidim::Civicrm).to eq("Be useful")
   end
 end
