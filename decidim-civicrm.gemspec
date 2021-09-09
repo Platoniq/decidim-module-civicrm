@@ -14,13 +14,12 @@ Gem::Specification.new do |s|
 
   s.name = "decidim-civicrm"
   s.summary = "A Decidim module to connect with CiViCRM as OAUTH provider and perform verifications based on CiViCRM Contact attributes."
-  s.description = "."
+  s.description = "A Decidim module to connect with CiViCRM as OAUTH provider and perform verifications based on CiViCRM Contact attributes."
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 
   s.require_paths = ["lib"]
 
-  s.add_dependency "decidim", "~> #{Decidim::Civicrm.version}"
   s.add_dependency "decidim-admin", "~> #{Decidim::Civicrm.version}"
   s.add_dependency "decidim-core", "~> #{Decidim::Civicrm.version}"
   s.add_dependency "decidim-verifications", "~> #{Decidim::Civicrm.version}"
