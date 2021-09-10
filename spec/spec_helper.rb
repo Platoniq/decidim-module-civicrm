@@ -1,15 +1,22 @@
 # frozen_string_literal: true
 
-require "decidim/civicrm"
+require "decidim/dev"
+
+require "simplecov"
+SimpleCov.start "rails"
+if ENV["CODECOV"]
+  require "codecov"
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
+
+ENV["ENGINE_ROOT"] = File.dirname(__dir__)
+
+Decidim::Dev.dummy_app_path = File.expand_path(File.join(__dir__, "decidim_dummy_app"))
+  
+require "decidim/dev/test/base_spec_helper"
+
+require "support/civicrm_stubs"
 
 RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
-
-  # Disable RSpec exposing methods globally on `Module` and `main`
-  config.disable_monkey_patching!
-
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
-  end
+  config.include CivicrmStubs
 end

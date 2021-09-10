@@ -46,6 +46,16 @@ TODO: Write usage instructions here
 
 ## Development
 
+Configure these values in `spec/decidim_dummy_app/config/secrets.yml`:
+
+```yaml
+  civicrm:
+    api:
+      api_key: fake-civicrm-api-key
+      key: fake-civicrm-api-secret
+      url: https://api.base
+```
+
 TODO: Write development instructions here
 
 ## Contributing

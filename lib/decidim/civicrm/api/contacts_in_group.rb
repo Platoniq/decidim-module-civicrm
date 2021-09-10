@@ -16,7 +16,7 @@ module Decidim
 
         def default_query
           {
-            options: { limit: 10 }, # DEBUG
+            options: { limit: 0 },
             return: "contact_id"
           }
         end

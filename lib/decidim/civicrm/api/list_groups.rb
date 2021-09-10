@@ -16,7 +16,7 @@ module Decidim
 
         def default_query
           {
-            options: { limit: 10 }, # DEBUG
+            options: { limit: 0 },
             return: "group_id,name,title,description,group_type"
           }
         end

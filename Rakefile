@@ -4,8 +4,14 @@ require "decidim/dev/common_rake"
 require "fileutils"
 
 def install_module(path)
+  templates_dir = "lib/generators/decidim/civicrm/templates"
+
+  FileUtils.cp File.join(templates_dir, "civicrm_verification.rb"), "spec/decidim_dummy_app/config/initializers/civicrm_verification.rb", verbose: true
+  FileUtils.cp File.join(templates_dir, "omniauth_civicrm.rb"), "spec/decidim_dummy_app/config/initializers/omniauth_civicrm.rb", verbose: true
+
   Dir.chdir(path) do
-    system("bundle exec rake decidim:civicrm:install")
+    system("bundle exec rake decidim_civicrm:install:migrations")
+    system("bundle exec rake db:migrate")
   end
 end
 
@@ -19,8 +25,6 @@ desc "Generates a dummy app for testing"
 task test_app: "decidim:generate_external_test_app" do
   ENV["RAILS_ENV"] = "test"
   install_module("spec/decidim_dummy_app")
-  copy_themes
-  copy_headers
 end
 
 desc "Generates a development app."

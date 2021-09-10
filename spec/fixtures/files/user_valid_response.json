@@ -1,0 +1,21 @@
+{
+  "is_error": 0,
+  "version": 3,
+  "count": 1,
+  "id": 42,
+  "values": [
+    {
+      "id": "42",
+      "name": "arthur.dent",
+      "email": "arthurdent@example.com",
+      "contact_id": "9999",
+      "api.Contact.get": {
+        "values": [
+          {
+            "display_name": "Arthur Dent"
+          }
+        ]
+      }
+    }
+  ]
+}
