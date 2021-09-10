@@ -9,9 +9,12 @@ en:
         groups:
           index:
             description: Description
+            empty: There are no groups
             members: Members
             name: Name
+            participants: Participants
             sync: Synchronize with CiViCRM
             title: Groups
+            total_members: Total members
           sync:
             success: The synchronization has started

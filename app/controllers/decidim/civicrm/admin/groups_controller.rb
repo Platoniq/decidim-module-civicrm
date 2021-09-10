@@ -4,6 +4,7 @@ module Decidim
   module Civicrm
     module Admin
       class GroupsController < Decidim::Admin::ApplicationController
+        include Paginable
         include NeedsPermission
 
         helper_method :groups, :members
@@ -31,7 +32,11 @@ module Decidim
         end
 
         def groups
-          @groups ||= Group.where(organization: current_organization)
+          paginate(all_groups)
+        end
+
+        def all_groups
+          @all_groups ||= Group.where(organization: current_organization)
         end
         
         def members(group)

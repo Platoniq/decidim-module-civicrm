@@ -46,6 +46,8 @@ module Decidim
 
         api_contacts_in_group = Decidim::Civicrm::Api::ContactsInGroup.new(group.civicrm_group_id).result[:contact_ids]
 
+        group.update!(civicrm_member_count: api_contacts_in_group.count)
+
         Contact.where(decidim_organization_id: organization_id, civicrm_contact_id: api_contacts_in_group).find_each do |contact|
           update_group_membership(organization_id, group.civicrm_group_id, contact)
         end
