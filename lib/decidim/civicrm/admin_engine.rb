@@ -11,7 +11,11 @@ module Decidim
 
       
       routes do
-        resources :groups, only: [:index, :show]
+        resources :groups, only: [:index, :show] do
+          collection do
+            get :sync
+          end
+        end
         
         root to: "groups#index"
       end

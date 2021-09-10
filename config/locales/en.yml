@@ -11,4 +11,7 @@ en:
             description: Description
             members: Members
             name: Name
+            sync: Synchronize with CiViCRM
             title: Groups
+          sync:
+            success: The synchronization has started

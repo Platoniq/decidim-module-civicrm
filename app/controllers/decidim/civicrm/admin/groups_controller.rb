@@ -18,8 +18,16 @@ module Decidim
           # enforce_permission_to :show, :civicrm_groups
         end
 
-        def update
-          # enforce_permission_to :index, :civicrm_groups
+        def sync
+          # enforce_permission_to :update, :civicrm_groups
+
+          SyncGroupsJob.perform_later(current_organization.id)
+          
+          flash[:notice] = t("success", scope: "decidim.civicrm.admin.groups.sync")
+
+          redirect_to decidim_civicrm_admin.groups_path
+          # TODO notification ok
+          # TODO send email when complete?
         end
 
         def groups
