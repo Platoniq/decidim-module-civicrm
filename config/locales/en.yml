@@ -4,3 +4,11 @@ en:
     authorization_handlers:
       civicrm_verification:
         name: Authorized with CiViCRM
+    civicrm:
+      admin:
+        groups:
+          index:
+            description: Description
+            members: Members
+            name: Name
+            title: Groups
