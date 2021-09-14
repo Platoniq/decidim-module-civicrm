@@ -4,7 +4,7 @@ module Decidim
   module Civicrm
     class GroupMembership < ApplicationRecord
       include MarkableForDeletion
-      
+
       belongs_to :organization, class_name: "Decidim::Organization", foreign_key: "decidim_organization_id"
 
       belongs_to :contact, class_name: "Decidim::Civicrm::Contact"

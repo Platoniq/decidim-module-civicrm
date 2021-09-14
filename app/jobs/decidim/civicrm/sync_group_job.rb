@@ -11,7 +11,7 @@ module Decidim
         group = Decidim::Civicrm::Group.find(group_id)
 
         data = Decidim::Civicrm::Api::FindGroup.new(group.civicrm_group_id).result[:group]
-        
+
         Rails.logger.info "Decidim::Civicrm::SyncGroupJob: Process group #{group.title} (civicrm id: #{group.civicrm_group_id})"
 
         update_group(group, data)

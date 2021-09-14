@@ -8,7 +8,7 @@ describe Decidim::Civicrm::Api::FindGroup, type: :class do
   describe "#result" do
     it "returns a Hash with the result" do
       stub_group_valid_request
-      
+
       expect(subject.result).to be_a Hash
     end
   end

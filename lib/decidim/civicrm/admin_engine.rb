@@ -9,14 +9,13 @@ module Decidim
       paths["db/migrate"] = nil
       paths["lib/tasks"] = nil
 
-      
       routes do
         resources :groups, only: [:index, :show] do
           collection do
             get :sync
           end
         end
-        
+
         root to: "groups#index"
       end
 
@@ -25,18 +24,18 @@ module Decidim
           mount Decidim::Civicrm::AdminEngine, at: "/admin/civicrm", as: "decidim_civicrm_admin"
         end
       end
-      
+
       initializer "decidim.civicrm.admin_menu" do
         Decidim.menu :admin_menu do |menu|
           menu.item I18n.t("menu.civicrm", scope: "decidim.admin", default: "CiViCRM"),
-          decidim_civicrm_admin.groups_path,
-          icon_name: "people",
-          position: 5.75,
-          active: is_active_link?(decidim_civicrm_admin.groups_path, :inclusive),
+                    decidim_civicrm_admin.groups_path,
+                    icon_name: "people",
+                    position: 5.75,
+                    active: is_active_link?(decidim_civicrm_admin.groups_path, :inclusive),
                     if: defined?(current_user) && current_user&.read_attribute("admin")
         end
       end
-                  
+
       def load_seed
         nil
       end

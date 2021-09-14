@@ -14,7 +14,7 @@ module Decidim
         def index
           # enforce_permission_to :index, :civicrm_groups
         end
-        
+
         def show
           # enforce_permission_to :show, :civicrm_groups
         end
@@ -32,16 +32,17 @@ module Decidim
             redirect_to decidim_civicrm_admin.groups_path
           end
 
-          # TODO notification ok
+          # TODO: notification ok
           # TODO send email when complete?
         end
 
         def groups
           paginate(all_groups)
         end
-        
+
         def group
-          return unless params[:id].present?
+          return if params[:id].blank?
+
           @group ||= all_groups.find(params[:id])
         end
 
