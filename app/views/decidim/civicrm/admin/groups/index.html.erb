@@ -21,7 +21,7 @@
         <tbody>
           <% groups.each do |group| %>
             <tr>
-              <td><%= group.title %></td>
+              <td><%= link_to group.title, group_path(group) %></td>
               <td><%= group.description %></td>
               <td><%= group.members.count %></td>
               <td><%= group.civicrm_member_count %></td>
@@ -32,7 +32,10 @@
       </table>
       <%= paginate groups, theme: "decidim" %>
     <% else %>
-      <p class="alert"><%= t(".empty") %></p>
+      <p class="alert">
+        <%= t(".empty") %>
+        <%= link_to t(".sync"), decidim_civicrm_admin.sync_groups_path %>
+      </p>
     <% end %>
   </div>
 </div>

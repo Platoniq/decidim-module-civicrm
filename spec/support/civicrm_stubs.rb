@@ -19,6 +19,15 @@ module CivicrmStubs
     stub_request_for(contact_request_url, file_fixture("contact_valid_response.json"))
   end
 
+  ## Group
+  def stub_group_valid_request
+    stub_request_for(group_request_url, file_fixture("group_valid_response.json"))
+  end
+
+  def stub_group_invalid_request
+    stub_request_for(group_request_url, file_fixture("error_response.json"))
+  end
+
   ## Groups
   def stub_groups_valid_request
     stub_request_for(groups_request_url, file_fixture("groups_valid_response.json"))
@@ -45,6 +54,10 @@ module CivicrmStubs
 
   def contact_request_url
     "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=Contact&contact_id=42&json=%7B%22return%22%3A%22display_name%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
+  end
+
+  def group_request_url
+    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=Group&group_id=1&json=%7B%22return%22%3A%22group_id%2Cname%2Ctitle%2Cdescription%2Cgroup_type%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
   end
 
   def groups_request_url

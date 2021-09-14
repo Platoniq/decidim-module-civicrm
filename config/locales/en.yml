@@ -9,12 +9,16 @@ en:
         groups:
           index:
             description: Description
-            empty: There are no groups
+            empty: There are no groups synchronized from CiViCRM.
             members: Members
             name: Name
             participants: Participants
             sync: Synchronize with CiViCRM
             title: Groups
             total_members: Total members
+          show:
+            empty: There are no Decidim participants in this group.
+            sync: Synchronize with CiViCRM
+            title: Group members
           sync:
             success: The synchronization has started

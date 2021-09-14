@@ -27,7 +27,7 @@ module Decidim
 
         return if civicrm_group_id.blank?
 
-        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: Creating or updating Group #{data[:title]} (#{civicrm_group_id}) with data #{data}"
+        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: Creating or updating Group #{data[:title]} (civicrm id: #{civicrm_group_id}) with data #{data}"
 
         group = Group.find_or_initialize_by(decidim_organization_id: organization_id, civicrm_group_id: civicrm_group_id)
 
@@ -42,7 +42,7 @@ module Decidim
       end
 
       def update_group_memberships(organization_id, group)
-        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: Updating group memberships for Group #{group.title} (#{group.civicrm_group_id})"
+        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: Updating group memberships for Group #{group.title} (civicrm id: #{group.civicrm_group_id})"
 
         api_contacts_in_group = Decidim::Civicrm::Api::ContactsInGroup.new(group.civicrm_group_id).result[:contact_ids]
 
@@ -56,7 +56,7 @@ module Decidim
       def update_group_membership(organization_id, civicrm_group_id, contact)
         return unless contact && (group = Group.find_by(decidim_organization_id: organization_id, civicrm_group_id: civicrm_group_id))
 
-        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: Creating or updating membership for Contact #{contact.civicrm_contact_id} for Group #{civicrm_group_id}"
+        Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: Creating or updating membership for Contact #{contact.civicrm_contact_id} for Group with civicrm id: #{civicrm_group_id}"
 
         GroupMembership.find_or_create_by(decidim_organization_id: organization_id, contact: contact, group: group) do |group_membership|
           group_membership.update!(marked_for_deletion: false)

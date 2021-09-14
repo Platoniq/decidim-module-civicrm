@@ -15,12 +15,12 @@ module Decidim
       class_methods do
         # rubocop:disable Rails/SkipsModelValidations
 
-        def prepare_cleanup
-          update_all(marked_for_deletion: true)
+        def prepare_cleanup(query = {})
+          where(query).update_all(marked_for_deletion: true)
         end
 
-        def clean_up_records
-          to_delete.destroy_all
+        def clean_up_records(query = {})
+          where(query).to_delete.destroy_all
         end
 
         # rubocop:enable Rails/SkipsModelValidations

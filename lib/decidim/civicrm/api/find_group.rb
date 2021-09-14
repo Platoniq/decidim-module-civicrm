@@ -3,11 +3,11 @@
 module Decidim
   module Civicrm
     module Api
-      class FindUser < BaseQuery
+      class FindGroup < BaseQuery
         def initialize(id, query = nil)
           @request = Request.new(
-            entity: "User",
-            id: id,
+            entity: "Group",
+            group_id: id,
             json: json_params(query || default_query)
           )
 
@@ -16,21 +16,15 @@ module Decidim
 
         def default_query
           {
-            "api.Contact.get" => {
-              return: "display_name"
-            }
+            return: "group_id,name,title,description,group_type"
           }
         end
 
         private
 
         def parsed_response
-          user = response["values"].first
-          contact = user.delete("api.Contact.get")["values"].first
-
           {
-            user: user,
-            contact: contact
+            group: response["values"].first
           }
         end
       end
