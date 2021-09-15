@@ -19,6 +19,14 @@ module CivicrmStubs
     stub_request_for(contact_request_url, file_fixture("contact_valid_response.json"))
   end
 
+  def stub_contact_groups_valid_request
+    stub_request_for(contact_groups_request_url, file_fixture("contact_groups_valid_response.json"))
+  end
+
+  def stub_contact_memberships_valid_request
+    stub_request_for(contact_memberships_request_url, file_fixture("contact_memberships_valid_response.json"))
+  end
+
   ## Group
   def stub_group_valid_request
     stub_request_for(group_request_url, file_fixture("group_valid_response.json"))
@@ -46,6 +54,15 @@ module CivicrmStubs
     stub_request_for(contacts_in_group_request_url, file_fixture("error_response.json"))
   end
 
+  ## Memberships
+  def stub_membership_types_valid_request
+    stub_request_for(membership_types_request_url, file_fixture("membership_types_valid_response.json"))
+  end
+
+  def stub_membership_types_invalid_request
+    stub_request_for(membership_types_request_url, file_fixture("error_response.json"))
+  end
+
   private
 
   def user_request_url
@@ -54,6 +71,14 @@ module CivicrmStubs
 
   def contact_request_url
     "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=Contact&contact_id=42&json=%7B%22return%22%3A%22display_name%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
+  end
+
+  def contact_groups_request_url
+    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&contact_id=1&entity=GroupContact&json=%7B%22options%22%3A%7B%22limit%22%3A0%7D%2C%22return%22%3A%22group_id%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
+  end
+
+  def contact_memberships_request_url
+    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&contact_id=1&entity=Membership&json=%7B%22options%22%3A%7B%22limit%22%3A0%7D%2C%22return%22%3A%22membership_type_id%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
   end
 
   def group_request_url
@@ -66,6 +91,10 @@ module CivicrmStubs
 
   def contacts_in_group_request_url
     "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=Contact&group=1&json=%7B%22options%22%3A%7B%22limit%22%3A0%7D%2C%22return%22%3A%22contact_id%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
+  end
+
+  def membership_types_request_url
+    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&contact_id=1&entity=MembershipType&json=%7B%22options%22%3A%7B%22limit%22%3A0%7D%2C%22return%22%3A%22name%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
   end
 
   # This will change depending on your gems versions.

@@ -1,0 +1,19 @@
+{
+  "is_error": 0,
+  "version": 3,
+  "count": 3,
+  "values": [
+    {
+      "id": "1",
+      "name": "Interested"
+    },
+    {
+      "id": "2",
+      "name": "Registered"
+    },
+    {
+      "id": "3",
+      "name": "Subscribed"
+    }
+  ]
+}
