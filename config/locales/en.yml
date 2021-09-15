@@ -4,6 +4,10 @@ en:
     authorization_handlers:
       civicrm_verification:
         name: Authorized with CiViCRM
+      civicrm_groups:
+        name: Authorized with CiViCRM Group
+        fields:
+          group_ids: CiViCRM Group IDs
     civicrm:
       admin:
         groups:
@@ -11,6 +15,7 @@ en:
             actions: Actions
             description: Description
             empty: There are no groups synchronized from CiViCRM.
+            id: ID
             members: Members
             name: Name
             participants: Participants
@@ -30,6 +35,7 @@ en:
             success: The synchronization has started
         menu:
           groups: Groups
+          verifications: Authorizations
   layouts:
     decidim:
       admin:

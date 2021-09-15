@@ -48,7 +48,7 @@ module Decidim
         end
 
         def all_groups
-          @all_groups ||= Group.where(organization: current_organization)
+          @all_groups ||= Group.where(organization: current_organization).order(id: :asc)
         end
 
         def members

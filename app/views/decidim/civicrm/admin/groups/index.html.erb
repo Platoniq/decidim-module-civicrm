@@ -11,6 +11,7 @@
       <table class="table-list civicrm-groups">
         <thead>
           <tr>
+            <th><%= t(".id") %></th>
             <th><%= t(".name") %></th>
             <th><%= t(".description") %></th>
             <th><%= t(".participants") %></th>
@@ -21,6 +22,7 @@
         <tbody>
           <% groups.each do |group| %>
             <tr>
+              <td><%= group.id %></td>
               <td><%= link_to group.title, group_path(group) %></td>
               <td><%= group.description %></td>
               <td><%= group.members.count %></td>
