@@ -22,7 +22,7 @@ module Decidim
       end
 
       def update_group(group, data)
-        Rails.logger.info "Decidim::Civicrm::SyncGroupJob: Creating or updating Group #{group.title} (civicrm id: #{group.civicrm_group_id}) with data #{data}"
+        Rails.logger.info "Decidim::Civicrm::SyncGroupJob: Creating / updating Group #{group.title} (civicrm id: #{group.civicrm_group_id}) with data #{data}"
 
         group.update!(
           title: data[:title],
@@ -49,7 +49,7 @@ module Decidim
       def update_group_membership(group, contact)
         return unless group && contact
 
-        Rails.logger.info "Decidim::Civicrm::SyncGroupJob: Creating or updating membership for Contact #{contact.civicrm_contact_id} for Group with civicrm id: #{civicrm_group_id}"
+        Rails.logger.info "Decidim::Civicrm::SyncGroupJob: Creating / updating membership for Contact #{contact.civicrm_contact_id} for Group with civicrm id: #{civicrm_group_id}"
 
         GroupMembership.find_or_create_by(organization: group.organization, contact: contact, group: group) do |group_membership|
           group_membership.update!(marked_for_deletion: false)
