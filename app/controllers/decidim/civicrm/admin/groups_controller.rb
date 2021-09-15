@@ -6,10 +6,11 @@ module Decidim
       class GroupsController < Decidim::Admin::ApplicationController
         include Paginable
         include NeedsPermission
+        helper Decidim::Messaging::ConversationHelper
 
         helper_method :group, :groups, :members
 
-        layout "decidim/admin/users"
+        layout "decidim/admin/civicrm"
 
         def index
           # enforce_permission_to :index, :civicrm_groups
@@ -51,7 +52,7 @@ module Decidim
         end
 
         def members
-          @members ||= GroupMembership.where(organization: current_organization, group: group)
+          paginate(group.members)
         end
       end
     end

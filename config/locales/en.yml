@@ -8,6 +8,7 @@ en:
       admin:
         groups:
           index:
+            actions: Actions
             description: Description
             empty: There are no groups synchronized from CiViCRM.
             members: Members
@@ -17,8 +18,20 @@ en:
             title: Groups
             total_members: Total members
           show:
+            actions: Actions
+            created_at: Created at
             empty: There are no Decidim participants in this group.
+            name: Name
+            nickname: Nickname
+            show_email: Show email
             sync: Synchronize with CiViCRM
-            title: Group members
+            title: Group members for '%{group_name}'
           sync:
             success: The synchronization has started
+        menu:
+          groups: Groups
+  layouts:
+    decidim:
+      admin:
+        civicrm:
+          title: CiViCRM

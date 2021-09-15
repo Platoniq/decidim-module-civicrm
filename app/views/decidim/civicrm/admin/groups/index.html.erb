@@ -15,7 +15,7 @@
             <th><%= t(".description") %></th>
             <th><%= t(".participants") %></th>
             <th><%= t(".total_members") %></th>
-            <th></th>
+            <th><%= t(".actions") %></th>
           </tr>
         </thead>
         <tbody>
@@ -25,7 +25,9 @@
               <td><%= group.description %></td>
               <td><%= group.members.count %></td>
               <td><%= group.civicrm_member_count %></td>
-              <td>...</td>
+              <td>
+                <%= icon_link_to "reload", decidim_civicrm_admin.sync_groups_path(id: group.id), t(".sync"), class: "action-icon--reload" %>
+              </td>
             </tr>
           <% end %>
         </tbody>
