@@ -10,9 +10,28 @@
       "email": "arthurdent@example.com",
       "contact_id": "9999",
       "api.Contact.get": {
+        "is_error": 0,
+        "version": 3,
+        "count": 1,
+        "id": 9999,
         "values": [
           {
             "display_name": "Arthur Dent"
+          }
+        ]
+      },
+      "api.Membership.get": {
+        "is_error": 0,
+        "version": 3,
+        "count": 2,
+        "values": [
+          {
+            "id": "1",
+            "membership_type_id": "2"
+          },
+          {
+            "id": "2",
+            "membership_type_id": "3"
           }
         ]
       }

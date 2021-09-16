@@ -18,6 +18,10 @@ module Decidim
           {
             "api.Contact.get" => {
               return: "display_name"
+            },
+            "api.Membership.get": {
+              contact_id: "$value.contact_id",
+              return: "membership_type_id"
             }
           }
         end
@@ -27,10 +31,12 @@ module Decidim
         def parsed_response
           user = response["values"].first
           contact = user.delete("api.Contact.get")["values"].first
+          memberships = user.delete("api.Membership.get")["values"]
 
           {
             user: user,
-            contact: contact
+            contact: contact,
+            memberships: memberships
           }
         end
       end

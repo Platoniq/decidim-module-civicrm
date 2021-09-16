@@ -66,11 +66,11 @@ module CivicrmStubs
   private
 
   def user_request_url
-    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=User&id=42&json=%7B%22api.Contact.get%22%3A%7B%22return%22%3A%22display_name%22%7D%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
+    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=User&id=42&json=%7B%22api.Contact.get%22%3A%7B%22return%22%3A%22display_name%22%7D%2C%22api.Membership.get%22%3A%7B%22contact_id%22%3A%22%24value.contact_id%22%2C%22return%22%3A%22membership_type_id%22%7D%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
   end
 
   def contact_request_url
-    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=Contact&contact_id=42&json=%7B%22return%22%3A%22display_name%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
+    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&contact_id=42&entity=Contact&json=%7B%22return%22%3A%22display_name%22%2C%22api.Membership.get%22%3A%7B%22return%22%3A%22membership_type_id%22%7D%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
   end
 
   def contact_groups_request_url

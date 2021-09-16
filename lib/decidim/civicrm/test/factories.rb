@@ -31,4 +31,10 @@ FactoryBot.define do
     group factory: :decidim_civicrm_group
     contact factory: :decidim_civicrm_contact
   end
+
+  factory :decidim_civicrm_membership_type, class: "Decidim::Civicrm::MembershipType" do
+    organization
+    civicrm_membership_type_id { Faker::Number.between(from: 1, to: 100) }
+    name { Faker::Lorem.word }
+  end
 end

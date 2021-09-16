@@ -7,7 +7,22 @@
     {
       "contact_id": "9999",
       "display_name": "Sir Arthur Dent",
-      "id": "9999"
+      "id": "9999",
+      "api.Membership.get": {
+        "is_error": 0,
+        "version": 3,
+        "count": 2,
+        "values": [
+          {
+            "id": "1",
+            "membership_type_id": "2"
+          },
+          {
+            "id": "2",
+            "membership_type_id": "3"
+          }
+        ]
+      }
     }
   ]
 }
