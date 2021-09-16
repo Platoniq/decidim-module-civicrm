@@ -2,19 +2,13 @@
 
 module Decidim
   module Civicrm
-    class VerificationJob < ApplicationJob
-      include CivicrmHelper
-
+    class ContactVerificationJob < ApplicationJob
       queue_as :default
 
       def perform(data)
-        data = JSON.parse(data).deep_symbolize_keys
+        contact = Decidim::Civicrm::Contact.find(data[:contact_id])
 
-        user = Decidim::User.find(data[:user_id])
-
-        return unless civicrm_user?(user)
-
-        handler = retrieve_handler(user)
+        handler = retrieve_handler(contact.user)
 
         Decidim::Verifications::AuthorizeUser.call(handler) do
           on(:ok) do

@@ -15,13 +15,13 @@ if !Rails.env.production? || ENV["SEED"]
     user: user,
     civicrm_contact_id: 1
   )
-  
+
   group = Decidim::Civicrm::Group.create!(
     organization: organization,
     civicrm_group_id: 1
   )
-  
-  group_membership = Decidim::Civicrm::GroupMembership.create!(
+
+  Decidim::Civicrm::GroupMembership.create!(
     organization: organization,
     contact: contact,
     group: group

@@ -4,10 +4,12 @@ class CreateDecidimCivicrmGroups < ActiveRecord::Migration[5.2]
       t.references :decidim_organization, foreign_key: { to_table: :decidim_organizations }, index: { name: :index_decidim_civicrm_groups_on_decidim_organization_id }
 
       t.integer :civicrm_group_id, null: false
+      t.integer :civicrm_member_count, default: 0
 
       t.string :title
       t.string :description
       t.jsonb :extra, default: {}
+      
 
       t.boolean :marked_for_deletion, default: false
 

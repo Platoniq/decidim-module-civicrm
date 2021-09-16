@@ -1,0 +1,16 @@
+{
+  "is_error": 0,
+  "version": 3,
+  "count": 1,
+  "values": [
+    {
+      "id": "1",
+      "group_id": "1",
+      "title": "Administrators",
+      "visibility": "User and User Admin Only",
+      "is_hidden": "0",
+      "in_date": "2021-09-15 15:10:00",
+      "in_method": "Admin"
+    }
+  ]
+}

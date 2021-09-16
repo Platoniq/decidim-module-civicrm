@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe Decidim::Civicrm::Api::ListGroups, type: :class do
   subject { described_class.new }
-  
+
   describe "#result" do
     it "returns a Hash with the result" do
       stub_groups_valid_request

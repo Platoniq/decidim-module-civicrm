@@ -1,0 +1,16 @@
+<% content_for :secondary_nav do %>
+  <div class="secondary-nav">
+    <div class="secondary-nav__title">
+      <%= t ".title" %>
+    </div>
+    <ul>
+      <li <% if is_active_link?(decidim_civicrm_admin.groups_path) %> class="is-active" <% end %>>
+        <%= link_to t("menu.groups", scope: "decidim.civicrm.admin"), decidim_civicrm_admin.groups_path %>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<%= render "layouts/decidim/admin/application" do %>
+  <%= yield %>
+<% end %>

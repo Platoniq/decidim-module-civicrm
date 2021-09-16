@@ -16,7 +16,7 @@ module Decidim
 
         def default_query
           {
-            "return" => "display_name"
+            return: "display_name"
           }
         end
 

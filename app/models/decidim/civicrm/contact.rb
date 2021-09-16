@@ -11,6 +11,9 @@ module Decidim
 
       has_many :group_memberships, class_name: "Decidim::Civicrm::GroupMembership", dependent: :destroy
       has_many :groups, class_name: "Decidim::Civicrm::Group", through: :group_memberships
+
+      validates :user, uniqueness: true
+      validates :civicrm_contact_id, uniqueness: { scope: :organization }
     end
   end
 end

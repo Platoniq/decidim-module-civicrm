@@ -17,7 +17,7 @@ module Decidim
         def default_query
           {
             "api.Contact.get" => {
-              "return" => "display_name"
+              return: "display_name"
             }
           }
         end

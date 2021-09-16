@@ -2,5 +2,46 @@
 en:
   decidim:
     authorization_handlers:
+      civicrm_groups:
+        fields:
+          group_ids: CiViCRM Group IDs
+        name: Authorized with CiViCRM Group
       civicrm_verification:
         name: Authorized with CiViCRM
+    civicrm:
+      admin:
+        groups:
+          index:
+            actions: Actions
+            description: Description
+            empty: There are no groups synchronized from CiViCRM.
+            id: ID
+            members: Members
+            name: Name
+            participants: Participants
+            sync: Synchronize with CiViCRM
+            title: Groups
+            total_members: Total members
+          show:
+            actions: Actions
+            contact: Contact
+            created_at: Created at
+            empty: There are no Decidim participants in this group.
+            name: Name
+            nickname: Nickname
+            show_email: Show email
+            sync: Synchronize with CiViCRM
+            title: Group members for '%{group_name}'
+          sync:
+            success: The synchronization has started
+        menu:
+          groups: Groups
+          verifications: Authorizations
+      contact:
+        errors:
+          not_unique: Contact is already taken
+  layouts:
+    decidim:
+      admin:
+        civicrm:
+          title: CiViCRM

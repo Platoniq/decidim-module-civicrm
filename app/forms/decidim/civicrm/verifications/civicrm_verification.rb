@@ -31,11 +31,11 @@ module Decidim
         end
 
         def uid
-          user.identities.find_by(organization: organization, provider: PROVIDER_NAME)&.uid
+          user.identities.find_by(organization: organization, provider: Decidim::Civicrm::PROVIDER_NAME)&.uid
         end
 
         def civicrm_contact
-          @civicrm_contact ||= Decidim::Civicrm::Contact.find_by(decidim_user: user)
+          @civicrm_contact ||= Decidim::Civicrm::Contact.find_by(user: user)
         end
 
         def civicrm_api_contact

@@ -3,8 +3,12 @@
 require_relative "api/base_query"
 require_relative "api/contacts_in_group"
 require_relative "api/find_contact"
+require_relative "api/find_group"
 require_relative "api/find_user"
+require_relative "api/list_contact_groups"
+require_relative "api/list_contact_memberships"
 require_relative "api/list_groups"
+require_relative "api/list_membership_types"
 require_relative "api/request"
 
 module Decidim
