@@ -5,7 +5,7 @@ require "digest"
 module Decidim
   module Civicrm
     module Verifications
-      class CivicrmVerification < Decidim::AuthorizationHandler
+      class CivicrmBasicVerification < Decidim::AuthorizationHandler
         validate :user_valid
 
         def metadata
@@ -19,10 +19,6 @@ module Decidim
             "#{uid}-#{Rails.application.secrets.secret_key_base}"
           )
         end
-
-        # def to_partial_path
-        #   "civicrm/form"
-        # end
 
         private
 

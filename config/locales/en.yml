@@ -2,12 +2,16 @@
 en:
   decidim:
     authorization_handlers:
-      civicrm_groups:
-        fields:
-          group_ids: CiViCRM Group IDs
-        name: Authorized with CiViCRM Group
-      civicrm_verification:
+      civicrm_basic_verification:
         name: Authorized with CiViCRM
+        explanation: Authorize with your CiViCRM account 
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            civicrm_basic: CiViCRM (Basic)
+        new:
+          no_action: This authorization will be assigned automatically if you meet the requirements.
     civicrm:
       admin:
         groups:

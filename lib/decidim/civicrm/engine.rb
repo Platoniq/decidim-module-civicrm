@@ -12,6 +12,10 @@ module Decidim
       config.to_prepare do
         Decidim::User.include(Decidim::Civicrm::CivicrmUser)
       end
+
+      routes do
+        root to: "authorizations#new"
+      end
     end
   end
 end

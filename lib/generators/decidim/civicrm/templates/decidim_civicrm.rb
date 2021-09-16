@@ -20,8 +20,9 @@ end
 
 ## Verification worfklows
 
-Decidim::Verifications.register_workflow(:civicrm) do |workflow|
-  workflow.form = "Decidim::Civicrm::Verifications::CivicrmVerification"
+Decidim::Verifications.register_workflow(:civicrm_basic) do |workflow|
+  workflow.form = "Decidim::Civicrm::Verifications::CivicrmBasicVerification"
+  workflow.engine = Decidim::Civicrm::Engine
 end
 
 ## Event listeners
