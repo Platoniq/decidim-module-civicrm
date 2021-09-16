@@ -20,9 +20,7 @@ module Decidim
           }
         end
 
-        private
-
-        def parse_item(item)
+        def self.parse_item(item)
           item["group_id"].to_i
         end
       end

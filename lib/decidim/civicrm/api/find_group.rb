@@ -3,7 +3,7 @@
 module Decidim
   module Civicrm
     module Api
-      class FindGroup < Base::BaseQuery
+      class FindGroup < Base::FindQuery
         def initialize(id, query = nil)
           @request = Base::Request.new(
             entity: "Group",
@@ -20,10 +20,14 @@ module Decidim
           }
         end
 
-        private
-
-        def parsed_response
-          response["values"].first
+        def self.parse_item(item)
+          {
+            id: item["id"].to_i,
+            name: item["name"],
+            title: item["title"],
+            description: item["description"],
+            group_type: item["group_type"].map(&:to_i)
+          }
         end
       end
     end

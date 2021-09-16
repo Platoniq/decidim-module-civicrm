@@ -4,18 +4,17 @@ module Decidim
   module Civicrm
     module Api
       module Base
-        class ListQuery < BaseQuery
+        class FindQuery < BaseQuery
           protected
 
           def json_params(params)
             params.deep_merge(
-              sequential: 1,
-              options: { limit: 0 }
+              sequential: 1
             ).to_json
           end
 
           def parsed_response
-            response["values"].map { |item| self.class.parse_item(item) }
+            self.class.parse_item(response["values"].first)
           end
         end
       end

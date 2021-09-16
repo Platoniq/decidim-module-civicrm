@@ -11,7 +11,19 @@ describe Decidim::Civicrm::Api::FindUser, type: :class do
     end
 
     it "returns a Hash with the result" do
-      expect(subject.result).to be_a Hash
+      expect(subject.result).to eq({
+                                     contact: {
+                                       id: 9999,
+                                       display_name: "Arthur Dent"
+                                     },
+                                     memberships: [2, 3],
+                                     user: {
+                                       contact_id: 9999,
+                                       email: "arthurdent@example.com",
+                                       name: "arthur.dent",
+                                       id: 42
+                                     }
+                                   })
     end
   end
 end

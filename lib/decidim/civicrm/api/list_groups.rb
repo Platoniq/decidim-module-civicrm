@@ -20,16 +20,8 @@ module Decidim
           }
         end
 
-        private
-
-        def parse_item(item)
-          {
-            id: item["id"].to_i,
-            name: item["name"],
-            title: item["title"],
-            description: item["description"],
-            group_type: item["group_type"].map(&:to_i)
-          }
+        def self.parse_item(item)
+          FindGroup.parse_item(item)
         end
       end
     end

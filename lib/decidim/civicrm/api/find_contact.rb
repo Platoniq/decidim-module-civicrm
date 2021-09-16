@@ -3,7 +3,7 @@
 module Decidim
   module Civicrm
     module Api
-      class FindContact < Base::BaseQuery
+      class FindContact < Base::FindQuery
         def initialize(id, query = nil)
           @request = Base::Request.new(
             entity: "Contact",
@@ -23,10 +23,18 @@ module Decidim
           }
         end
 
-        private
+        def self.parse_item(item)
+          contact = {
+            id: item["id"].to_i,
+            display_name: item["display_name"]
+          }
 
-        def parsed_response
-          response["values"].first
+          memberships = item["api.Membership.get"]["values"]
+
+          {
+            contact: contact,
+            memberships: memberships.map { |m| ListContactMemberships.parse_item(m) }
+          }
         end
       end
     end

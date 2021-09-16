@@ -2,7 +2,7 @@ error:
   json: error_response.json
 find_contact:
   json: find_contact_valid_response.json
-  url: https://api.base/?action=Get&api_key=fake-civicrm-api-key&contact_id=42&entity=Contact&json=%7B%22return%22%3A%22display_name%22%2C%22api.Membership.get%22%3A%7B%22return%22%3A%22membership_type_id%22%7D%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret
+  url: https://api.base/?action=Get&api_key=fake-civicrm-api-key&contact_id=9999&entity=Contact&json=%7B%22return%22%3A%22display_name%22%2C%22api.Membership.get%22%3A%7B%22return%22%3A%22membership_type_id%22%7D%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret
 find_group:
   json: find_group_valid_response.json 
   url: https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=Group&group_id=1&json=%7B%22return%22%3A%22group_id%2Cname%2Ctitle%2Cdescription%2Cgroup_type%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret

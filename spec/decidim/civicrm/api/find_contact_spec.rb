@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe Decidim::Civicrm::Api::FindContact, type: :class do
-  subject { described_class.new(42) }
+  subject { described_class.new(9999) }
 
   describe "#result" do
     before do
@@ -11,7 +11,15 @@ describe Decidim::Civicrm::Api::FindContact, type: :class do
     end
 
     it "returns a Hash with the result" do
-      expect(subject.result).to be_a Hash
+      expect(subject.result).to eq(
+        {
+          contact: {
+            id: 9999,
+            display_name: "Sir Arthur Dent"
+          },
+          memberships: [2, 3]
+        }
+      )
     end
   end
 end

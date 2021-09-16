@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "api/base/base_query"
+require_relative "api/base/find_query"
 require_relative "api/base/list_query"
 require_relative "api/base/request"
 require_relative "api/find_contact"

@@ -11,7 +11,15 @@ describe Decidim::Civicrm::Api::FindGroup, type: :class do
     end
 
     it "returns a Hash with the result" do
-      expect(subject.result).to be_a Hash
+      expect(subject.result).to eq(
+        {
+          id: 1,
+          name: "Administrators",
+          title: "Administrators",
+          description: "The users in this group are assigned admin privileges.",
+          group_type: [1]
+        }
+      )
     end
   end
 end
