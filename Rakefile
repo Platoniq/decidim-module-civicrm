@@ -6,7 +6,7 @@ require "fileutils"
 def install_module(path)
   templates_dir = "lib/generators/decidim/civicrm/templates"
 
-  FileUtils.cp File.join(templates_dir, "decidim_civicrm.rb"), "spec/decidim_dummy_app/config/initializers/decidim_civicrm.rb", verbose: true
+  FileUtils.cp File.join(templates_dir, "decidim_civicrm.rb"), "#{path}/config/initializers/decidim_civicrm.rb", verbose: true
 
   Dir.chdir(path) do
     system("bundle exec rake decidim_civicrm:install:migrations")
