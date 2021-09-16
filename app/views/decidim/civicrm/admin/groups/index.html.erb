@@ -23,12 +23,14 @@
           <% groups.each do |group| %>
             <tr>
               <td><%= group.id %></td>
-              <td><%= link_to group.title, group_path(group) %></td>
+              <td><%= group.title %></td>
               <td><%= group.description %></td>
               <td><%= group.members.count %></td>
               <td><%= group.civicrm_member_count %></td>
-              <td>
-                <%= icon_link_to "reload", decidim_civicrm_admin.sync_groups_path(id: group.id), t(".sync"), class: "action-icon--reload" %>
+              
+              <td class="table-list__actions">
+                <%= icon_link_to "people", decidim_civicrm_admin.group_path(group.id), t(".members"), class: "action-icon action-icon--people" %>
+                <%= icon_link_to "reload", decidim_civicrm_admin.sync_groups_path(id: group.id), t(".sync"), class: "action-icon action-icon--reload" %>
               </td>
             </tr>
           <% end %>

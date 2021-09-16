@@ -32,6 +32,7 @@ en:
             show_email: Show email
             sync: Synchronize with CiViCRM
             title: Group members for '%{group_name}'
+            view_profile: View profile
           sync:
             success: The synchronization has started
         menu:
