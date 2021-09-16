@@ -9,6 +9,8 @@ module Decidim
 
       belongs_to :contact, class_name: "Decidim::Civicrm::Contact"
       belongs_to :group, class_name: "Decidim::Civicrm::Group"
+
+      validates :contact, uniqueness: { scope: [:group] }
     end
   end
 end

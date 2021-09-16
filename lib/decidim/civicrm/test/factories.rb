@@ -28,7 +28,7 @@ FactoryBot.define do
 
   factory :decidim_civicrm_group_membership, class: "Decidim::Civicrm::GroupMembership" do
     organization
-    group
-    contact
+    group factory: :decidim_civicrm_group
+    contact factory: :decidim_civicrm_contact
   end
 end
