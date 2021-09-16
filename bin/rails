@@ -5,7 +5,6 @@
 # installed from the root of your application.
 
 ENGINE_ROOT = File.expand_path("..", __dir__)
-ENGINE_PATH = File.expand_path("../lib/decidim/decidim_awesome/engine", __dir__)
 
 # Set up gems listed in the Gemfile.
 

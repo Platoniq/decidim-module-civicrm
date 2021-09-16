@@ -33,8 +33,7 @@ module Decidim
             redirect_to decidim_civicrm_admin.groups_path
           end
 
-          # TODO: notification ok
-          # TODO send email when complete?
+          # TODO: send email when complete?
         end
 
         def groups

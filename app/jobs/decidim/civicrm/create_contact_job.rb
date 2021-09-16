@@ -10,7 +10,7 @@ module Decidim
 
         user = Decidim::User.find(data[:user_id])
 
-        return unless civicrm_user?(user)
+        return unless user.civicrm_identity?
 
         Contact.create!(
           user: user,

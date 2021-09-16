@@ -3,8 +3,6 @@
 module Decidim
   module Civicrm
     class VerificationJob < ApplicationJob
-      include CivicrmHelper
-
       queue_as :default
 
       def perform(data)
@@ -12,7 +10,7 @@ module Decidim
 
         user = Decidim::User.find(data[:user_id])
 
-        return unless civicrm_user?(user)
+        return unless user.civicrm_identity?
 
         handler = retrieve_handler(user)
 

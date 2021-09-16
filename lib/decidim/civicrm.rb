@@ -11,6 +11,8 @@ require "decidim/civicrm/workflows"
 module Decidim
   # This namespace holds the logic of the `decidim-civicrm` module.
   module Civicrm
+    PROVIDER_NAME = "civicrm"
+
     class Error < StandardError; end
   end
 end
