@@ -24,6 +24,7 @@ en:
             total_members: Total members
           show:
             actions: Actions
+            contact: Contact
             created_at: Created at
             empty: There are no Decidim participants in this group.
             name: Name
@@ -36,6 +37,9 @@ en:
         menu:
           groups: Groups
           verifications: Authorizations
+      contact:
+        errors:
+          not_unique: Contact is already taken
   layouts:
     decidim:
       admin:

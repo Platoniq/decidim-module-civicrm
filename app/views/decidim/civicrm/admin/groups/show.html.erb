@@ -35,7 +35,7 @@
                 <% if allowed_to? :show_email, :user, user: member.user %>
                   <%= icon_link_to "envelope-open", decidim_admin.show_email_officialization_path(user_id: member.user.id), t(".show_email"), class: "action-icon action-icon--show-email", data: { full_name: member.user.name, toggle: "show-email-modal" } %>
                 <% end %>
-                <%= icon_link_to "envelope-closed", current_or_new_conversation_path_with(member.user), t("decidim.contact"), class:"action-icon--new" %>
+                <%= icon_link_to "envelope-closed", current_or_new_conversation_path_with(member.user), t(".contact"), class:"action-icon--new" %>
               </td>
             </tr>
           <% end %>
