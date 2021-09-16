@@ -32,6 +32,16 @@ Configure these values in your project's `config/secrets.yml` file:
 
 and
 
+
+```yaml
+  omniauth:
+    civicrm:
+      enabled: true
+      client_id: fake-civicrm-client-id
+      client_secret: fake-civicrm-client-secret
+      site: https://civicrm.site
+```
+
 ```yaml
   civicrm:
     api:
