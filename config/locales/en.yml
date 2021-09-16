@@ -2,12 +2,12 @@
 en:
   decidim:
     authorization_handlers:
-      civicrm_verification:
-        name: Authorized with CiViCRM
       civicrm_groups:
-        name: Authorized with CiViCRM Group
         fields:
           group_ids: CiViCRM Group IDs
+        name: Authorized with CiViCRM Group
+      civicrm_verification:
+        name: Authorized with CiViCRM
     civicrm:
       admin:
         groups:
