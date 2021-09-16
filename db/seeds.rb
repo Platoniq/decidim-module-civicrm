@@ -21,7 +21,7 @@ if !Rails.env.production? || ENV["SEED"]
     civicrm_group_id: 1,
     civicrm_member_count: 2,
     title: "Test Group",
-    description: "This is a Test Group automatically generated to have some content.",
+    description: "This is a Test Group automatically generated to have some content."
   )
 
   Decidim::Civicrm::GroupMembership.create!(
