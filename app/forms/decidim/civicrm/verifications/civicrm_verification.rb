@@ -35,7 +35,7 @@ module Decidim
         end
 
         def civicrm_contact
-          @civicrm_contact ||= Decidim::Civicrm::Contact.find_by(decidim_user: user)
+          @civicrm_contact ||= Decidim::Civicrm::Contact.find_by(user: user)
         end
 
         def civicrm_api_contact
