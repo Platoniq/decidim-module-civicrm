@@ -4,10 +4,9 @@ module Decidim
   module Civicrm
     module Api
       class ListMembershipTypes < BaseQuery
-        def initialize(id, query = nil)
+        def initialize(query = nil)
           @request = Request.new(
             entity: "MembershipType",
-            contact_id: id,
             json: json_params(query || default_query)
           )
 
