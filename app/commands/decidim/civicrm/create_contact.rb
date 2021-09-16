@@ -26,6 +26,9 @@ module Decidim
             civicrm_contact_id: form.civicrm_contact_id,
             extra: form.extra
           )
+
+          ActiveSupport::Notifications.publish("decidim.civicrm.contact.created", contact.id)
+
           broadcast(:ok, @contact)
         rescue ActiveRecord::RecordNotUnique
           broadcast(:invalid, I18n.t("decidim.civicrm.contact.errors.not_unique"))
