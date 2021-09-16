@@ -9,7 +9,7 @@ module Decidim
         Group.prepare_cleanup
         GroupMembership.prepare_cleanup
 
-        api_groups = Decidim::Civicrm::Api::ListGroups.new.result[:groups]
+        api_groups = Decidim::Civicrm::Api::ListGroups.new.result
 
         Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: #{api_groups.count} groups to process"
 
@@ -44,7 +44,7 @@ module Decidim
       def update_group_memberships(organization_id, group)
         Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: Updating group memberships for Group #{group.title} (civicrm id: #{group.civicrm_group_id})"
 
-        api_contacts_in_group = Decidim::Civicrm::Api::ContactsInGroup.new(group.civicrm_group_id).result[:contact_ids]
+        api_contacts_in_group = Decidim::Civicrm::Api::ContactsInGroup.new(group.civicrm_group_id).result
 
         group.update!(civicrm_member_count: api_contacts_in_group.count)
 

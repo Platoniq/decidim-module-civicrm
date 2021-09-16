@@ -3,9 +3,9 @@
 module Decidim
   module Civicrm
     module Api
-      class FindGroup < BaseQuery
+      class FindGroup < Base::BaseQuery
         def initialize(id, query = nil)
-          @request = Request.new(
+          @request = Base::Request.new(
             entity: "Group",
             group_id: id,
             json: json_params(query || default_query)
@@ -23,9 +23,7 @@ module Decidim
         private
 
         def parsed_response
-          {
-            group: response["values"].first
-          }
+          response["values"].first
         end
       end
     end

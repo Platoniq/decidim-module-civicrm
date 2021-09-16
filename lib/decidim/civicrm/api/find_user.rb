@@ -3,9 +3,9 @@
 module Decidim
   module Civicrm
     module Api
-      class FindUser < BaseQuery
+      class FindUser < Base::BaseQuery
         def initialize(id, query = nil)
-          @request = Request.new(
+          @request = Base::Request.new(
             entity: "User",
             id: id,
             json: json_params(query || default_query)

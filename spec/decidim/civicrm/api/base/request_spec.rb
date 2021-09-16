@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe Decidim::Civicrm::Api::Request, type: :class do
+describe Decidim::Civicrm::Api::Base::Request, type: :class do
   subject { described_class.new(params) }
 
   let(:params) do

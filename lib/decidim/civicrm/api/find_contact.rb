@@ -3,9 +3,9 @@
 module Decidim
   module Civicrm
     module Api
-      class FindContact < BaseQuery
+      class FindContact < Base::BaseQuery
         def initialize(id, query = nil)
-          @request = Request.new(
+          @request = Base::Request.new(
             entity: "Contact",
             contact_id: id,
             json: json_params(query || default_query)
@@ -26,9 +26,7 @@ module Decidim
         private
 
         def parsed_response
-          {
-            contact: response["values"].first
-          }
+          response["values"].first
         end
       end
     end

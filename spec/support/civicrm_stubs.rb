@@ -1,101 +1,20 @@
 # frozen_string_literal: true
 
 module CivicrmStubs
-  ## User
-  def stub_user_valid_request
-    stub_request_for(user_request_url, file_fixture("user_valid_response.json"))
+  def yaml
+    @yaml ||= YAML.safe_load(File.read(file_fixture("stubs.yml"))).deep_symbolize_keys
   end
 
-  def stub_user_not_found_request
-    stub_request_for(user_request_url, file_fixture("empty_response.json"))
-  end
+  def stub_api_request(request_name, valid: true)
+    request = yaml[request_name]
 
-  def stub_user_invalid_request
-    stub_request_for(user_request_url, file_fixture("error_response.json"))
-  end
+    url = request[:url]
+    file = valid ? request[:json] : yaml[:error][:json]
 
-  ## Contact
-  def stub_contact_valid_request
-    stub_request_for(contact_request_url, file_fixture("contact_valid_response.json"))
-  end
-
-  def stub_contact_groups_valid_request
-    stub_request_for(contact_groups_request_url, file_fixture("contact_groups_valid_response.json"))
-  end
-
-  def stub_contact_memberships_valid_request
-    stub_request_for(contact_memberships_request_url, file_fixture("contact_memberships_valid_response.json"))
-  end
-
-  ## Group
-  def stub_group_valid_request
-    stub_request_for(group_request_url, file_fixture("group_valid_response.json"))
-  end
-
-  def stub_group_invalid_request
-    stub_request_for(group_request_url, file_fixture("error_response.json"))
-  end
-
-  ## Groups
-  def stub_groups_valid_request
-    stub_request_for(groups_request_url, file_fixture("groups_valid_response.json"))
-  end
-
-  def stub_groups_invalid_request
-    stub_request_for(groups_request_url, file_fixture("error_response.json"))
-  end
-
-  ## Users in group
-  def stub_contacts_in_group_valid_request
-    stub_request_for(contacts_in_group_request_url, file_fixture("contacts_in_group_valid_response.json"))
-  end
-
-  def stub_contacts_in_group_invalid_request
-    stub_request_for(contacts_in_group_request_url, file_fixture("error_response.json"))
-  end
-
-  ## Memberships
-  def stub_membership_types_valid_request
-    stub_request_for(membership_types_request_url, file_fixture("membership_types_valid_response.json"))
-  end
-
-  def stub_membership_types_invalid_request
-    stub_request_for(membership_types_request_url, file_fixture("error_response.json"))
+    stub_request_for(url, file_fixture(file))
   end
 
   private
-
-  def user_request_url
-    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=User&id=42&json=%7B%22api.Contact.get%22%3A%7B%22return%22%3A%22display_name%22%7D%2C%22api.Membership.get%22%3A%7B%22contact_id%22%3A%22%24value.contact_id%22%2C%22return%22%3A%22membership_type_id%22%7D%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
-  end
-
-  def contact_request_url
-    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&contact_id=42&entity=Contact&json=%7B%22return%22%3A%22display_name%22%2C%22api.Membership.get%22%3A%7B%22return%22%3A%22membership_type_id%22%7D%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
-  end
-
-  def contact_groups_request_url
-    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&contact_id=1&entity=GroupContact&json=%7B%22options%22%3A%7B%22limit%22%3A0%7D%2C%22return%22%3A%22group_id%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
-  end
-
-  def contact_memberships_request_url
-    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&contact_id=1&entity=Membership&json=%7B%22options%22%3A%7B%22limit%22%3A0%7D%2C%22return%22%3A%22membership_type_id%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
-  end
-
-  def group_request_url
-    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=Group&group_id=1&json=%7B%22return%22%3A%22group_id%2Cname%2Ctitle%2Cdescription%2Cgroup_type%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
-  end
-
-  def groups_request_url
-    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=Group&is_active=1&json=%7B%22options%22%3A%7B%22limit%22%3A0%7D%2C%22return%22%3A%22group_id%2Cname%2Ctitle%2Cdescription%2Cgroup_type%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
-  end
-
-  def contacts_in_group_request_url
-    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&entity=Contact&group=1&json=%7B%22options%22%3A%7B%22limit%22%3A0%7D%2C%22return%22%3A%22contact_id%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
-  end
-
-  def membership_types_request_url
-    "https://api.base/?action=Get&api_key=fake-civicrm-api-key&contact_id=1&entity=MembershipType&json=%7B%22options%22%3A%7B%22limit%22%3A0%7D%2C%22return%22%3A%22name%22%2C%22sequential%22%3A1%7D&key=fake-civicrm-api-secret"
-  end
 
   # This will change depending on your gems versions.
   def headers

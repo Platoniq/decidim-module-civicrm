@@ -6,10 +6,27 @@ describe Decidim::Civicrm::Api::ListGroups, type: :class do
   subject { described_class.new }
 
   describe "#result" do
-    it "returns a Hash with the result" do
-      stub_groups_valid_request
+    before do
+      stub_api_request(:list_groups)
+    end
 
-      expect(subject.result).to be_a Hash
+    let(:result) { subject.result }
+    let(:group) { subject.result.first }
+
+    it "returns an Array with the result" do
+      expect(result).to be_a Array
+    end
+
+    it "has the right attributes for each Group" do
+      expect(group).to eq(
+        {
+          id: 1,
+          name: "Administrators",
+          title: "Administrators",
+          description: "The users in this group are assigned admin privileges.",
+          group_type: [1]
+        }
+      )
     end
   end
 end

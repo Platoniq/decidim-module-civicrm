@@ -10,7 +10,7 @@ module Decidim
 
         group = Decidim::Civicrm::Group.find(group_id)
 
-        data = Decidim::Civicrm::Api::FindGroup.new(group.civicrm_group_id).result[:group]
+        data = Decidim::Civicrm::Api::FindGroup.new(group.civicrm_group_id).result
 
         Rails.logger.info "Decidim::Civicrm::SyncGroupJob: Process group #{group.title} (civicrm id: #{group.civicrm_group_id})"
 
@@ -37,7 +37,7 @@ module Decidim
       def update_group_memberships(group)
         Rails.logger.info "Decidim::Civicrm::SyncGroupJob: Updating group memberships for Group #{group.title} (civicrm id: #{group.civicrm_group_id})"
 
-        api_contacts_in_group = Decidim::Civicrm::Api::ContactsInGroup.new(group.civicrm_group_id).result[:contact_ids]
+        api_contacts_in_group = Decidim::Civicrm::Api::ContactsInGroup.new(group.civicrm_group_id).result
 
         group.update!(civicrm_member_count: api_contacts_in_group.count)
 

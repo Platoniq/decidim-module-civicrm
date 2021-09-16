@@ -3,9 +3,9 @@
 module Decidim
   module Civicrm
     module Api
-      class ListMembershipTypes < BaseQuery
+      class ListMembershipTypes < Base::ListQuery
         def initialize(query = nil)
-          @request = Request.new(
+          @request = Base::Request.new(
             entity: "MembershipType",
             json: json_params(query || default_query)
           )
@@ -22,9 +22,10 @@ module Decidim
 
         private
 
-        def parsed_response
+        def parse_item(item)
           {
-            membership_types: response["values"]
+            id: item["id"].to_i,
+            name: item["name"]
           }
         end
       end

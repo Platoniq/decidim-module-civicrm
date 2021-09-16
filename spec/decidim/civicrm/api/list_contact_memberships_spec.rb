@@ -6,10 +6,15 @@ describe Decidim::Civicrm::Api::ListContactMemberships, type: :class do
   subject { described_class.new(1) }
 
   describe "#result" do
-    it "returns a Hash with the result" do
-      stub_contact_memberships_valid_request
+    before do
+      stub_api_request(:list_contact_memberships)
+    end
 
-      expect(subject.result).to be_a Hash
+    let(:result) { subject.result }
+
+    it "returns an Array with the result" do
+      expect(result).to be_a Array
+      expect(result).to eq [2, 3]
     end
   end
 end
