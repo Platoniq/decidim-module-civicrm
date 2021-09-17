@@ -17,7 +17,7 @@ module Decidim
         Rails.logger.info "Decidim::Civicrm::SyncMembershipTypesJob: #{MembershipType.to_delete.count} membership_types to delete"
 
         MembershipType.clean_up_records
-        
+
         update_translations(organization_id)
       end
 

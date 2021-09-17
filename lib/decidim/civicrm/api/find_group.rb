@@ -5,7 +5,7 @@ module Decidim
     module Api
       class FindGroup < Base::FindQuery
         def initialize(id, query = nil)
-          raise Civicrm::Error, "Must provide a valid id for FindGroup" unless id.present?
+          raise Civicrm::Error, "Must provide a valid id for FindGroup" if id.blank?
 
           @request = Base::Request.new(
             entity: "Group",

@@ -37,7 +37,7 @@ module Decidim
         end
 
         private
-        
+
         def groups
           paginate(all_groups)
         end

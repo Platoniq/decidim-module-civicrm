@@ -5,7 +5,7 @@ module Decidim
     module Api
       class FindUser < Base::FindQuery
         def initialize(id, query = nil)
-          raise Civicrm::Error, "Must provide a valid id for FindUser" unless id.present?
+          raise Civicrm::Error, "Must provide a valid id for FindUser" if id.blank?
 
           @request = Base::Request.new(
             entity: "User",
