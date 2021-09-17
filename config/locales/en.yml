@@ -2,9 +2,14 @@
 en:
   decidim:
     authorization_handlers:
-      civicrm_basic_verification:
-        name: Authorized with CiViCRM
+      civicrm_basic:
+        name: CiViCRM
         explanation: Authorize with your CiViCRM account 
+      civicrm_membership:
+        name: CiViCRM - Memberships
+        explanation: Authorize with your CiViCRM acount
+        fields:
+          civicrm_membership_types: Membership types
     verifications:
       authorizations:
         first_login:
@@ -39,9 +44,18 @@ en:
             view_profile: View profile
           sync:
             success: The synchronization has started
+        membership_types:
+          index:
+            empty: There are no Membership Types synchronized from CiViCRM.
+            id: ID
+            name: Name
+            title: Membership Types
+            sync: Synchronize with CiViCRM
+          sync:
+            success: The synchronization has started
         menu:
+          membership_types: Membership Types
           groups: Groups
-          verifications: Authorizations
       contact:
         errors:
           not_unique: Contact is already taken

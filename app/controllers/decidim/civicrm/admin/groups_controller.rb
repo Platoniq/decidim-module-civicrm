@@ -36,6 +36,8 @@ module Decidim
           # TODO: send email when complete?
         end
 
+        private
+        
         def groups
           paginate(all_groups)
         end

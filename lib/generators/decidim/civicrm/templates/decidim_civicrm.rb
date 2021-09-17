@@ -21,8 +21,16 @@ end
 ## Verification worfklows
 
 Decidim::Verifications.register_workflow(:civicrm_basic) do |workflow|
-  workflow.form = "Decidim::Civicrm::Verifications::CivicrmBasicVerification"
+  workflow.form = "Decidim::Civicrm::Verifications::CivicrmBasic"
   workflow.engine = Decidim::Civicrm::Engine
+end
+
+Decidim::Verifications.register_workflow(:civicrm_membership) do |workflow|
+  workflow.form = "Decidim::Civicrm::Verifications::CivicrmMembership"
+  workflow.engine = Decidim::Civicrm::Engine
+  workflow.options do |options|
+    options.attribute :civicrm_membership_types, type: :enum, choices: -> { Decidim::Civicrm::MembershipType.pluck(:id, :name) }
+  end
 end
 
 ## Event listeners

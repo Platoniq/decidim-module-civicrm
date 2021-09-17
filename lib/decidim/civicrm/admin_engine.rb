@@ -15,6 +15,12 @@ module Decidim
             get :sync
           end
         end
+        
+        resources :membership_types, only: [:index] do
+          collection do
+            get :sync
+          end
+        end
 
         root to: "groups#index"
       end

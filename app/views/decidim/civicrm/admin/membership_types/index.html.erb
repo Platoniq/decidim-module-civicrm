@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title">
+      <%= t(".title") %>
+
+      <%= link_to t(".sync"), decidim_civicrm_admin.sync_membership_types_path, class: "button tiny button--title" %>
+    </h2>
+  </div>
+  <div class="card-section">
+    <% if membership_types.any? %>
+      <table class="table-list civicrm-membership-types">
+        <thead>
+          <tr>
+            <th><%= t(".id") %></th>
+            <th><%= t(".name") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% membership_types.each do |membership_type| %>
+            <tr>
+              <td><%= membership_type.id %></td>
+              <td><%= membership_type.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate membership_types, theme: "decidim" %>
+    <% else %>
+      <p class="alert">
+        <%= t(".empty") %>
+        <%= link_to t(".sync"), decidim_civicrm_admin.sync_membership_types_path %>
+      </p>
+    <% end %>
+  </div>
+</div>

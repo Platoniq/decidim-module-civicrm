@@ -5,7 +5,7 @@ require "digest"
 module Decidim
   module Civicrm
     module Verifications
-      class CivicrmBasicVerification < Decidim::AuthorizationHandler
+      class CivicrmBasic < Decidim::AuthorizationHandler
         validate :user_valid
 
         def metadata
@@ -16,7 +16,7 @@ module Decidim
 
         def unique_id
           Digest::SHA512.hexdigest(
-            "#{uid}-#{Rails.application.secrets.secret_key_base}"
+            "#{uid}-civicrm-basic-#{Rails.application.secrets.secret_key_base}"
           )
         end
 
@@ -39,6 +39,8 @@ module Decidim
         end
 
         def user_valid
+          return errors.add(:user, "decidim.civicrm.errors.not_found") if uid.blank?
+
           errors.add(:user, "decidim.civicrm.errors.not_found") if civicrm_contact.blank? && civicrm_api_contact.blank?
         end
       end
