@@ -25,6 +25,14 @@ module Decidim
         root to: "groups#index"
       end
 
+      config.to_prepare do
+        Decidim::Admin::ApplicationController.helper(Decidim::ArraySettingsHelper)
+      end
+
+      initializer "decidim.civicrm.update_translations" do
+        Decidim::Civicrm::MembershipType.update_translations
+      end
+
       initializer "decidim.civicrm.mount_admin_engine" do
         Decidim::Core::Engine.routes do
           mount Decidim::Civicrm::AdminEngine, at: "/admin/civicrm", as: "decidim_civicrm_admin"

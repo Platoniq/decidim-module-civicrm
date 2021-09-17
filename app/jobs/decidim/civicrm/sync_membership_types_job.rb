@@ -6,7 +6,7 @@ module Decidim
       queue_as :default
 
       def perform(organization_id)
-        MembershipType.prepare_cleanup
+        MembershipType.prepare_cleanup(decidim_organization_id: organization_id)
 
         api_membership_types = Decidim::Civicrm::Api::ListMembershipTypes.new.result
 
@@ -16,9 +16,8 @@ module Decidim
 
         Rails.logger.info "Decidim::Civicrm::SyncMembershipTypesJob: #{MembershipType.to_delete.count} membership_types to delete"
 
-        MembershipType.clean_up_records
-
-        update_translations(organization_id)
+        MembershipType.clean_up_records(decidim_organization_id: organization_id)
+        MembershipType.update_translations
       end
 
       def update_membership_types(organization_id, data)
@@ -34,16 +33,6 @@ module Decidim
         membership_type.marked_for_deletion = false
 
         membership_type.save!
-      end
-
-      def update_translations(organization_id)
-        fields_translations = MembershipType.where(decidim_organization_id: organization_id).pluck(:id, :name).to_h
-
-        I18n.available_locales.each do |locale|
-          I18n.backend.store_translations(
-            locale, decidim: { authorization_handlers: { civicrm_membership: { fields: { civicrm_membership_types_choices: fields_translations } } } }
-          )
-        end
       end
     end
   end
