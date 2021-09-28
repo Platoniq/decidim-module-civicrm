@@ -28,6 +28,9 @@ module Decidim
 
         def user_valid
           super
+
+          return if errors.any?
+
           errors.add(:user, "decidim.civicrm.errors.not_found") unless civicrm_api_contact&.has_key?(:memberships)
         end
       end

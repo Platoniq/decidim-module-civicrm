@@ -26,10 +26,11 @@ Decidim::Verifications.register_workflow(:civicrm_basic) do |workflow|
 end
 
 Decidim::Verifications.register_workflow(:civicrm_membership) do |workflow|
+  workflow.action_authorizer = "Decidim::Civicrm::Verifications::MembershipActionAuthorizer"
   workflow.form = "Decidim::Civicrm::Verifications::CivicrmMembership"
   workflow.engine = Decidim::Civicrm::Engine
   workflow.options do |options|
-    options.attribute :civicrm_membership_types, type: :enum, choices: -> { Decidim::Civicrm::MembershipType.pluck(:id, :name) }
+    options.attribute :civicrm_membership_types, type: :array, choices: -> { Decidim::Civicrm::MembershipType.update_translations.pluck(:id) }
   end
 end
 
