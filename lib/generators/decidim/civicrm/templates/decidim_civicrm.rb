@@ -23,6 +23,7 @@ end
 Decidim::Verifications.register_workflow(:civicrm_basic) do |workflow|
   workflow.form = "Decidim::Civicrm::Verifications::CivicrmBasic"
   workflow.engine = Decidim::Civicrm::Engine
+  workflow.renewable = true
 end
 
 Decidim::Verifications.register_workflow(:civicrm_membership) do |workflow|
@@ -32,6 +33,7 @@ Decidim::Verifications.register_workflow(:civicrm_membership) do |workflow|
   workflow.options do |options|
     options.attribute :civicrm_membership_types, type: :array, choices: -> { Decidim::Civicrm::MembershipType.update_translations.pluck(:id) }
   end
+  workflow.renewable = true
 end
 
 ## Event listeners
