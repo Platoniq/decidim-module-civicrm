@@ -25,7 +25,8 @@ module Decidim
 
         return if civicrm_membership_type_id.blank?
 
-        Rails.logger.info "Decidim::Civicrm::SyncMembershipTypesJob: Creating / updating MembershipType #{data[:name]} (civicrm id: #{civicrm_membership_type_id}) with data #{data}"
+        Rails.logger.info "Decidim::Civicrm::SyncMembershipTypesJob: Creating / updating MembershipType #{data[:name]} \
+                           (civicrm id: #{civicrm_membership_type_id}) with data #{data}"
 
         membership_type = MembershipType.find_or_initialize_by(decidim_organization_id: organization_id, civicrm_membership_type_id: civicrm_membership_type_id)
 

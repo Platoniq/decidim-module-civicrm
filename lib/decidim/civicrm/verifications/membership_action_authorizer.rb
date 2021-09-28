@@ -5,7 +5,7 @@ module Decidim
     module Verifications
       class MembershipActionAuthorizer < Decidim::Verifications::DefaultActionAuthorizer
         def authorize
-          membership_type_ids = options["civicrm_membership_types"].reject { |o| o.blank? }.map(&:to_i)
+          membership_type_ids = options["civicrm_membership_types"].reject(&:blank?).map(&:to_i)
 
           status_code = has_membership?(membership_type_ids) ? :ok : :unauthorized
 
