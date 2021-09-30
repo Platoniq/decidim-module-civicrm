@@ -5,18 +5,28 @@ module Decidim
     module Verifications
       class MembershipActionAuthorizer < Decidim::Verifications::DefaultActionAuthorizer
         def authorize
-          membership_type_ids = options["civicrm_membership_types"].reject(&:blank?).map(&:to_i)
+          return [:missing, { action: :authorize }] if authorization.blank?
 
-          status_code = has_membership?(membership_type_ids) ? :ok : :unauthorized
+          status_code = :unauthorized
 
-          [status_code, {}]
+          return [status_code, { fields: { "civicrm_membership_types": "..." } }] if memberships.blank? || matching_memberships.empty?
+          return [:ok, {}] if matching_memberships.any?
+
+          [:incomplete, {}]
         end
 
-        def has_membership?(membership_type_ids)
-          return unless membership_type_ids.any?
+        private
 
-          matching_groups = authorization.metadata["memberships"] & (membership_type_ids)
-          matching_groups.any?
+        def allowed_memberships
+          options["civicrm_membership_types"].reject(&:blank?).map(&:to_i)
+        end
+
+        def memberships
+          authorization.metadata["memberships"]
+        end
+
+        def matching_memberships
+          (memberships) & (allowed_memberships)
         end
 
         def manifest

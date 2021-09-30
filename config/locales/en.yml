@@ -5,6 +5,11 @@ en:
       civicrm_basic:
         name: CiViCRM
         explanation: Authorize with your CiViCRM account 
+      civicrm_group:
+        name: CiViCRM - Groups
+        explanation: Authorize with your CiViCRM acount
+        fields:
+          civicrm_groups: Groups
       civicrm_membership:
         name: CiViCRM - Memberships
         explanation: Authorize with your CiViCRM acount

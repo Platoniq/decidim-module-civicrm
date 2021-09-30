@@ -19,6 +19,8 @@ module Decidim
         Rails.logger.info "Decidim::Civicrm::SyncGroupsJob: #{GroupMembership.to_delete.count} group memberships to delete"
 
         Group.clean_up_records(decidim_organization_id: organization_id)
+        Group.update_translations
+
         GroupMembership.clean_up_records(decidim_organization_id: organization_id)
       end
 

@@ -10,13 +10,13 @@ module Decidim
 
         def metadata
           super.merge(
-            memberships: civircm_memberships
+            civicrm_membership_types: civircm_memberships
           )
         end
 
         def unique_id
           Digest::SHA512.hexdigest(
-            "#{uid}-civicrm-memberships-#{Rails.application.secrets.secret_key_base}"
+            "#{uid}-civicrm-membership-#{Rails.application.secrets.secret_key_base}"
           )
         end
 

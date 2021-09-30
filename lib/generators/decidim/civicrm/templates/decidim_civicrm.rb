@@ -36,6 +36,16 @@ Decidim::Verifications.register_workflow(:civicrm_membership) do |workflow|
   workflow.renewable = true
 end
 
+Decidim::Verifications.register_workflow(:civicrm_group) do |workflow|
+  workflow.action_authorizer = "Decidim::Civicrm::Verifications::GroupActionAuthorizer"
+  workflow.form = "Decidim::Civicrm::Verifications::CivicrmGroup"
+  workflow.engine = Decidim::Civicrm::Engine
+  workflow.options do |options|
+    options.attribute :civicrm_groups, type: :array, choices: -> { Decidim::Civicrm::Group.update_translations.pluck(:id) }
+  end
+  workflow.renewable = true
+end
+
 ## Event listeners
 
 ActiveSupport::Notifications.subscribe(/^decidim\.civicrm\.contact\.created/) do |_name, contact_id|
