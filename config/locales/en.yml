@@ -4,7 +4,7 @@ en:
     authorization_handlers:
       civicrm_basic:
         explanation: Authorize with your CiViCRM account
-        name: CiViCRM
+        name: CiViCRM - Basic
       civicrm_group:
         explanation: Authorize with your CiViCRM acount
         fields:

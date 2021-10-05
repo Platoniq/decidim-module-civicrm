@@ -4,7 +4,7 @@ es:
     authorization_handlers:
       civicrm_basic:
         explanation: Verifícate con tu cuenta CiViCRM
-        name: CiViCRM
+        name: CiViCRM - Básico
       civicrm_group:
         explanation: Verifícate con tu cuenta CiViCRM
         fields:
