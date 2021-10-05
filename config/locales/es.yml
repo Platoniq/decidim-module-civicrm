@@ -3,25 +3,18 @@ es:
   decidim:
     authorization_handlers:
       civicrm_basic:
+        explanation: Verifícate con tu cuenta CiViCRM
         name: CiViCRM
-        explanation: Verifícate con tu cuenta CiViCRM 
       civicrm_group:
-        name: CiViCRM - Grupos
         explanation: Verifícate con tu cuenta CiViCRM
         fields:
           civicrm_groups: Grupos
+        name: CiViCRM - Grupos
       civicrm_membership:
-        name: CiViCRM - Membresías
         explanation: Verifícate con tu cuenta CiViCRM
         fields:
           civicrm_membership_types: Tipo de membresía
-    verifications:
-      authorizations:
-        first_login:
-          actions:
-            civicrm_basic: CiViCRM (Básico)
-        new:
-          no_action: Esta autorización se asignará automáticamente si cumples los requisitos.
+        name: CiViCRM - Membresías
     civicrm:
       admin:
         groups:
@@ -54,16 +47,24 @@ es:
             empty: No hay Tipos de Membresía sincronizados con CiViCRM.
             id: ID
             name: Nombre
-            title: Tipo de Membresía
             sync: Sincroniza con CiViCRM
+            title: Tipo de Membresía
           sync:
             success: La sincronización ha empezadpo
         menu:
-          membership_types: Tipo de Membresía
           groups: Grupos
+          membership_types: Tipo de Membresía
       contact:
         errors:
           not_unique: Ya existe un contacto con este ID
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            civicrm_basic: CiViCRM (Básico)
+        new:
+          no_action: Esta autorización se asignará automáticamente si cumples los
+            requisitos.
   layouts:
     decidim:
       admin:

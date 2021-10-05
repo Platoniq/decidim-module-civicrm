@@ -3,25 +3,18 @@ ca:
   decidim:
     authorization_handlers:
       civicrm_basic:
+        explanation: Verifica't amb el teu compte CiViCRM
         name: CiViCRM
-        explanation: Verifica't amb el teu compte CiViCRM 
       civicrm_group:
-        name: CiViCRM - Grups
         explanation: Verifica't amb el teu compte CiViCRM
         fields:
           civicrm_groups: Grups
+        name: CiViCRM - Grups
       civicrm_membership:
-        name: CiViCRM - Membresies
         explanation: Verifica't amb el teu compte CiViCRM
         fields:
           civicrm_membership_types: Tipus de membresia
-    verifications:
-      authorizations:
-        first_login:
-          actions:
-            civicrm_basic: CiViCRM (Bàsic)
-        new:
-          no_action: Aquesta autorització s'assignarà automàticament si compleixes els requisits.
+        name: CiViCRM - Membresies
     civicrm:
       admin:
         groups:
@@ -54,16 +47,24 @@ ca:
             empty: No hi ha Tipus de Membresia sincronitzats amb CiViCRM.
             id: ID
             name: Nom
-            title: Tipus de Membresia
             sync: Sincronitza amb CiViCRM
+            title: Tipus de Membresia
           sync:
             success: La sincronització ha començat
         menu:
-          membership_types: Tipus de Membresia
           groups: Grups
+          membership_types: Tipus de Membresia
       contact:
         errors:
           not_unique: Ja existeix un contacte amb aquest ID
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            civicrm_basic: CiViCRM (Bàsic)
+        new:
+          no_action: Aquesta autorització s'assignarà automàticament si compleixes
+            els requisits.
   layouts:
     decidim:
       admin:
