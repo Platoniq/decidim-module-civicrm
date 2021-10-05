@@ -57,6 +57,13 @@ es:
       contact:
         errors:
           not_unique: Ya existe un contacto con este ID
+    system:
+      organizations:
+        omniauth_settings:
+          civicrm:
+            client_id: ID del cliente
+            client_secret: Secreto del cliente
+            site: URL del sitio web
     verifications:
       authorizations:
         first_login:

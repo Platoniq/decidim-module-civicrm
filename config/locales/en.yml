@@ -57,6 +57,13 @@ en:
       contact:
         errors:
           not_unique: Contact is already taken
+    system:
+      organizations:
+        omniauth_settings:
+          civicrm:
+            client_id: Client ID
+            client_secret: Client secret
+            site: Site URL
     verifications:
       authorizations:
         first_login:

@@ -57,6 +57,13 @@ ca:
       contact:
         errors:
           not_unique: Ja existeix un contacte amb aquest ID
+    system:
+      organizations:
+        omniauth_settings:
+          civicrm:
+            client_id: ID del client
+            client_secret: Secret del client
+            site: URL del lloc web
     verifications:
       authorizations:
         first_login:
