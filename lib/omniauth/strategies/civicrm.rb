@@ -36,9 +36,7 @@ module OmniAuth
 
         base_url = options.site
 
-        if options.with_locale_path_segment
-          base_url = URI.join(base_url, "/#{request[:locale]}/")
-        end
+        base_url = URI.join(base_url, "/#{request[:locale]}/") if options.with_locale_path_segment
 
         options.client_options[:authorize_url] = URI.join(base_url, "oauth2/authorize").to_s
         options.client_options[:token_url] = URI.join(base_url, "oauth2/token").to_s
