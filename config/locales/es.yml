@@ -1,5 +1,71 @@
+---
 es:
   decidim:
     authorization_handlers:
-      civicrm_verification:
-        name: Autorización con CiViCRM
+      civicrm_basic:
+        name: CiViCRM
+        explanation: Verifícate con tu cuenta CiViCRM 
+      civicrm_group:
+        name: CiViCRM - Grupos
+        explanation: Verifícate con tu cuenta CiViCRM
+        fields:
+          civicrm_groups: Grupos
+      civicrm_membership:
+        name: CiViCRM - Membresías
+        explanation: Verifícate con tu cuenta CiViCRM
+        fields:
+          civicrm_membership_types: Tipo de membresía
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            civicrm_basic: CiViCRM (Básico)
+        new:
+          no_action: Esta autorización se asignará automáticamente si cumples los requisitos.
+    civicrm:
+      admin:
+        groups:
+          index:
+            actions: Acciones
+            description: Descripción
+            empty: No hay grupos sincronizados con CiViCRM.
+            id: ID
+            members: Miembros
+            name: Nombre
+            participants: Participantes
+            sync: Sincroniza con CiViCRM
+            title: Grupos
+            total_members: Número de miembros
+          show:
+            actions: Acciones
+            contact: Contacto
+            created_at: Creado el
+            empty: No hay participantes de Decidim en este grupo.
+            name: Nombre
+            nickname: Álias
+            show_email: Mostrar email
+            sync: Sincroniza con CiViCRM
+            title: Miembros del grupo '%{group_name}'
+            view_profile: Ver perfil
+          sync:
+            success: La sincronización ha empezadpo
+        membership_types:
+          index:
+            empty: No hay Tipos de Membresía sincronizados con CiViCRM.
+            id: ID
+            name: Nombre
+            title: Tipo de Membresía
+            sync: Sincroniza con CiViCRM
+          sync:
+            success: La sincronización ha empezadpo
+        menu:
+          membership_types: Tipo de Membresía
+          groups: Grupos
+      contact:
+        errors:
+          not_unique: Ya existe un contacto con este ID
+  layouts:
+    decidim:
+      admin:
+        civicrm:
+          title: CiViCRM

@@ -1,5 +1,71 @@
+---
 ca:
   decidim:
     authorization_handlers:
-      civicrm_verification:
-        name: Autorització amb CiViCRM
+      civicrm_basic:
+        name: CiViCRM
+        explanation: Verifica't amb el teu compte CiViCRM 
+      civicrm_group:
+        name: CiViCRM - Grups
+        explanation: Verifica't amb el teu compte CiViCRM
+        fields:
+          civicrm_groups: Grups
+      civicrm_membership:
+        name: CiViCRM - Membresies
+        explanation: Verifica't amb el teu compte CiViCRM
+        fields:
+          civicrm_membership_types: Tipus de membresia
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            civicrm_basic: CiViCRM (Bàsic)
+        new:
+          no_action: Aquesta autorització s'assignarà automàticament si compleixes els requisits.
+    civicrm:
+      admin:
+        groups:
+          index:
+            actions: Accions
+            description: Descripció
+            empty: No hi ha grups sincronitzats amb CiViCRM.
+            id: ID
+            members: Membres
+            name: Nom
+            participants: Participants
+            sync: Sincronitza amb CiViCRM
+            title: Grups
+            total_members: Nombre de membres
+          show:
+            actions: Accions
+            contact: Contacte
+            created_at: Creat el
+            empty: No hi ha participants de Decidim en aquest grup.
+            name: Nom
+            nickname: Àlies
+            show_email: Mostrar e-mail
+            sync: Sincronitza amb CiViCRM
+            title: Membres del grup '%{group_name}'
+            view_profile: Veure perfil
+          sync:
+            success: La sincronització ha començat
+        membership_types:
+          index:
+            empty: No hi ha Tipus de Membresia sincronitzats amb CiViCRM.
+            id: ID
+            name: Nom
+            title: Tipus de Membresia
+            sync: Sincronitza amb CiViCRM
+          sync:
+            success: La sincronització ha començat
+        menu:
+          membership_types: Tipus de Membresia
+          groups: Grups
+      contact:
+        errors:
+          not_unique: Ja existeix un contacte amb aquest ID
+  layouts:
+    decidim:
+      admin:
+        civicrm:
+          title: CiViCRM
