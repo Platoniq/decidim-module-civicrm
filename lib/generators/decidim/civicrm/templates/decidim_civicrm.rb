@@ -49,5 +49,7 @@ end
 ## Event listeners
 
 ActiveSupport::Notifications.subscribe(/^decidim\.civicrm\.contact\.created/) do |_name, contact_id|
-  Decidim::Civicrm::ContactVerificationJob.perform_later(contact_id)
+  Decidim::Civicrm::ContactVerificationJob.perform_later(contact_id, "civicrm_basic")
+  Decidim::Civicrm::ContactVerificationJob.perform_later(contact_id, "civicrm_membership")
+  Decidim::Civicrm::ContactVerificationJob.perform_later(contact_id, "civicrm_group")
 end

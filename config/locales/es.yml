@@ -57,6 +57,18 @@ es:
       contact:
         errors:
           not_unique: Ya existe un contacto con este ID
+    events:
+      civicrm:
+        verification:
+          civicrm_basic:
+            ok:
+              notification_title: Tu cuenta ha sido verificada con CiViCRM (Básico)
+          civicrm_group:
+            ok:
+              notification_title: Tu cuenta ha sido verificada con CiViCRM (Grupo)
+          civicrm_membership:
+            ok:
+              notification_title: Tu cuenta ha sido verificada con CiViCRM (Membresía)
     system:
       organizations:
         omniauth_settings:

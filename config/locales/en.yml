@@ -57,6 +57,21 @@ en:
       contact:
         errors:
           not_unique: Contact is already taken
+    events:
+      civicrm:
+        verification:
+          civicrm_basic:
+            ok:
+              notification_title: You've been succesfully authorized with CiViCRM
+                (Basic method)
+          civicrm_group:
+            ok:
+              notification_title: You've been succesfully authorized with CiViCRM
+                (Group method)
+          civicrm_membership:
+            ok:
+              notification_title: You've been succesfully authorized with CiViCRM
+                (Membership method)
     system:
       organizations:
         omniauth_settings:

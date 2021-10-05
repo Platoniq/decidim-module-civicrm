@@ -57,6 +57,18 @@ ca:
       contact:
         errors:
           not_unique: Ja existeix un contacte amb aquest ID
+    events:
+      civicrm:
+        verification:
+          civicrm_basic:
+            ok:
+              notification_title: El teu compte ha estat verificat amb CiViCRM (Bàsic)
+          civicrm_group:
+            ok:
+              notification_title: El teu compte ha estat verificat amb CiViCRM (Grup)
+          civicrm_membership:
+            ok:
+              notification_title: El teu compte ha estat verificat amb CiViCRM (Membresia)
     system:
       organizations:
         omniauth_settings:
