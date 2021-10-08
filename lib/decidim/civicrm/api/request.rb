@@ -10,7 +10,7 @@ module Decidim
           response = connection.get Decidim::Civicrm::Api.url do |request|
             request.params = base_params.merge(params)
 
-            puts [request.path, URI.encode_www_form(request.params.sort)].join("/?") # DEBUG, to obtain the correct URL for stub_request
+            # puts [request.path, URI.encode_www_form(request.params.sort)].join("/?") # DEBUG, to obtain the correct URL for stub_request
           end
 
           raise Decidim::Civicrm::Error, response.reason_phrase unless response.success?

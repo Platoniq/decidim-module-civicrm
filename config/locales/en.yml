@@ -4,10 +4,13 @@ en:
     authorization_handlers:
       civicrm_groups:
         fields:
-          group_ids: CiViCRM Group IDs
-        name: Authorized with CiViCRM Group
+          groups: CiViCRM Group IDs
+          group: CiViCRM Group
+        explanation: CiViCRM Groups and Intelligent Groups memberships
+        name: Authorized with CiViCRM Groups
       civicrm_verification:
         name: Authorized with CiViCRM
+        explanation: CiViCRM membership
     civicrm:
       admin:
         groups:
@@ -15,13 +18,17 @@ en:
             actions: Actions
             description: Description
             empty: There are no groups synchronized from CiViCRM.
-            id: ID
+            civicrm_id: CiViCRM ID
             members: Members
             name: Name
             participants: Participants
             sync: Synchronize with CiViCRM
             title: Groups
             total_members: Total members
+            last_sync: Last synchronization
+            auto_sync:
+              enable: Auto synchronize users in this group
+              disable: Do not auto synchronize users in this group
           show:
             actions: Actions
             contact: Contact
@@ -32,6 +39,10 @@ en:
             show_email: Show email
             sync: Synchronize with CiViCRM
             title: Group members for '%{group_name}'
+            unsynchronized: Never logged yet
+            auto_sync:
+              enabled: This group will be automatically synchronized with CiViCRM
+              disabled: This group won't be automatically synchronized with CiViCRM
           sync:
             success: The synchronization has started
         menu:

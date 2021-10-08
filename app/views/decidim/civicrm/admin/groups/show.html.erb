@@ -7,6 +7,10 @@
     </h2>
   </div>
   <div class="card-section">
+    <p>
+      <%= t(group.auto_sync_members? ? ".auto_sync.enabled" : ".auto_sync.disabled") %>
+    </p>
+
     <% if members.any? %>
       <table class="table-list civicrm-group-members">
         <thead>
@@ -18,35 +22,42 @@
           </tr>
         </thead>
         <tbody>
-          <% group.members.each do |member| %>
+          <% members.each do |member| %>
             <tr>
-              <td><%= member.user.name %></td>
+              <td><%= member.name %></td>
 
-              <td>
-                <%= link_to decidim.profile_path(member.user.nickname), target: :blank do %>
-                  <%= member.user.nickname %>
-                  <%= icon "external-link" %>
-                <% end %>
-              </td>
+              <% if member.synchronized? %>
+                <td>
+                  <%= link_to decidim.profile_path(member.user.nickname), target: :blank do %>
+                    <%= member.user.nickname %>
+                    <%= icon "external-link" %>
+                  <% end %>
+                </td>
 
-              <td><%= l member.created_at, format: :decidim_short %></td>
+                <td><%= l member.contact.created_at, format: :decidim_short %></td>
 
-              <td class="table-list__actions">
-                <% if allowed_to? :show_email, :user, user: member.user %>
-                  <%= icon_link_to "envelope-open", decidim_admin.show_email_officialization_path(user_id: member.user.id), t(".show_email"), class: "action-icon action-icon--show-email", data: { full_name: member.user.name, toggle: "show-email-modal" } %>
-                <% end %>
-                <%= icon_link_to "envelope-closed", current_or_new_conversation_path_with(member.user), t(".contact"), class:"action-icon--new" %>
-              </td>
+                <td class="table-list__actions">
+                  <% if allowed_to? :show_email, :user, user: member.user %>
+                    <%= icon_link_to "envelope-open", decidim_admin.show_email_officialization_path(user_id: member.user.id), t(".show_email"), class: "action-icon action-icon--show-email", data: { full_name: member.user.name, toggle: "show-email-modal" } %>
+                  <% end %>
+                  <%= icon_link_to "envelope-closed", current_or_new_conversation_path_with(member.user), t(".contact"), class:"action-icon--new" %>
+                </td>
+              <% else %>
+                <td><%= t(".unsynchronized") %></td>
+                <td><%= l member.created_at, format: :decidim_short %></td>
+                <td></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
       <%= paginate members, theme: "decidim" %>
     <% else %>
-      <p class="alert">
+      <p class="callout warning">
         <%= t(".empty") %>
         <%= link_to t(".sync"), decidim_civicrm_admin.sync_groups_path(id: group.id) %>
       </p>
     <% end %>
   </div>
 </div>
+<%= render "decidim/admin/officializations/show_email_modal" %>

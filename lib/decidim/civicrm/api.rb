@@ -16,13 +16,13 @@ module Decidim
     # This namespace holds the logic to connect to the CiViCRM REST API.
     module Api
       def self.config
-        Rails.application.secrets[:civicrm][:api]
+        Decidim::Civicrm.api
       end
 
       def self.credentials
         {
-          api_key: config[:api_key],
-          key: config[:key]
+          api_key: config[:key],
+          key: config[:secret]
         }
       end
 

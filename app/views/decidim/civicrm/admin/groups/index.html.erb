@@ -11,24 +11,33 @@
       <table class="table-list civicrm-groups">
         <thead>
           <tr>
-            <th><%= t(".id") %></th>
+            <th><%= t(".civicrm_id") %></th>
             <th><%= t(".name") %></th>
             <th><%= t(".description") %></th>
             <th><%= t(".participants") %></th>
             <th><%= t(".total_members") %></th>
+            <th><%= t(".last_sync") %></th>
             <th><%= t(".actions") %></th>
           </tr>
         </thead>
         <tbody>
           <% groups.each do |group| %>
             <tr>
-              <td><%= group.id %></td>
-              <td><%= link_to group.title, group_path(group) %></td>
+              <td><%= group.civicrm_group_id %></td>
+              <td><%= link_to group.title, decidim_civicrm_admin.group_path(group) %></td>
               <td><%= group.description %></td>
               <td><%= group.members.count %></td>
               <td><%= group.civicrm_member_count %></td>
-              <td>
-                <%= icon_link_to "reload", decidim_civicrm_admin.sync_groups_path(id: group.id), t(".sync"), class: "action-icon--reload" %>
+              <td class="<%= last_sync_class(group.last_sync) %>"><%= l(group.last_sync, format: :decidim_short) if group.last_sync %></td>
+              <td class="table-list__actions">
+              <% if group.auto_sync_members? %>
+                <%= icon_link_to "check", decidim_civicrm_admin.toggle_auto_sync_groups_path(id: group.id), t(".auto_sync.disable"), class: "action-icon action-icon--success", method: :put %>
+              <% else %>
+                <%= icon_link_to "check", decidim_civicrm_admin.toggle_auto_sync_groups_path(id: group.id), t(".auto_sync.enable"), class: "action-icon action-icon--remove", method: :put %>
+              <% end %>
+
+              <%= icon_link_to "reload", decidim_civicrm_admin.sync_groups_path(id: group.id), t(".sync"), class: "action-icon--reload" %>
+              <%= icon_link_to "eye", decidim_civicrm_admin.group_path(group), t(".members"), class: "action-icon" %>
               </td>
             </tr>
           <% end %>
@@ -36,7 +45,7 @@
       </table>
       <%= paginate groups, theme: "decidim" %>
     <% else %>
-      <p class="alert">
+      <p class="callout warning">
         <%= t(".empty") %>
         <%= link_to t(".sync"), decidim_civicrm_admin.sync_groups_path %>
       </p>

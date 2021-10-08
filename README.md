@@ -1,63 +1,82 @@
-# Decidim::Civicrm
+Decidim CiviCRM integration module
+==================================
 
-## Installation
+This module provides certain integrations in order to use [CiviCRM](https://civicrm.org/) with Decidim.
 
-Add this line to your application's Gemfile:
+Currently, the implementation supported is using CiviCRM 5.3 with Drupal 7.8.
+
+Features:
+--------
+
+- Omniauth integration (aka: "Login with CiviCRM")
+- Verification handler for all users logged via Omniauth. Handler: `civicrm`
+- Verification handler for every group available in CiviCRM (and intelligent groups). Handler: `groups`
+- Contact & groups synchronization to internal Rails models
+- Administrator interface to enable which user/groups must be synchronized
+
+
+Install
+-------
+
+Add into the `Gemfile`
 
 ```ruby
-gem 'decidim-civicrm'
+gem "decidim-civicrm", git: "https://github.com/Platoniq/decidim-module-civicrm", branch: "main"
+
 ```
 
-And then execute to install the gem:
+Install dependencies:
 
-    $ bundle install
+```
+bundle
+```
 
-And then run:
+Install (and run) migrations:
 
-    $ rails g decidim:civicrm:install
+
+```
+bundle exec rails decidim_civicrm:install:migrations
+bundle exec rails db:migrate
+
+```
 
 
 ## Configuration
 
-Configure these values in your project's `config/secrets.yml` file:
 
-```yaml
-  omniauth:
-    civicrm:
-      enabled: true
-      client_id: <%= ENV["CIVICRM_OAUTH_CLIENT_ID"] %>
-      client_secret: <%= ENV["CIVICRM_OAUTH_CLIENT_SECRET"] %>
-      site: <%= ENV["CIVICRM_OAUTH_SITE"] %>
+Customize your integration by creating an initializer (ie: `config/initializes/decidim_civicrm.rb`) and set some of the variables:
+
+```ruby
+# config/initializers/decidim_civicrm.rb
+
+Decidim::Civicrm.configure do |config|
+  # Configure api credentials
+  config.api =   {
+    key: Rails.application.secrets.dig(:civicrm, :api, :key),
+    secret: Rails.application.secrets.dig(:civicrm, :api, :secret),
+    url: Rails.application.secrets.dig(:civicrm, :api, :url)
+  }
+
+  # Configure omniauth secrets
+  config.omniauth =   {
+    client_id: Rails.application.secrets.dig(:omniauth, :civicrm, :client_id),
+    client_secret: Rails.application.secrets.dig(:omniauth, :civicrm, :client_secret),
+    site: Rails.application.secrets.dig(:omniauth, :civicrm, :site)
+  }
+
+  # whether to send notifications to user when they auto-verified or not:
+  config.send_verification_notifications = false
+
+  # Optional: enable or disable verification methods (all enableD by default)
+  config.authorizations = [:civicrm, :civicrm_groups]
+end
+
+
 ```
 
-and
-
-```yaml
-  civicrm:
-    api:
-      api_key: <%= ENV["CIVICRM_API_KEY"] %>
-      key: <%= ENV["CIVICRM_API_SECRET"] %>
-      url: <%= ENV["CIVICRM_API_URL"] %>
-```
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-Configure these values in `spec/decidim_dummy_app/config/secrets.yml`:
-
-```yaml
-  civicrm:
-    api:
-      api_key: fake-civicrm-api-key
-      key: fake-civicrm-api-secret
-      url: https://api.base
-```
 
 TODO: Write development instructions here
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Platoniq/decidim-module-decidim_civicrm.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Platoniq/decidim-module-civicrm.

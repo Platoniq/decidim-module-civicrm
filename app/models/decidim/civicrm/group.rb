@@ -11,6 +11,10 @@ module Decidim
       has_many :members, class_name: "Decidim::Civicrm::Contact", source: :contact, through: :group_memberships
 
       validates :civicrm_group_id, uniqueness: { scope: :organization }
+
+      def last_sync
+        @last_sync ||= group_memberships.select(:updated_at).order(updated_at: :desc).last&.updated_at
+      end
     end
   end
 end
