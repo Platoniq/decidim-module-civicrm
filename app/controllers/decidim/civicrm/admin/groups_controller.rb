@@ -14,6 +14,12 @@ module Decidim
 
         def index
           # enforce_permission_to :index, :civicrm_groups
+          respond_to do |format|
+            format.html
+            format.json do
+              render json: json_groups
+            end
+          end
         end
 
         def show
@@ -42,6 +48,23 @@ module Decidim
           group.auto_sync_members = !group.auto_sync_members
           group.save!
           redirect_to decidim_civicrm_admin.groups_path
+        end
+
+        private
+
+        def json_groups
+          query = groups.where(auto_sync_members: true)
+          query = if params[:ids]
+                    query.where(civicrm_group_id: params[:ids])
+                  else
+                    query.where("title ILIKE ?", "%#{params[:q]}%")
+                  end
+          query.map do |item|
+            {
+              id: item.civicrm_group_id,
+              text: item.title
+            }
+          end
         end
 
         def groups

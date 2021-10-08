@@ -16,6 +16,7 @@ module Decidim
         # omniauth only trigger notifications when a new user is registered
         # this adds a notification too when user logs in
         Decidim::CreateOmniauthRegistration.include(Decidim::Civicrm::CreateOmniauthRegistrationOverride)
+        Decidim::Admin::ResourcePermissionsController.include(Decidim::Civicrm::Admin::NeedsMultiselectSnippets)
       end
 
       initializer "decidim_civicrm.omniauth" do
