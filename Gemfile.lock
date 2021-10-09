@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    decidim-civicrm (0.24)
-      decidim-admin (~> 0.24)
-      decidim-core (~> 0.24)
-      decidim-verifications (~> 0.24)
+    decidim-civicrm (0.3)
+      decidim-admin (~> 0.3)
+      decidim-core (~> 0.3)
+      decidim-verifications (~> 0.3)
 
 GEM
   remote: https://rubygems.org/
@@ -851,7 +851,7 @@ DEPENDENCIES
   web-console (~> 3.5)
 
 RUBY VERSION
-   ruby 2.7.3p183
+   ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.26
+   2.2.27

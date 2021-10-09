@@ -5,12 +5,13 @@ require "digest"
 module Decidim
   module Civicrm
     module Verifications
-      class CivicrmVerification < Decidim::AuthorizationHandler
+      class Civicrm < Decidim::AuthorizationHandler
         validate :user_valid
 
         def metadata
           super.merge(
-            contact_id: uid
+            uid: uid,
+            contact_id: civicrm_contact&.civicrm_contact_id
           )
         end
 
@@ -24,14 +25,14 @@ module Decidim
         #   "civicrm/form"
         # end
 
-        private
+        protected
 
         def organization
           current_organization || user&.organization
         end
 
         def uid
-          user.identities.find_by(organization: organization, provider: Decidim::Civicrm::PROVIDER_NAME)&.uid
+          civicrm_contact&.civicrm_uid || user.civicrm_identity&.uid&.to_i
         end
 
         def civicrm_contact

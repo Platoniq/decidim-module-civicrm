@@ -13,6 +13,7 @@ module Decidim
         resources :groups, only: [:index, :show] do
           collection do
             get :sync
+            put :toggle_auto_sync
           end
         end
 

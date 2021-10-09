@@ -1,13 +1,14 @@
 # frozen_string_literal: true
+# # frozen_string_literal: true
 
-Decidim::Verifications.register_workflow(:civicrm_groups) do |workflow|
-  workflow.admin_engine = Decidim::Civicrm::AdminEngine
-  workflow.action_authorizer = "Decidim::Civicrm::Verifications::GroupActionAuthorizer"
+# Decidim::Verifications.register_workflow(:civicrm_groups) do |workflow|
+#   workflow.admin_engine = Decidim::Civicrm::AdminEngine
+#   workflow.action_authorizer = "Decidim::Civicrm::Verifications::GroupActionAuthorizer"
 
-  workflow.options do |options|
-    options.attribute :group_ids, type: :string
-  end
-end
+#   workflow.options do |options|
+#     options.attribute :group_ids, type: :string
+#   end
+# end
 
 # Decidim::Verifications.register_workflow(:civicrm_memberships) do |workflow|
 #   workflow.admin_engine = Decidim::Civicrm::AdminEngine

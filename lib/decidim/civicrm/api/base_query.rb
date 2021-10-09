@@ -33,7 +33,13 @@ module Decidim
         end
 
         def store_result
-          @result = parsed_response.deep_symbolize_keys if success?
+          return unless success?
+
+          if parsed_response.respond_to? :deep_symbolize_keys
+            @result = parsed_response.deep_symbolize_keys
+          elsif parsed_response.present?
+            @result = parsed_response.map(&:deep_symbolize_keys)
+          end
         end
       end
     end

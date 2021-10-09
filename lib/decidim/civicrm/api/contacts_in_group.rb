@@ -17,16 +17,14 @@ module Decidim
         def default_query
           {
             options: { limit: 0 },
-            return: "contact_id"
+            return: "contact_id,display_name,email"
           }
         end
 
         private
 
         def parsed_response
-          {
-            contact_ids: response["values"].map { |v| v["contact_id"] }
-          }
+          response["values"]
         end
       end
     end

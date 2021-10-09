@@ -25,8 +25,8 @@ module Decidim
         private
 
         def parsed_response
-          user = response["values"].first
-          contact = user.delete("api.Contact.get")["values"].first
+          user = response["values"].first.dup
+          contact = user.dig("api.Contact.get", "values") ? user.delete("api.Contact.get")["values"].first : nil
 
           {
             user: user,
