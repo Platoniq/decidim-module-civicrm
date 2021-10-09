@@ -20,6 +20,10 @@ module Decidim
         root to: "groups#index"
       end
 
+      initializer "decidim_civicrm.assets" do |app|
+        app.config.assets.precompile += %w(decidim_admin_civicrm_manifest.js)
+      end
+
       initializer "decidim.civicrm.mount_admin_engine" do
         Decidim::Core::Engine.routes do
           mount Decidim::Civicrm::AdminEngine, at: "/admin/civicrm", as: "decidim_civicrm_admin"
