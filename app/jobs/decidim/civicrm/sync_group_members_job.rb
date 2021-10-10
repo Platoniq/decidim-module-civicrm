@@ -19,6 +19,8 @@ module Decidim
         Rails.logger.info "SyncGroupMembersJob: #{GroupMembership.where(group_id: group_id).to_delete.count} group memberships to delete"
 
         GroupMembership.clean_up_records(group_id: group_id)
+
+        ActiveSupport::Notifications.publish("decidim.civicrm.group_membership.updated", group.id)
       end
 
       def update_group(group, data)

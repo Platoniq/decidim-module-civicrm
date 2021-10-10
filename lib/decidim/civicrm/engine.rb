@@ -36,9 +36,16 @@ module Decidim
         ActiveSupport::Notifications.subscribe "decidim.user.omniauth_registration" do |_name, data|
           Decidim::Civicrm::OmniauthContactSyncJob.perform_later(data)
         end
-        # Trigger autho-verification after sync a contact
         ActiveSupport::Notifications.subscribe "decidim.civicrm.contact.updated" do |_name, data|
+          # Trigger autho-verification after sync a contact
           Decidim::Civicrm::AutoVerificationJob.perform_later(data)
+          # Trigger membership as private user in configured participatory spaces
+          Decidim::Civicrm::JoinContactToParticipatorySpacesJob.perform_later(data)
+        end
+
+        # Trigger participatory spaces private members sync
+        ActiveSupport::Notifications.subscribe "decidim.civicrm.group_membership.updated" do |_name, data|
+          Decidim::Civicrm::ParticipatorySpaceGroupMembershipJob.perform_later(data)
         end
       end
 
