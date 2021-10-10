@@ -45,6 +45,9 @@ en:
               disabled: This group won't be automatically synchronized with CiViCRM
           sync:
             success: The synchronization has started
+          participatory_spaces:
+            sync_members: "Synchronize this members as private participants in these participatory spaces:"
+            save: Save changes
         menu:
           groups: Groups
           verifications: Authorizations

@@ -6,11 +6,16 @@
       <%= link_to t(".sync"), decidim_civicrm_admin.sync_groups_path(id: group.id), class: "button tiny button--title" %>
     </h2>
   </div>
+
   <div class="card-section">
     <p>
       <%= t(group.auto_sync_members? ? ".auto_sync.enabled" : ".auto_sync.disabled") %>
     </p>
 
+    <%= render partial: "participatory_spaces" %>
+  </div>
+
+  <div class="card-section">
     <% if members.any? %>
       <table class="table-list civicrm-group-members">
         <thead>
@@ -60,4 +65,4 @@
     <% end %>
   </div>
 </div>
-<%= render "decidim/admin/officializations/show_email_modal" %>
+<%= render partial: "decidim/admin/officializations/show_email_modal" %>

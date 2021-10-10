@@ -10,9 +10,10 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
-        resources :groups, only: [:index, :show] do
+        resources :groups, only: [:index, :show, :update] do
           collection do
             get :sync
+            get :participatory_spaces
             put :toggle_auto_sync
           end
         end
