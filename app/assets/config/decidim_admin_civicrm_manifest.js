@@ -1,1 +1,1 @@
-// = link decidim/civicrm/admin/multiselect_authorization_groups.js
+// = link decidim/civicrm/admin/resource_permissions_multiselect.js
