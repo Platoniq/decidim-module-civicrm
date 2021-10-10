@@ -22,6 +22,7 @@ $(() => {
       // load text via ajax
       $.get(url_groups, { ids: values }, (data) => {
         $select.val("");
+        $select.contents("option").remove()
         data.forEach((item) => {
          $select.append(new Option(item.text, item.id, true, true));
         });

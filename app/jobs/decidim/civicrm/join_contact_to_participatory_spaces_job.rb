@@ -18,7 +18,7 @@ module Decidim
             next unless (space = item.participatory_space)
 
             # TODO: use CreateParticipatorySpacePrivateUser to notify users if enabled by config var
-            Decidim::ParticipatorySpacePrivateUser.new(decidim_user_id: @contact.decidim_user_id, privatable_to: space).save
+            Decidim::ParticipatorySpacePrivateUser.find_or_create_by(decidim_user_id: @contact.decidim_user_id, privatable_to: space)
           end
         end
       end

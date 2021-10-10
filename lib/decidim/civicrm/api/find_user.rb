@@ -5,7 +5,7 @@ module Decidim
     module Api
       class FindUser < BaseQuery
         def initialize(id, query = nil)
-          @request = Request.new(
+          @request = Request.get(
             entity: "User",
             id: id,
             json: json_params(query || default_query)
