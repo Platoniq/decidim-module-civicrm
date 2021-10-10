@@ -1,5 +1,61 @@
-ca:
+---
+en:
   decidim:
     authorization_handlers:
+      civicrm_groups:
+        explanation: Membres de CiViCRM Grups i/o Grups Intel·ligents
+        fields:
+          group: CiViCRM Grup
+          groups: CiViCRM Grup IDs
+        name: Autorització amb CiViCRM Grups
       civicrm_verification:
+        explanation: Membres de CiViCRM
         name: Autorització amb CiViCRM
+    civicrm:
+      admin:
+        groups:
+          index:
+            actions: Accions
+            auto_sync:
+              disable: No sincronitzis automàticament aquest grup
+              enable: Sincronitza automàticament aquest grup
+            civicrm_id: CiViCRM ID
+            description: Descripció
+            empty: No hi ha grups sincronitzats des de CiViCRM.
+            last_sync: Última sincronització
+            members: Membres
+            name: Nom
+            participants: Participants
+            sync: Sincronitza amb el CiViCRM
+            title: Grups
+            total_members: Membres totals
+          participatory_spaces:
+            save: Desa els canvis
+            sync_members: 'Sincronitza aquests membres com a participants privats dels espais participatius:'
+          show:
+            actions: Accions
+            auto_sync:
+              disabled: Aquest grup no serà sincronitzat automàticament amb el CiViCRM
+              enabled: Aquest grup serà sincronitzat automàticament amb el CiViCRM
+            contact: Contacte
+            created_at: Creat el
+            empty: No hi ha participants de Decidim en aquest grup.
+            name: Nom
+            nickname: Àlies
+            show_email: Mostra l'email
+            sync: Sincronitza amb el CiViCRM
+            title: Membres del grup '%{group_name}'
+            unsynchronized: Mai loguejat encara
+          sync:
+            success: La sincronització ha començat
+        menu:
+          groups: Grups
+          verifications: Autoritzacions
+      contact:
+        errors:
+          not_unique: El contact ja existeix
+  layouts:
+    decidim:
+      admin:
+        civicrm:
+          title: CiViCRM

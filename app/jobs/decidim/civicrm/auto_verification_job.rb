@@ -9,12 +9,12 @@ module Decidim
         @contact = Decidim::Civicrm::Contact.find_by(id: contact_id)
 
         unless @contact
-          Rails.logger.error "ERROR: Civicrm Authorization model not found for contact #{contact_id}"
+          Rails.logger.error "AutoVerificationJob: ERROR: model not found for contact #{contact_id}"
           return
         end
 
         unless @contact&.user
-          Rails.logger.error "ERROR: Civicrm Authorization user relationship not found for contact #{contact_id}"
+          Rails.logger.error "AutoVerificationJob: ERROR: user relationship not found for contact #{contact_id}"
           return
         end
 
@@ -30,12 +30,12 @@ module Decidim
 
         Decidim::Verifications::AuthorizeUser.call(handler) do
           on(:ok) do
-            Rails.logger.info "Success: Civicrm Authorization created for user #{handler.user.id}"
+            Rails.logger.info "AutoVerificationJob: Success: created for user #{handler.user.id}"
             notify_user(handler.user, :ok, handler) if Decidim::Civicrm.send_verification_notifications
           end
 
           on(:invalid) do
-            Rails.logger.error "ERROR: Civicrm Authorization failed for user #{handler&.user&.id}"
+            Rails.logger.error "AutoVerificationJob: ERROR: failed for user #{handler&.user&.id}"
             notify_user(handler.user, :invalild, handler) if Decidim::Civicrm.send_verification_notifications
           end
         end
@@ -47,11 +47,11 @@ module Decidim
 
         Decidim::Verifications::AuthorizeUser.call(handler) do
           on(:ok) do
-            Rails.logger.info "Success: Civicrm Groups Authorization created for user #{handler.user.id}"
+            Rails.logger.info "AutoVerificationJob: Success: Authorization created for user #{handler.user.id}"
           end
 
           on(:invalid) do
-            Rails.logger.error "ERROR: Civicrm Groups Authorization failed for user #{handler&.user&.id}"
+            Rails.logger.error "AutoVerificationJob: ERROR: Authorization failed for user #{handler&.user&.id}"
           end
         end
       end

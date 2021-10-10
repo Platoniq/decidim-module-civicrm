@@ -12,11 +12,11 @@ module Decidim
 
         Decidim::Civicrm::SyncContact.call(contact_form(user, data)) do
           on(:ok) do |contact|
-            Rails.logger.info "Success: Civicrm Contact #{contact.id} created for user #{contact.user&.id}"
+            Rails.logger.info "OmniauthContactSyncJob: Success: Civicrm Contact #{contact.id} created for user #{contact.user&.id}"
           end
 
           on(:invalid) do |message|
-            Rails.logger.error "ERROR: Civicrm Contact creation error #{message}"
+            Rails.logger.error "OmniauthContactSyncJob: ERROR: Civicrm Contact creation error #{message}"
           end
         end
       end

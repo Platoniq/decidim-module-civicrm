@@ -10,12 +10,12 @@ module Decidim
 
         api_groups = Decidim::Civicrm::Api::ListGroups.new.result[:groups]
 
-        Rails.logger.info "Decidim::Civicrm::SyncAllGroupsJob: #{api_groups.count} groups to process"
+        Rails.logger.info "SyncAllGroupsJob: #{api_groups.count} groups to process"
 
         api_groups.each { |data| update_group(organization_id, data) }
 
-        Rails.logger.info "Decidim::Civicrm::SyncAllGroupsJob: #{Group.to_delete.count} groups to delete"
-        Rails.logger.info "Decidim::Civicrm::SyncAllGroupsJob: #{GroupMembership.to_delete.count} group memberships to delete"
+        Rails.logger.info "SyncAllGroupsJob: #{Group.to_delete.count} groups to delete"
+        Rails.logger.info "SyncAllGroupsJob: #{GroupMembership.to_delete.count} group memberships to delete"
 
         Group.clean_up_records
       end
@@ -25,7 +25,7 @@ module Decidim
 
         return if civicrm_group_id.blank?
 
-        Rails.logger.info "Decidim::Civicrm::SyncAllGroupsJob: Creating / updating Group #{data[:title]} (civicrm id: #{civicrm_group_id}) with data #{data}"
+        Rails.logger.info "SyncAllGroupsJob: Creating / updating Group #{data[:title]} (civicrm id: #{civicrm_group_id}) with data #{data}"
 
         group = Group.find_or_initialize_by(decidim_organization_id: organization_id, civicrm_group_id: civicrm_group_id)
 
@@ -39,10 +39,10 @@ module Decidim
         group.save!
 
         if group.auto_sync_members
-          Rails.logger.info "Decidim::Civicrm::SyncAllGroupsJob: Auto sync enabled for group #{group.id}, updating members..."
+          Rails.logger.info "SyncAllGroupsJob: Auto sync enabled for group #{group.id}, updating members..."
           SyncGroupMembersJob.perform_later(group.id)
         else
-          Rails.logger.info "Decidim::Civicrm::SyncAllGroupsJob: Auto sync disabled for group #{group.id}, skipping member sync"
+          Rails.logger.info "SyncAllGroupsJob: Auto sync disabled for group #{group.id}, skipping member sync"
         end
       end
     end

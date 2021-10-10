@@ -36,9 +36,16 @@ module Decidim
         ActiveSupport::Notifications.subscribe "decidim.user.omniauth_registration" do |_name, data|
           Decidim::Civicrm::OmniauthContactSyncJob.perform_later(data)
         end
-        # Trigger autho-verification after sync a contact
         ActiveSupport::Notifications.subscribe "decidim.civicrm.contact.updated" do |_name, data|
+          # Trigger autho-verification after sync a contact
           Decidim::Civicrm::AutoVerificationJob.perform_later(data)
+          # Trigger membership as private user in configured participatory spaces
+          Decidim::Civicrm::JoinContactToParticipatorySpacesJob.perform_later(data)
+        end
+
+        # Trigger participatory spaces private members sync
+        ActiveSupport::Notifications.subscribe "decidim.civicrm.group_membership.updated" do |_name, data|
+          Decidim::Civicrm::ParticipatorySpaceGroupMembershipJob.perform_later(data)
         end
       end
 
@@ -47,15 +54,8 @@ module Decidim
 
         if Decidim::Civicrm.authorizations.include?(:civicrm)
           # Generic verification method using civicrm contacts
-          # A omniauth operation will try to use this method to obtain the contact_id and store it
-          # as an extended_data attribute of the user
           Decidim::Verifications.register_workflow(:civicrm) do |workflow|
             workflow.form = "Decidim::Civicrm::Verifications::Civicrm"
-
-            # workflow.options do |options|
-            #   options.attribute :role, type: :enum, choices: -> { Decidim::Civicrm::Api::User::ROLES.values.map(&:to_s) }
-            #   options.attribute :regional_scope, type: :enum, choices: -> { Decidim::Civicrm::Api::RegionalScope::ALL.keys.map(&:to_s) }
-            # end
           end
         end
 

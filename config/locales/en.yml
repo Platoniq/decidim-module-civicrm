@@ -3,34 +3,41 @@ en:
   decidim:
     authorization_handlers:
       civicrm_groups:
-        fields:
-          groups: CiViCRM Group IDs
-          group: CiViCRM Group
         explanation: CiViCRM Groups and Intelligent Groups memberships
+        fields:
+          group: CiViCRM Group
+          groups: CiViCRM Group IDs
         name: Authorized with CiViCRM Groups
       civicrm_verification:
-        name: Authorized with CiViCRM
         explanation: CiViCRM membership
+        name: Authorized with CiViCRM
     civicrm:
       admin:
         groups:
           index:
             actions: Actions
+            auto_sync:
+              disable: Do not auto synchronize users in this group
+              enable: Auto synchronize users in this group
+            civicrm_id: CiViCRM ID
             description: Description
             empty: There are no groups synchronized from CiViCRM.
-            civicrm_id: CiViCRM ID
+            last_sync: Last synchronization
             members: Members
             name: Name
             participants: Participants
             sync: Synchronize with CiViCRM
             title: Groups
             total_members: Total members
-            last_sync: Last synchronization
-            auto_sync:
-              enable: Auto synchronize users in this group
-              disable: Do not auto synchronize users in this group
+          participatory_spaces:
+            save: Save changes
+            sync_members: 'Synchronize this members as private participants in these
+              participatory spaces:'
           show:
             actions: Actions
+            auto_sync:
+              disabled: This group won't be automatically synchronized with CiViCRM
+              enabled: This group will be automatically synchronized with CiViCRM
             contact: Contact
             created_at: Created at
             empty: There are no Decidim participants in this group.
@@ -40,9 +47,6 @@ en:
             sync: Synchronize with CiViCRM
             title: Group members for '%{group_name}'
             unsynchronized: Never logged yet
-            auto_sync:
-              enabled: This group will be automatically synchronized with CiViCRM
-              disabled: This group won't be automatically synchronized with CiViCRM
           sync:
             success: The synchronization has started
         menu:
