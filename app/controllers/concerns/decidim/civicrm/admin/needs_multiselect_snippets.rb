@@ -17,8 +17,7 @@ module Decidim
 
           @snippets = Decidim::Snippets.new
 
-          @snippets.add(:select2, ActionController::Base.helpers.stylesheet_link_tag("select2.css"))
-          @snippets.add(:select2, ActionController::Base.helpers.stylesheet_link_tag("select2-foundation-theme.css"))
+          @snippets.add(:select2, ActionController::Base.helpers.stylesheet_link_tag("decidim/civicrm/select2.css"))
           @snippets.add(:select2, ActionController::Base.helpers.javascript_include_tag("decidim/civicrm/admin/resource_permissions_multiselect"))
           @snippets.add(:head, @snippets.for(:select2))
 
