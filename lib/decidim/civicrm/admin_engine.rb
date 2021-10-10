@@ -22,7 +22,7 @@ module Decidim
       end
 
       initializer "decidim_civicrm.assets" do |app|
-        app.config.assets.precompile += %w(decidim_admin_civicrm_manifest.js)
+        app.config.assets.precompile += %w(decidim_admin_civicrm_manifest.js decidim_admin_civicrm_manifest.css)
       end
 
       initializer "decidim.civicrm.mount_admin_engine" do
