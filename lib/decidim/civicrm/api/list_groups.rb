@@ -5,7 +5,7 @@ module Decidim
     module Api
       class ListGroups < BaseQuery
         def initialize(query = nil)
-          @request = Request.new(
+          @request = Request.get(
             entity: "Group",
             is_active: 1,
             json: json_params(query || default_query)

@@ -5,7 +5,7 @@ module Decidim
     module Api
       class ListContactMemberships < BaseQuery
         def initialize(id, query = nil)
-          @request = Request.new(
+          @request = Request.get(
             entity: "Membership",
             contact_id: id,
             json: json_params(query || default_query)

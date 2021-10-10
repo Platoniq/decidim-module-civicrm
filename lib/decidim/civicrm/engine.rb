@@ -66,7 +66,6 @@ module Decidim
             workflow.action_authorizer = "Decidim::Civicrm::Verifications::Groups::GroupsActionAuthorizer"
 
             workflow.options do |options|
-              # options.attribute :group, type: :enum, choices: -> { Decidim::Civicrm::Api::Request.new.fetch_groups.map { |g| g[:name].downcase.to_sym } }
               options.attribute :groups, type: :string
             end
           end
