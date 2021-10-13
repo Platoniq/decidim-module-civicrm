@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/civicrm/test/shared_contexts"
 
-describe Decidim::Civicrm::Api::ListContactGroups, type: :class do
-  subject { described_class.new(1) }
+module Decidim
+  describe Civicrm::Api::ListContactGroups, type: :class do
+    subject { described_class.new(1) }
 
-  describe "#result" do
-    it "returns a Hash with the result" do
-      stub_contact_groups_valid_request
+    include_context "with stubs example api"
 
-      expect(subject.result).to be_a Hash
+    let(:data) { JSON.parse(file_fixture("contact_groups_valid_response.json").read) }
+
+    describe "#result" do
+      it_behaves_like "returns a mapped property", :group_ids, "group_id"
     end
   end
 end

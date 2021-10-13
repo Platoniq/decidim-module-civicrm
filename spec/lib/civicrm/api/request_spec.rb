@@ -7,7 +7,7 @@ module Decidim
   describe Civicrm::Api::Request, type: :class do
     subject { described_class }
 
-    include_context "stubs example api"
+    include_context "with stubs example api"
 
     describe "#get petition" do
       it "returns a connection instance" do
