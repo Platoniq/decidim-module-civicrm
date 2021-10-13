@@ -13,13 +13,13 @@ module Decidim::Civicrm
 
     context "when civicrm_contact_id is already taken" do
       context "when contact belongs to the same organization" do
-        let!(:contact) { create(:decidim_civicrm_contact, organization: organization, civicrm_contact_id: 1) }
+        let!(:contact) { create(:civicrm_contact, organization: organization, civicrm_contact_id: 1) }
 
         it { is_expected.not_to be_valid }
       end
 
       context "when contact belongs to another organization" do
-        let!(:contact) { create(:decidim_civicrm_contact, civicrm_contact_id: 1) }
+        let!(:contact) { create(:civicrm_contact, civicrm_contact_id: 1) }
 
         it { is_expected.to be_valid }
       end
@@ -27,13 +27,13 @@ module Decidim::Civicrm
 
     context "when user is already taken" do
       context "when contact belongs to the same organization" do
-        let!(:contact) { create(:decidim_civicrm_contact, organization: organization, user: user) }
+        let!(:contact) { create(:civicrm_contact, organization: organization, user: user) }
 
         it { is_expected.not_to be_valid }
       end
 
       context "when contact belongs to another organization" do
-        let!(:contact) { create(:decidim_civicrm_contact, user: user) }
+        let!(:contact) { create(:civicrm_contact, user: user) }
 
         it { is_expected.not_to be_valid }
       end

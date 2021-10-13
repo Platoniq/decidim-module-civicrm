@@ -12,13 +12,13 @@ module Decidim::Civicrm
 
     context "when civicrm_group_id is already taken" do
       context "when group belongs to the same organization" do
-        let!(:group) { create(:decidim_civicrm_group, organization: organization, civicrm_group_id: 1) }
+        let!(:group) { create(:civicrm_group, organization: organization, civicrm_group_id: 1) }
 
         it { is_expected.not_to be_valid }
       end
 
       context "when group belongs to another organization" do
-        let!(:group) { create(:decidim_civicrm_group, civicrm_group_id: 1) }
+        let!(:group) { create(:civicrm_group, civicrm_group_id: 1) }
 
         it { is_expected.to be_valid }
       end

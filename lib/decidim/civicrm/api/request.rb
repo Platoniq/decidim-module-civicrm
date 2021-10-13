@@ -4,14 +4,14 @@ module Decidim
   module Civicrm
     module Api
       class Request
-        def initialize(_params, verify_ssl: true)
+        def initialize(verify_ssl: true)
           @verify_ssl = verify_ssl
         end
 
         attr_accessor :response
 
         def self.get(params, verify_ssl: true)
-          instance = Request.new(params, verify_ssl: verify_ssl)
+          instance = Request.new(verify_ssl: verify_ssl)
           response = instance.connection.get Decidim::Civicrm::Api.url do |request|
             request.params = instance.base_params.merge(params)
 
@@ -25,7 +25,7 @@ module Decidim
         end
 
         def self.post(params, verify_ssl: true)
-          instance = Request.new(params, verify_ssl: verify_ssl)
+          instance = Request.new(verify_ssl: verify_ssl)
           response = instance.connection.post Decidim::Civicrm::Api.url do |request|
             request.params = instance.base_params.merge(params)
           end
