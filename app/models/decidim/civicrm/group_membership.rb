@@ -10,6 +10,7 @@ module Decidim
 
       validates :contact, uniqueness: { scope: [:group] }, if: -> { contact.present? }
       validates :civicrm_contact_id, uniqueness: { scope: [:group] }
+      validate :same_group_contact_organization
 
       delegate :organization, to: :group
       delegate :user, to: :contact
@@ -24,6 +25,14 @@ module Decidim
 
       def email
         contact&.user&.email || extra["email"]
+      end
+
+      private
+
+      def same_group_contact_organization
+        return if contact.blank?
+
+        errors.add(:contact, :invalid) unless contact.organization == group.organization
       end
     end
   end
