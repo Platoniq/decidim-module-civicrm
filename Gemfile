@@ -5,7 +5,7 @@ source "https://rubygems.org"
 ruby RUBY_VERSION
 DECIDIM_VERSION = "0.24.3"
 
-gem "decidim", git: "https://github.com/decidim/decidim", branch: "release/0.24-stable"
+gem "decidim", DECIDIM_VERSION
 gem "decidim-civicrm", path: "."
 
 gem "bootsnap", "~> 1.4"
