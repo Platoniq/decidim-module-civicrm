@@ -10,9 +10,11 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
-        resources :groups, only: [:index, :show] do
+        resources :groups, only: [:index, :show, :update] do
           collection do
             get :sync
+            get :participatory_spaces
+            put :toggle_auto_sync
           end
         end
 
@@ -25,8 +27,8 @@ module Decidim
         root to: "groups#index"
       end
 
-      config.to_prepare do
-        Decidim::Admin::ApplicationController.helper(Decidim::ArraySettingsHelper)
+      initializer "decidim_civicrm.assets" do |app|
+        app.config.assets.precompile += %w(decidim_admin_civicrm_manifest.js decidim_admin_civicrm_manifest.css)
       end
 
       initializer "decidim.civicrm.mount_admin_engine" do

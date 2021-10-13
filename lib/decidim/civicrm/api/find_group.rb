@@ -3,11 +3,9 @@
 module Decidim
   module Civicrm
     module Api
-      class FindGroup < Base::FindQuery
+      class FindGroup < BaseQuery
         def initialize(id, query = nil)
-          raise Civicrm::Error, "Must provide a valid id for FindGroup" if id.blank?
-
-          @request = Base::Request.new(
+          @request = Request.get(
             entity: "Group",
             group_id: id,
             json: json_params(query || default_query)
@@ -22,13 +20,11 @@ module Decidim
           }
         end
 
-        def self.parse_item(item)
+        private
+
+        def parsed_response
           {
-            id: item["id"].to_i,
-            name: item["name"],
-            title: item["title"],
-            description: item["description"],
-            group_type: item["group_type"].map(&:to_i)
+            group: response["values"].first
           }
         end
       end

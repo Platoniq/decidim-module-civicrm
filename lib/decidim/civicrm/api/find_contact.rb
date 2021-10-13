@@ -3,11 +3,9 @@
 module Decidim
   module Civicrm
     module Api
-      class FindContact < Base::FindQuery
+      class FindContact < BaseQuery
         def initialize(id, query = nil)
-          raise Civicrm::Error, "Must provide a valid id for FindContact" if id.blank?
-
-          @request = Base::Request.new(
+          @request = Request.get(
             entity: "Contact",
             contact_id: id,
             json: json_params(query || default_query)
@@ -18,24 +16,15 @@ module Decidim
 
         def default_query
           {
-            return: "display_name",
-            "api.Membership.get" => {
-              return: "membership_type_id"
-            }
+            return: "display_name"
           }
         end
 
-        def self.parse_item(item)
-          contact = {
-            id: item["id"].to_i,
-            display_name: item["display_name"]
-          }
+        private
 
-          memberships = item["api.Membership.get"]["values"]
-
+        def parsed_response
           {
-            contact: contact,
-            memberships: memberships.map { |m| ListContactMemberships.parse_item(m) }
+            contact: response["values"].first
           }
         end
       end

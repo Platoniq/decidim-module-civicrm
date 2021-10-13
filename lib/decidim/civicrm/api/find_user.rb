@@ -3,11 +3,9 @@
 module Decidim
   module Civicrm
     module Api
-      class FindUser < Base::FindQuery
+      class FindUser < BaseQuery
         def initialize(id, query = nil)
-          raise Civicrm::Error, "Must provide a valid id for FindUser" if id.blank?
-
-          @request = Base::Request.new(
+          @request = Request.get(
             entity: "User",
             id: id,
             json: json_params(query || default_query)
@@ -20,31 +18,19 @@ module Decidim
           {
             "api.Contact.get" => {
               return: "display_name"
-            },
-            "api.Membership.get": {
-              contact_id: "$value.contact_id",
-              return: "membership_type_id"
             }
           }
         end
 
-        def self.parse_item(item)
-          user = item
-          contact = user.delete("api.Contact.get")["values"].first
-          memberships = user.delete("api.Membership.get")["values"]
+        private
+
+        def parsed_response
+          user = response["values"].first.dup
+          contact = user.dig("api.Contact.get", "values") ? user.delete("api.Contact.get")["values"].first : nil
 
           {
-            user: {
-              id: user["id"].to_i,
-              name: user["name"],
-              email: user["email"],
-              contact_id: user["contact_id"].to_i
-            },
-            contact: {
-              id: user["contact_id"].to_i,
-              display_name: contact["display_name"]
-            },
-            memberships: memberships.map { |m| ListContactMemberships.parse_item(m) }
+            user: user,
+            contact: contact
           }
         end
       end

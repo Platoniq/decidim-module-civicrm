@@ -9,7 +9,7 @@ module Decidim
         desc "Adds initializer files and install migrations for CiViCRM OAuth and verifications."
 
         def copy_files
-          copy_file "decidim_civicrm.rb", "config/initializers/decidim_civicrm.rb"
+          copy_file "civicrm_config.rb", "config/initializers/civicrm_config.rb"
 
           rake "decidim_civicrm:install:migrations"
           rake "db:migrate"

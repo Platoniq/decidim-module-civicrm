@@ -2,88 +2,58 @@
 ca:
   decidim:
     authorization_handlers:
-      civicrm_basic:
-        explanation: Verifica't amb el teu compte CiViCRM
-        name: CiViCRM - Bàsic
-      civicrm_group:
-        explanation: Verifica't amb el teu compte CiViCRM
+      civicrm_groups:
+        explanation: Membres de CiViCRM Grups i/o Grups Intel·ligents
         fields:
-          civicrm_groups: Grups
-        name: CiViCRM - Grups
-      civicrm_membership:
-        explanation: Verifica't amb el teu compte CiViCRM
-        fields:
-          civicrm_membership_types: Tipus de membresia
-        name: CiViCRM - Membresies
+          group: CiViCRM Grup
+          groups: CiViCRM Grup IDs
+        name: Autorització amb CiViCRM Grups
+      civicrm_verification:
+        explanation: Membres de CiViCRM
+        name: Autorització amb CiViCRM
     civicrm:
       admin:
         groups:
           index:
             actions: Accions
+            auto_sync:
+              disable: No sincronitzis automàticament aquest grup
+              enable: Sincronitza automàticament aquest grup
+            civicrm_id: CiViCRM ID
             description: Descripció
-            empty: No hi ha grups sincronitzats amb CiViCRM.
-            id: ID
+            empty: No hi ha grups sincronitzats des de CiViCRM.
+            last_sync: Última sincronització
             members: Membres
             name: Nom
             participants: Participants
-            sync: Sincronitza amb CiViCRM
+            sync: Sincronitza amb el CiViCRM
             title: Grups
-            total_members: Nombre de membres
+            total_members: Membres totals
+          participatory_spaces:
+            save: Desa els canvis
+            sync_members: 'Sincronitza aquests membres com a participants privats dels espais participatius:'
           show:
             actions: Accions
+            auto_sync:
+              disabled: Aquest grup no serà sincronitzat automàticament amb el CiViCRM
+              enabled: Aquest grup serà sincronitzat automàticament amb el CiViCRM
             contact: Contacte
             created_at: Creat el
             empty: No hi ha participants de Decidim en aquest grup.
             name: Nom
             nickname: Àlies
-            show_email: Mostrar e-mail
-            sync: Sincronitza amb CiViCRM
+            show_email: Mostra l'email
+            sync: Sincronitza amb el CiViCRM
             title: Membres del grup '%{group_name}'
-            view_profile: Veure perfil
-          sync:
-            success: La sincronització ha començat
-        membership_types:
-          index:
-            empty: No hi ha Tipus de Membresia sincronitzats amb CiViCRM.
-            id: ID
-            name: Nom
-            sync: Sincronitza amb CiViCRM
-            title: Tipus de Membresia
+            unsynchronized: Mai loguejat encara
           sync:
             success: La sincronització ha començat
         menu:
           groups: Grups
-          membership_types: Tipus de Membresia
+          verifications: Autoritzacions
       contact:
         errors:
-          not_unique: Ja existeix un contacte amb aquest ID
-    events:
-      civicrm:
-        verification:
-          civicrm_basic:
-            ok:
-              notification_title: El teu compte ha estat verificat amb CiViCRM (Bàsic)
-          civicrm_group:
-            ok:
-              notification_title: El teu compte ha estat verificat amb CiViCRM (Grup)
-          civicrm_membership:
-            ok:
-              notification_title: El teu compte ha estat verificat amb CiViCRM (Membresia)
-    system:
-      organizations:
-        omniauth_settings:
-          civicrm:
-            client_id: ID del client
-            client_secret: Secret del client
-            site: URL del lloc web
-    verifications:
-      authorizations:
-        first_login:
-          actions:
-            civicrm_basic: CiViCRM (Bàsic)
-        new:
-          no_action: Aquesta autorització s'assignarà automàticament si compleixes
-            els requisits.
+          not_unique: El contact ja existeix
   layouts:
     decidim:
       admin:

@@ -2,35 +2,42 @@
 en:
   decidim:
     authorization_handlers:
-      civicrm_basic:
-        explanation: Authorize with your CiViCRM account
-        name: CiViCRM - Basic
-      civicrm_group:
-        explanation: Authorize with your CiViCRM acount
+      civicrm_groups:
+        explanation: CiViCRM Groups and Intelligent Groups memberships
         fields:
-          civicrm_groups: Groups
-        name: CiViCRM - Groups
-      civicrm_membership:
-        explanation: Authorize with your CiViCRM acount
-        fields:
-          civicrm_membership_types: Membership types
-        name: CiViCRM - Memberships
+          group: CiViCRM Group
+          groups: CiViCRM Group IDs
+        name: Authorized with CiViCRM Groups
+      civicrm_verification:
+        explanation: CiViCRM membership
+        name: Authorized with CiViCRM
     civicrm:
       admin:
         groups:
           index:
             actions: Actions
+            auto_sync:
+              disable: Do not auto synchronize users in this group
+              enable: Auto synchronize users in this group
+            civicrm_id: CiViCRM ID
             description: Description
             empty: There are no groups synchronized from CiViCRM.
-            id: ID
+            last_sync: Last synchronization
             members: Members
             name: Name
             participants: Participants
             sync: Synchronize with CiViCRM
             title: Groups
             total_members: Total members
+          participatory_spaces:
+            save: Save changes
+            sync_members: 'Synchronize this members as private participants in these
+              participatory spaces:'
           show:
             actions: Actions
+            auto_sync:
+              disabled: This group won't be automatically synchronized with CiViCRM
+              enabled: This group will be automatically synchronized with CiViCRM
             contact: Contact
             created_at: Created at
             empty: There are no Decidim participants in this group.
@@ -39,54 +46,15 @@ en:
             show_email: Show email
             sync: Synchronize with CiViCRM
             title: Group members for '%{group_name}'
-            view_profile: View profile
-          sync:
-            success: The synchronization has started
-        membership_types:
-          index:
-            empty: There are no Membership Types synchronized from CiViCRM.
-            id: ID
-            name: Name
-            sync: Synchronize with CiViCRM
-            title: Membership Types
+            unsynchronized: Never logged yet
           sync:
             success: The synchronization has started
         menu:
           groups: Groups
-          membership_types: Membership Types
+          verifications: Authorizations
       contact:
         errors:
           not_unique: Contact is already taken
-    events:
-      civicrm:
-        verification:
-          civicrm_basic:
-            ok:
-              notification_title: You've been succesfully authorized with CiViCRM
-                (Basic method)
-          civicrm_group:
-            ok:
-              notification_title: You've been succesfully authorized with CiViCRM
-                (Group method)
-          civicrm_membership:
-            ok:
-              notification_title: You've been succesfully authorized with CiViCRM
-                (Membership method)
-    system:
-      organizations:
-        omniauth_settings:
-          civicrm:
-            client_id: Client ID
-            client_secret: Client secret
-            site: Site URL
-    verifications:
-      authorizations:
-        first_login:
-          actions:
-            civicrm_basic: CiViCRM (Basic)
-        new:
-          no_action: This authorization will be assigned automatically if you meet
-            the requirements.
   layouts:
     decidim:
       admin:

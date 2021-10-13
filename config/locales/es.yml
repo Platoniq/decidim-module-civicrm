@@ -2,88 +2,58 @@
 es:
   decidim:
     authorization_handlers:
-      civicrm_basic:
-        explanation: Verifícate con tu cuenta CiViCRM
-        name: CiViCRM - Básico
-      civicrm_group:
-        explanation: Verifícate con tu cuenta CiViCRM
+      civicrm_groups:
+        explanation: Miembros de CiViCRM Grupos y/o Grupos Inteligentes
         fields:
-          civicrm_groups: Grupos
-        name: CiViCRM - Grupos
-      civicrm_membership:
-        explanation: Verifícate con tu cuenta CiViCRM
-        fields:
-          civicrm_membership_types: Tipo de membresía
-        name: CiViCRM - Membresías
+          group: CiViCRM Grupo
+          groups: CiViCRM Grupo IDs
+        name: Autorización con CiViCRM Grupos
+      civicrm_verification:
+        explanation: Miembros de CiViCRM
+        name: Autorización con CiViCRM
     civicrm:
       admin:
         groups:
           index:
             actions: Acciones
+            auto_sync:
+              disable: No sincronizar automáticamente este grupo
+              enable: Sincroniza automáticamente este grupo
+            civicrm_id: CiViCRM ID
             description: Descripción
-            empty: No hay grupos sincronizados con CiViCRM.
-            id: ID
+            empty: No hay grupos sincronizados desde CiViCRM.
+            last_sync: Última sincronización
             members: Miembros
             name: Nombre
             participants: Participantes
             sync: Sincroniza con CiViCRM
             title: Grupos
-            total_members: Número de miembros
+            total_members: Miembros totales
+          participatory_spaces:
+            save: Guarda los cambios
+            sync_members: 'Sincroniza estos miembros como participantes privados de los espacios participativos:'
           show:
             actions: Acciones
+            auto_sync:
+              disabled: Este grupo no será sincronizado automáticamente con CiViCRM
+              enabled: Este grupo será sincronizado automáticamente con CiViCRM
             contact: Contacto
             created_at: Creado el
             empty: No hay participantes de Decidim en este grupo.
             name: Nombre
             nickname: Álias
-            show_email: Mostrar email
+            show_email: Muestra el email
             sync: Sincroniza con CiViCRM
             title: Miembros del grupo '%{group_name}'
-            view_profile: Ver perfil
+            unsynchronized: Nunca logueado todavía
           sync:
-            success: La sincronización ha empezadpo
-        membership_types:
-          index:
-            empty: No hay Tipos de Membresía sincronizados con CiViCRM.
-            id: ID
-            name: Nombre
-            sync: Sincroniza con CiViCRM
-            title: Tipo de Membresía
-          sync:
-            success: La sincronización ha empezadpo
+            success: La sincronización ha empezado
         menu:
           groups: Grupos
-          membership_types: Tipo de Membresía
+          verifications: Autorizaciones
       contact:
         errors:
-          not_unique: Ya existe un contacto con este ID
-    events:
-      civicrm:
-        verification:
-          civicrm_basic:
-            ok:
-              notification_title: Tu cuenta ha sido verificada con CiViCRM (Básico)
-          civicrm_group:
-            ok:
-              notification_title: Tu cuenta ha sido verificada con CiViCRM (Grupo)
-          civicrm_membership:
-            ok:
-              notification_title: Tu cuenta ha sido verificada con CiViCRM (Membresía)
-    system:
-      organizations:
-        omniauth_settings:
-          civicrm:
-            client_id: ID del cliente
-            client_secret: Secreto del cliente
-            site: URL del sitio web
-    verifications:
-      authorizations:
-        first_login:
-          actions:
-            civicrm_basic: CiViCRM (Básico)
-        new:
-          no_action: Esta autorización se asignará automáticamente si cumples los
-            requisitos.
+          not_unique: El contacto ya existe
   layouts:
     decidim:
       admin:

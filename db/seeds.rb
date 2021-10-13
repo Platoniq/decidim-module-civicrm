@@ -25,7 +25,6 @@ if !Rails.env.production? || ENV["SEED"]
   )
 
   Decidim::Civicrm::GroupMembership.create!(
-    organization: organization,
     contact: contact,
     group: group
   )

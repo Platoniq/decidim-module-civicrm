@@ -8,7 +8,7 @@ module OmniAuth
     class Civicrm < OmniAuth::Strategies::OAuth2
       args [:client_id, :client_secret, :site]
 
-      option :name, :civicrm
+      option :name, "civicrm" # do not symbolize this
       option :site, nil
       option :client_options, {}
 
