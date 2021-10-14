@@ -5,7 +5,6 @@ require "decidim/civicrm/admin_engine"
 require "decidim/civicrm/api"
 require "decidim/civicrm/engine"
 require "decidim/civicrm/verifications"
-require "decidim/civicrm/verifications/groups_action_authorizer"
 require "decidim/civicrm/version"
 
 module Decidim
