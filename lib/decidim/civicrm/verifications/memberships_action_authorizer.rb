@@ -3,7 +3,7 @@
 module Decidim
   module Civicrm
     module Verifications
-      class MembershipActionAuthorizer < Decidim::Verifications::DefaultActionAuthorizer
+      class MembershipsActionAuthorizer < Decidim::Verifications::DefaultActionAuthorizer
         def authorize
           return [:missing, { action: :authorize }] if authorization.blank?
 
