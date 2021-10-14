@@ -9,10 +9,17 @@ module Decidim
 
     include_context "with stubs example api"
 
-    let(:data) { JSON.parse(file_fixture("group_valid_response.json").read) }
+    let(:data) { JSON.parse(file_fixture("find_group_valid_response.json").read) }
 
     describe "#result" do
-      it_behaves_like "returns a single object", :group
+      it "returns a mapped object" do
+        expect(subject.result).to be_a Hash
+        expect(subject.result[:group_type]).to eq(data["values"].first["group_type"].map(&:to_i))
+        expect(subject.result[:title]).to eq(data["values"].first["title"])
+        expect(subject.result[:id]).to eq(data["values"].first["id"].to_i)
+        expect(subject.result[:name]).to eq(data["values"].first["name"])
+        expect(subject.result[:description]).to eq(data["values"].first["description"])
+      end
     end
   end
 end

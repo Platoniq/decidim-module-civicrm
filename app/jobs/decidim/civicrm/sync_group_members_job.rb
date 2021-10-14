@@ -39,7 +39,7 @@ module Decidim
       def update_group_memberships(group)
         Rails.logger.info "SyncGroupMembersJob: Updating group memberships for Group #{group.title} (civicrm id: #{group.civicrm_group_id})"
 
-        api_memberships_in_group = Decidim::Civicrm::Api::ContactsInGroup.new(group.civicrm_group_id).result
+        api_memberships_in_group = Decidim::Civicrm::Api::ListContactsInGroup.new(group.civicrm_group_id).result
 
         group.update!(civicrm_member_count: api_memberships_in_group.count)
 

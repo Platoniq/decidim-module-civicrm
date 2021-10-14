@@ -43,7 +43,7 @@ FactoryBot.define do
     association :participatory_space, factory: :participatory_process
   end
 
-  factory :decidim_civicrm_membership_type, class: "Decidim::Civicrm::MembershipType" do
+  factory :civicrm_membership_type, class: "Decidim::Civicrm::MembershipType" do
     organization
     civicrm_membership_type_id { Faker::Number.unique.between(from: 1, to: 100) }
     name { Faker::Lorem.word }

@@ -9,10 +9,10 @@ module Decidim
 
     include_context "with stubs example api"
 
-    let(:data) { JSON.parse(file_fixture("contact_memberships_valid_response.json").read) }
+    let(:data) { JSON.parse(file_fixture("list_contact_memberships_valid_response.json").read) }
 
     describe "#result" do
-      it_behaves_like "returns a mapped property", :membership_type_ids, "membership_type_id"
+      it_behaves_like "returns mapped array ids", "membership_type_id"
     end
   end
 end

@@ -23,32 +23,9 @@ shared_context "with stubs example api" do
   end
 end
 
-shared_examples "returns hash content" do |key|
-  it "returns a Hash with the result" do
-    expect(subject.result).to be_a Hash
-    expect(subject.result[key]).to be_a Array
-    expect(subject.result[key]).to eq(data["values"].map(&:symbolize_keys))
-  end
-end
-
-shared_examples "returns array content" do
+shared_examples "returns mapped array ids" do |property|
   it "returns an Array with the result" do
     expect(subject.result).to be_a Array
-    expect(subject.result).to eq(data["values"].map(&:symbolize_keys))
-  end
-end
-
-shared_examples "returns a mapped property" do |key, property|
-  it "returns a property mapped in an array" do
-    expect(subject.result).to be_a Hash
-    expect(subject.result[key]).to be_a Array
-    expect(subject.result[key]).to eq(data["values"].map { |v| v[property] })
-  end
-end
-
-shared_examples "returns a single object" do |key|
-  it "returns a mapped object" do
-    expect(subject.result).to be_a Hash
-    expect(subject.result[key]).to eq(data["values"].first.symbolize_keys)
+    expect(subject.result).to eq(data["values"].map { |v| v[property].to_i })
   end
 end
