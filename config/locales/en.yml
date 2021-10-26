@@ -13,6 +13,23 @@ en:
         name: Authorized with CiViCRM
     civicrm:
       admin:
+        meetings:
+          index:
+            title: Meeting registrations after joining
+            new: New redirection
+            meeting: Meeting
+            url: URL
+            actions: Actions
+            remove: Remove
+            active:
+              enable: Activate
+              disable: Deactivate
+          create:
+            success: New meeting redirection created successfully
+            error: Error while creating meeting redirection
+          new:
+            title: New meeting redirection after joining
+            create: Create redirection
         groups:
           index:
             actions: Actions
@@ -51,6 +68,7 @@ en:
             success: The synchronization has started
         menu:
           groups: Groups
+          meetings: Meeting registrations
           verifications: Authorizations
       contact:
         errors:
