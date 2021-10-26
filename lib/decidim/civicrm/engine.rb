@@ -17,6 +17,7 @@ module Decidim
         # this adds a notification too when user logs in
         Decidim::CreateOmniauthRegistration.include(Decidim::Civicrm::CreateOmniauthRegistrationOverride)
         Decidim::Admin::ResourcePermissionsController.include(Decidim::Civicrm::Admin::NeedsMultiselectSnippets)
+        Decidim::Meetings::RegistrationsController.include(Decidim::Civicrm::MeetingsRegistrationsControllerOverride)
       end
 
       initializer "decidim_civicrm.omniauth" do

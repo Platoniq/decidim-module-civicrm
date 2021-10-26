@@ -18,6 +18,12 @@ module Decidim
           end
         end
 
+        resources :meetings, except: [:update, :edit] do
+          collection do
+            put :toggle_active
+          end
+        end
+
         root to: "groups#index"
       end
 

@@ -49,8 +49,26 @@ en:
             unsynchronized: Never logged yet
           sync:
             success: The synchronization has started
+        meetings:
+          create:
+            error: Error while creating meeting redirection
+            success: New meeting redirection created successfully
+          index:
+            actions: Actions
+            active:
+              disable: Deactivate
+              enable: Activate
+            meeting: Meeting
+            new: New redirection
+            remove: Remove
+            title: Meeting registrations after joining
+            url: URL
+          new:
+            create: Create redirection
+            title: New meeting redirection after joining
         menu:
           groups: Groups
+          meetings: Meeting registrations
           verifications: Authorizations
       contact:
         errors:
