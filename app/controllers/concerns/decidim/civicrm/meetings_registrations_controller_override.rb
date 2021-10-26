@@ -21,7 +21,7 @@ module Decidim
           url = civicrm_meeting_redirection
           return url if url && registered_in_decidim?
 
-          meeting_path(meeting)
+          Decidim::EngineRouter.main_proxy(meeting.component).meeting_path(meeting)
         end
 
         def redirect_after_path

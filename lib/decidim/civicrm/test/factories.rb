@@ -43,4 +43,11 @@ FactoryBot.define do
     group factory: :civicrm_group
     association :participatory_space, factory: :participatory_process
   end
+
+  factory :civicrm_meeting_redirection, class: "Decidim::Civicrm::MeetingRedirection" do
+    organization
+    meeting factory: :meeting
+    url { Faker::Internet.url }
+    active { true }
+  end
 end
