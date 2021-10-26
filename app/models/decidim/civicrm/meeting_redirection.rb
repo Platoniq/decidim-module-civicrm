@@ -13,7 +13,7 @@ module Decidim
       def same_organization
         return if !meeting || !organization
 
-        errors.add(:meeting_redirection, :invalid) unless organization == meeting.organization
+        errors.add(:organization, :invalid) unless organization == meeting.organization
       end
     end
   end
