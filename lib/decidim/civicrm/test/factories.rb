@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "decidim/core/test/factories"
+require "decidim/meetings/test/factories"
 
 FactoryBot.define do
   factory :civicrm_contact, class: "Decidim::Civicrm::Contact" do
