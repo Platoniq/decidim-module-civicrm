@@ -3,6 +3,7 @@
 require "decidim/civicrm/admin"
 require "decidim/civicrm/admin_engine"
 require "decidim/civicrm/api"
+require "decidim/civicrm/event_parsers"
 require "decidim/civicrm/engine"
 require "decidim/civicrm/verifications"
 require "decidim/civicrm/verifications/groups_action_authorizer"
@@ -53,6 +54,13 @@ module Decidim
     # New meetings created in decidim will generate a new event in CiViCRM automatically
     # set to false to disable this functionality
     config_accessor :auto_sync_meetings do
+      {}
+    end
+
+    # set extra attributes to send when creating a event from a meeting in CiViCRM
+    # ie:
+    # { template_id: 2 }
+    config_accessor :auto_sync_meetings_event_attributes do
       {}
     end
 

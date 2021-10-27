@@ -72,6 +72,14 @@ module Decidim
           end
         end
       end
+
+      initializer "decidim_civicrm.events_sync" do
+        # triggers civicrm api submissions for events
+        Decidim::EventsManager.subscribe(/^decidim\.events\./) do |event_name, data|
+          byebug
+          Decidim::Civicrm::EventSyncJob.perform_now(event_name, data)
+        end
+      end
     end
   end
 end
