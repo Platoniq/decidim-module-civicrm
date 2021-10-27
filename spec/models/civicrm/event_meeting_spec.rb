@@ -3,8 +3,8 @@
 require "spec_helper"
 
 module Decidim::Civicrm
-  describe MeetingRedirection do
-    subject { described_class.new(organization: organization, meeting: meeting, url: url, active: active) }
+  describe EventMeeting do
+    subject { described_class.new(organization: organization, meeting: meeting, redirect_url: url, redirect_active: active) }
 
     let!(:meeting) { create :meeting }
     let(:organization) { meeting.organization }

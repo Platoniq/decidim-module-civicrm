@@ -7,7 +7,7 @@ module Decidim::Meetings
     routes { Decidim::Meetings::Engine.routes }
 
     let!(:meeting) { create :meeting, :with_registrations_enabled }
-    let!(:meeting_redirection) { create :civicrm_meeting_redirection, meeting: meeting, organization: organization, active: active }
+    let!(:event_meeting) { create :civicrm_event_meeting, meeting: meeting, organization: organization, redirect_active: active }
     let!(:user) { create(:user, :confirmed, organization: organization) }
     let(:organization) { meeting.organization }
     let(:component) { meeting.component }
@@ -27,16 +27,16 @@ module Decidim::Meetings
       sign_in user, scope: :user
     end
 
-    context "when redirection exists" do
+    context "when event meeting exists" do
       it "redirects to external url" do
         post :create, params: params
 
-        expect(response).to redirect_to(meeting_redirection.url)
+        expect(response).to redirect_to(event_meeting.redirect_url)
       end
     end
 
-    context "when redirection does not exists" do
-      let(:meeting_redirection) { create :civicrm_meeting_redirection, organization: organization, meeting: another_meeting }
+    context "when event meeting does not exists" do
+      let(:event_meeting) { create :civicrm_event_meeting, organization: organization, meeting: another_meeting }
       let(:another_meeting) { create :meeting, component: component }
 
       it "redirects redirects to meeting" do
@@ -46,7 +46,7 @@ module Decidim::Meetings
       end
     end
 
-    context "when redirection is inactive" do
+    context "when event meeting is inactive" do
       let(:active) { false }
 
       it "redirects redirects to meeting" do

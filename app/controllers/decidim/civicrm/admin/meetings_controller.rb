@@ -10,19 +10,19 @@ module Decidim
 
         layout "decidim/admin/civicrm"
 
-        helper_method :meeting_redirections, :meeting_redirection, :meetings, :meetings_list, :meeting_title
+        helper_method :event_meetings, :event_meeting, :meetings, :meetings_list, :meeting_title
 
         def index
           # enforce_permission_to :index, :civicrm_meetings
         end
 
         def new
-          @form = form(Decidim::Civicrm::Admin::MeetingRedirectionForm).instance
+          @form = form(Decidim::Civicrm::Admin::EventMeetingForm).instance
         end
 
         def create
-          @form = form(Decidim::Civicrm::Admin::MeetingRedirectionForm).from_params(params)
-          CreateMeetingRedirection.call(@form) do
+          @form = form(Decidim::Civicrm::Admin::EventMeetingForm).from_params(params)
+          CreateEventMeeting.call(@form) do
             on(:ok) do
               flash[:notice] = t(".success")
 
@@ -37,34 +37,34 @@ module Decidim
         end
 
         def destroy
-          meeting_redirection.destroy!
+          event_meeting.destroy!
           redirect_to decidim_civicrm_admin.meetings_path
         end
 
         def toggle_active
           # enforce_permission_to :update, :civicrm_groups
 
-          return if meeting_redirection.blank?
+          return if event_meeting.blank?
 
-          meeting_redirection.active = !meeting_redirection.active
-          meeting_redirection.save!
+          event_meeting.active = !event_meeting.active
+          event_meeting.save!
           redirect_to decidim_civicrm_admin.meetings_path
         end
 
         private
 
-        def all_meeting_redirections
-          Decidim::Civicrm::MeetingRedirection.where(organization: current_organization)
+        def all_event_meetings
+          Decidim::Civicrm::EventMeeting.where(organization: current_organization)
         end
 
-        def meeting_redirections
-          paginate(all_meeting_redirections)
+        def event_meetings
+          paginate(all_event_meetings)
         end
 
-        def meeting_redirection
+        def event_meeting
           return if params[:id].blank?
 
-          @meeting_redirection ||= all_meeting_redirections.find(params[:id])
+          @event_meeting ||= all_event_meetings.find(params[:id])
         end
 
         def meetings

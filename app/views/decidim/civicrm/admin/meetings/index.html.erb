@@ -7,34 +7,34 @@
     </h2>
   </div>
   <div class="card-section">
-    <% if meeting_redirections.any? %>
+    <% if event_meetings.any? %>
       <table class="table-list civicrm-meetings">
         <thead>
           <tr>
             <th><%= t(".meeting") %></th>
-            <th><%= t(".url") %></th>
+            <th><%= t(".redirect_url") %></th>
             <th><%= t(".actions") %></th>
           </tr>
         </thead>
         <tbody>
-          <% meeting_redirections.each do |meeting_redirection| %>
+          <% event_meetings.each do |event_meeting| %>
             <tr>
-              <td><%= meeting_title(meeting_redirection.meeting) %></td>
-              <td><%= meeting_redirection.url %></td>
+              <td><%= meeting_title(event_meeting.meeting) %></td>
+              <td><%= event_meeting.redirect_url %></td>
               <td class="table-list__actions">
-              <% if meeting_redirection.active? %>
-                <%= icon_link_to "check", decidim_civicrm_admin.toggle_active_meetings_path(id: meeting_redirection.id), t(".active.disable"), class: "action-icon action-icon--success", method: :put %>
+              <% if event_meeting.redirect_active? %>
+                <%= icon_link_to "check", decidim_civicrm_admin.toggle_active_meetings_path(id: event_meeting.id), t(".redirect_active.disable"), class: "action-icon action-icon--success", method: :put %>
               <% else %>
-                <%= icon_link_to "check", decidim_civicrm_admin.toggle_active_meetings_path(id: meeting_redirection.id), t(".active.enable"), class: "action-icon action-icon--remove", method: :put %>
+                <%= icon_link_to "check", decidim_civicrm_admin.toggle_active_meetings_path(id: event_meeting.id), t(".redirect_active.enable"), class: "action-icon action-icon--remove", method: :put %>
               <% end %>
 
-              <%= icon_link_to "x", decidim_civicrm_admin.meeting_path(meeting_redirection), t(".remove"), class: "action-icon action-icon--remove", method: :delete %>
+              <%= icon_link_to "x", decidim_civicrm_admin.meeting_path(event_meeting), t(".remove"), class: "action-icon action-icon--remove", method: :delete %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
-      <%= paginate meeting_redirections, theme: "decidim" %>
+      <%= paginate event_meetings, theme: "decidim" %>
     <% end %>
   </div>
 </div>

@@ -12,10 +12,10 @@ module Decidim::Civicrm
 
       let(:params) do
         {
-          meeting_redirection: {
+          event_meeting: {
             decidim_meeting_id: decidim_meeting_id,
-            url: url,
-            active: active
+            redirect_url: url,
+            redirect_active: active
           }
         }.with_indifferent_access
       end
@@ -30,22 +30,22 @@ module Decidim::Civicrm
         sign_in user, scope: :user
       end
 
-      context "when creating a meeting redirection" do
+      context "when creating a event meeting" do
         it "creates redirects back" do
           post :create, params: params
 
           expect(response).to redirect_to(meetings_path)
         end
 
-        it "creates a new meeting redirection" do
-          expect { post(:create, params: params) }.to change(MeetingRedirection, :count).by(1)
+        it "creates a new event meeting" do
+          expect { post(:create, params: params) }.to change(EventMeeting, :count).by(1)
         end
 
         context "and meeting does not exist" do
           let(:decidim_meeting_id) { nil }
 
-          it "do not create a new meeting redirection" do
-            expect { post(:create, params: params) }.to change(MeetingRedirection, :count).by(0)
+          it "do not create a new event meeting" do
+            expect { post(:create, params: params) }.to change(EventMeeting, :count).by(0)
           end
         end
       end

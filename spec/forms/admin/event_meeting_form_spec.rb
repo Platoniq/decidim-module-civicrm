@@ -4,15 +4,15 @@ require "spec_helper"
 
 module Decidim::Civicrm
   module Admin
-    describe MeetingRedirectionForm do
+    describe EventMeetingForm do
       subject { described_class.from_params(attributes) }
 
       let(:attributes) do
         {
-          "meeting_redirection" => {
+          "event_meeting" => {
             "decidim_meeting_id" => decidim_meeting_id,
-            "url" => url,
-            "active" => active
+            "redirect_url" => url,
+            "redirect_active" => active
           }
         }
       end
