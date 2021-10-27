@@ -8,6 +8,7 @@ class CreateDecidimCivicrmEventMeetings < ActiveRecord::Migration[5.2]
       t.jsonb :extra, default: {}
       t.jsonb :data
 
+      t.boolean :removable, default: false
       t.boolean :marked_for_deletion, default: false
 
       t.boolean :redirect_active, null: false, default: false

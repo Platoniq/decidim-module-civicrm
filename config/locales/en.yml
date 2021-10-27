@@ -51,24 +51,24 @@ en:
             success: The synchronization has started
         meetings:
           create:
-            error: Error while creating event meeting
-            success: New event meeting created successfully
+            error: Error while creating sync meeting
+            success: New sync meeting created successfully
           index:
             actions: Actions
             meeting: Decidim Meeting
-            new: New event meeting
+            new: New sync meeting
             redirect_active:
               disable: Deactivate redirection after join
               enable: Activate redirection after join
             redirect_url: Redirect URL
             remove: Remove
-            title: Meeting registrations after joining
+            title: Meeting synchronization
           new:
-            create: Create event meeting
-            title: New event meeting after joining
+            create: Create sync meeting
+            title: New sync meeting after joining
         menu:
           groups: Groups
-          meetings: Meeting registrations
+          meetings: Meetings
           verifications: Authorizations
       contact:
         errors:

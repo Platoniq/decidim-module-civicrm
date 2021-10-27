@@ -7,7 +7,7 @@ module Decidim::Civicrm
     describe MeetingsController, type: :controller do
       routes { Decidim::Civicrm::AdminEngine.routes }
 
-      let(:organization) { create :organization }
+      let(:organization) { meeting.organization }
       let(:user) { create(:user, :admin, :confirmed, organization: organization) }
 
       let(:params) do
@@ -46,6 +46,25 @@ module Decidim::Civicrm
 
           it "do not create a new event meeting" do
             expect { post(:create, params: params) }.to change(EventMeeting, :count).by(0)
+          end
+        end
+      end
+
+      context "when destroying a event meeting" do
+        let!(:event_meeting) { create :civicrm_event_meeting, organization: organization, meeting: meeting, removable: removable }
+        let(:removable) { true }
+
+        it "destroys the event" do
+          expect { delete :destroy, params: { id: event_meeting.id } }.to change(EventMeeting, :count).by(-1)
+        end
+
+        context "when not removable" do
+          let(:removable) { false }
+
+          it "do not destroy the event" do
+            expect { delete :destroy, params: { id: event_meeting.id } }.to raise_exception(ActiveRecord::RecordNotDestroyed)
+
+            expect(EventMeeting.count).to eq(1)
           end
         end
       end

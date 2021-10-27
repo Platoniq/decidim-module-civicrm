@@ -44,8 +44,22 @@ module Decidim
     end
 
     # array with civirm group ids that will automatically (cron based) syncronize contact memberships
+    # note that admins can override these groups in the app
     config_accessor :auto_sync_groups do
       []
+    end
+
+    # Hash with default correspondences between decidim_meeting_id => civicrm_event_id
+    # New meetings created in decidim will generate a new event in CiViCRM automatically
+    # set to false to disable this functionality
+    config_accessor :auto_sync_meetings do
+      {}
+    end
+
+    # unless false, meeting registrations will be posted to CiViCRM and syncronized back according to the status
+    # set to false to disable this functionality
+    config_accessor :auto_sync_meeting_registrations do
+      {}
     end
 
     class Error < StandardError; end

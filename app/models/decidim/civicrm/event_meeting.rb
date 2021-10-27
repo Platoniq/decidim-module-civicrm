@@ -7,6 +7,7 @@ module Decidim
       belongs_to :organization, foreign_key: "decidim_organization_id", class_name: "Decidim::Organization"
 
       validate :same_organization
+      before_destroy :abort_unless_removable
 
       private
 
@@ -14,6 +15,10 @@ module Decidim
         return if !meeting || !organization
 
         errors.add(:organization, :invalid) unless organization == meeting.organization
+      end
+
+      def abort_unless_removable
+        throw(:abort) unless removable?
       end
     end
   end
