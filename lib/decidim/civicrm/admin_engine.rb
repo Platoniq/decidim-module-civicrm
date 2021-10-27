@@ -20,6 +20,7 @@ module Decidim
 
         resources :meetings, except: [:update, :edit] do
           collection do
+            get :sync
             put :toggle_active
           end
         end

@@ -55,17 +55,35 @@ en:
             success: New sync meeting created successfully
           index:
             actions: Actions
+            last_sync: Last synchronization
             meeting: Decidim Meeting
             new: New sync meeting
             redirect_active:
               disable: Deactivate redirection after join
               enable: Activate redirection after join
             redirect_url: Redirect URL
+            event_id: CiViCRM Event ID
+            registrations: Registrations
+            sync: Synchronize with CiViCRM
             remove: Remove
             title: Meeting synchronization
+          show:
+            actions: Actions
+            title: CiViCRM Registrations for Meeting %{meeting_name}
+            contact: Contact
+            sync: Synchronize with CiViCRM
+            empty: There are no Registrations in this meeting.
+            name: Name
+            nickname: Nickname
+            show_email: Show email
+            sync: Synchronize with CiViCRM
+            unsynchronized: Never logged yet
+            created_at: Created at
           new:
             create: Create sync meeting
             title: New sync meeting after joining
+          sync:
+            success: The synchronization has started
         menu:
           groups: Groups
           meetings: Meetings

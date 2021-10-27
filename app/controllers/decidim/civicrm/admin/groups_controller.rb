@@ -8,6 +8,7 @@ module Decidim
         include NeedsPermission
         include NeedsMultiselectSnippets
 
+        helper CivicrmSyncHelpers
         helper Decidim::Messaging::ConversationHelper
 
         helper_method :group, :groups, :members, :last_sync_class, :all_participatory_spaces
@@ -122,15 +123,6 @@ module Decidim
 
         def members
           paginate(group.group_memberships.order("contact_id desc nulls last", "extra ->>'display_name' ASC"))
-        end
-
-        def last_sync_class(datetime)
-          return unless datetime
-
-          return "alert" if datetime < 1.week.ago
-          return "warning" if datetime < 1.day.ago
-
-          "success"
         end
 
         def per_page

@@ -3,6 +3,8 @@
 module Decidim
   module Civicrm
     class EventRegistration < ApplicationRecord
+      include MarkableForDeletion
+
       belongs_to :event_meeting, class_name: "Decidim::Civicrm::EventMeeting"
       belongs_to :meeting_registration,
                  foreign_key: "decidim_meeting_registration_id",
@@ -10,6 +12,8 @@ module Decidim
                  optional: true
 
       delegate :meeting, to: :event
+      delegate :user, to: :meeting_registration
+      delegate :contact, to: :user
 
       validate :same_meeting
 

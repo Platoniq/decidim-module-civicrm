@@ -10,7 +10,10 @@ module Decidim
 
         layout "decidim/admin/civicrm"
 
-        helper_method :event_meetings, :event_meeting, :meetings, :meetings_list, :meeting_title
+        helper CivicrmSyncHelpers
+        helper Decidim::Messaging::ConversationHelper
+
+        helper_method :event_meetings, :event_meeting, :meetings, :meetings_list, :meeting_title, :registrations, :public_meeting_path
 
         def index
           # enforce_permission_to :index, :civicrm_meetings
@@ -18,6 +21,10 @@ module Decidim
 
         def new
           @form = form(Decidim::Civicrm::Admin::EventMeetingForm).instance
+        end
+
+        def show
+          # enforce_permission_to :show, :civicrm_meetings
         end
 
         def create
@@ -41,8 +48,23 @@ module Decidim
           redirect_to decidim_civicrm_admin.meetings_path
         end
 
+        def sync
+          # enforce_permission_to :update, :civicrm_meetings
+          if event_meeting.present?
+            SyncEventRegistrationsJob.perform_later(event_meeting.id)
+            flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
+            redirect_to decidim_civicrm_admin.meeting_path(event_meeting)
+          else
+            SyncAllEventRegistrationsJob.perform_later(current_organization.id)
+            flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
+            redirect_to decidim_civicrm_admin.meetings_path
+          end
+
+          # TODO: send email when complete?
+        end
+
         def toggle_active
-          # enforce_permission_to :update, :civicrm_groups
+          # enforce_permission_to :update, :civicrm_meetings
 
           return if event_meeting.blank?
 
@@ -91,8 +113,16 @@ module Decidim
           end
         end
 
+        def registrations
+          paginate(event_meeting.event_registrations.order("extra ->>'display_name' ASC"))
+        end
+
         def per_page
           50
+        end
+
+        def public_meeting_path(meeting)
+          Decidim::EngineRouter.main_proxy(meeting.component).meeting_path(meeting)
         end
       end
     end
