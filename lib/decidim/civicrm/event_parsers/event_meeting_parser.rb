@@ -17,9 +17,8 @@ module Decidim
           {
             start_date: @resource.start_time.strftime("%Y%m%d"),
             end_date: @resource.end_time.strftime("%Y%m%d"),
-            title: title,
-            template_id: 2 # TODO: from config
-          }
+            title: title
+          }.merge(Decidim::Civicrm.auto_sync_meetings_event_attributes)
         end
 
         def save!

@@ -54,10 +54,10 @@ module Decidim
             SyncEventRegistrationsJob.perform_later(event_meeting.id)
             flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
             redirect_to decidim_civicrm_admin.meeting_path(event_meeting)
-          else
-            SyncAllEventRegistrationsJob.perform_later(current_organization.id)
-            flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
-            redirect_to decidim_civicrm_admin.meetings_path
+          # else
+          #   SyncAllEventRegistrationsJob.perform_later(current_organization.id)
+          #   flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
+          #   redirect_to decidim_civicrm_admin.meetings_path
           end
 
           # TODO: send email when complete?

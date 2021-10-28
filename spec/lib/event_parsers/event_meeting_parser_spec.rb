@@ -12,8 +12,12 @@ module Decidim::Civicrm
         start_date: meeting.start_time.strftime("%Y%m%d"),
         end_date: meeting.end_time.strftime("%Y%m%d"),
         title: "#{meeting.participatory_space.title["ca"]}: #{meeting.title["ca"]}",
-        template_id: 2
+        template_id: template_id
       }
+    end
+    let(:template_id) { 666 }
+    let(:attributes) do
+      { template_id: template_id }
     end
     let(:data) do
       {
@@ -30,6 +34,7 @@ module Decidim::Civicrm
 
     before do
       subject.result = result
+      allow(Decidim::Civicrm).to receive(:auto_sync_meetings_event_attributes).and_return(attributes)
     end
 
     it "is valid" do
