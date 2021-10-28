@@ -41,7 +41,6 @@
                   <% end %>
                 </td>
 
-
                 <td class="table-list__actions">
                   <% if allowed_to? :show_email, :user, user: registration.user %>
                     <%= icon_link_to "envelope-open", decidim_admin.show_email_officialization_path(user_id: registration.user.id), t(".show_email"), class: "action-icon action-icon--show-email", data: { full_name: registration.user.name, toggle: "show-email-modal" } %>
