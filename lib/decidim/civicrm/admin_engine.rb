@@ -18,7 +18,7 @@ module Decidim
           end
         end
 
-        resources :meetings, except: [:update, :edit] do
+        resources :meetings do
           collection do
             get :sync
             put :toggle_active

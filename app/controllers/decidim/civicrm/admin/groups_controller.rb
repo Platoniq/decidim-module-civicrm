@@ -11,7 +11,7 @@ module Decidim
         helper CivicrmSyncHelpers
         helper Decidim::Messaging::ConversationHelper
 
-        helper_method :group, :groups, :members, :last_sync_class, :all_participatory_spaces
+        helper_method :group, :groups, :members, :all_participatory_spaces
 
         layout "decidim/admin/civicrm"
 

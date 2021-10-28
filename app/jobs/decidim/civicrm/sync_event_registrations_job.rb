@@ -53,12 +53,10 @@ module Decidim
 
         Rails.logger.info "SyncEventRegistrationsJob: Creating / updating registration for Contact #{participant[:id]} for civicrm_event_id: #{event_meeting.civicrm_event_id}"
         contact = Decidim::Civicrm::Contact.find_by(civicrm_contact_id: participant[:contact_id], organization: event_meeting.organization)
-        return unless contact && contact&.user
+        # return unless contact && contact&.user
 
-        registration = Decidim::Meetings::Registration.find_or_initialize_by(user: contact.user, meeting: event_meeting.meeting)
-
-        event_registration = EventRegistration.find_or_initialize_by(meeting_registration: registration)
-        event_registration.civicrm_event_registration_id = participant[:id]
+        event_registration = EventRegistration.find_or_initialize_by(civicrm_event_registration_id: participant[:id])
+        event_registration.meeting_registration = Decidim::Meetings::Registration.find_or_initialize_by(user: contact&.user, meeting: event_meeting.meeting)
         event_registration.event_meeting = event_meeting
         event_registration.extra = participant
         event_registration.marked_for_deletion = false
@@ -73,7 +71,7 @@ module Decidim
           contact = registration.user.contact
           next unless contact
 
-          next if EventRegistration.find_by(meeting_registration: registration).exists?
+          next if EventRegistration.exists?(meeting_registration: registration)
 
           Rails.logger.info "SyncEventRegistrationsJob: Destroying registration for Meeting #{event_meeting.meeting.id} (Contact #{contact.id})"
           registration.destroy!

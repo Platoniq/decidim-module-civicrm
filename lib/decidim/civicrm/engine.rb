@@ -74,6 +74,8 @@ module Decidim
       end
 
       initializer "decidim_civicrm.events_sync" do
+        next unless Decidim::Civicrm.auto_sync_meetings_event_attributes.is_a?(Hash)
+
         # triggers civicrm api submissions for events
         Decidim::EventsManager.subscribe(/^decidim\.events\./) do |event_name, data|
           Decidim::Civicrm::EventSyncJob.perform_later(event_name, data)

@@ -7,6 +7,7 @@
     <div class="card-section">
       <div class="row column">
         <%= f.select :decidim_meeting_id, meetings_list %>
+        <%= f.number_field :civicrm_event_id %>
         <%= f.text_field :redirect_url %>
         <%= f.check_box :redirect_active %>
       </div>

@@ -26,11 +26,16 @@ module Decidim
                                  civicrm_event_id: result["id"],
                                  meeting: @resource,
                                  organization: @resource.organization,
-                                 data: result
+                                 data: result,
+                                 extra: extra_data
                                })
         end
 
         private
+
+        def extra_data
+          @extra_data ||= Decidim::Civicrm::Api::FindEvent.new(result["id"]).result[:event]
+        end
 
         def title
           meeting_title = @resource.title["ca"] || @resource.title["es"] || @resource.title["en"]

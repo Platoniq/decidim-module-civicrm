@@ -25,7 +25,8 @@ module Decidim
                                  civicrm_event_registration_id: result["id"],
                                  event_meeting: event,
                                  meeting_registration: @resource,
-                                 data: result
+                                 data: result,
+                                 extra: extra_data
                                })
         end
 
@@ -40,6 +41,10 @@ module Decidim
 
         def event
           @event ||= EventMeeting.find_by(meeting: @resource.meeting)
+        end
+
+        def extra_data
+          @extra_data ||= Decidim::Civicrm::Api::FindParticipant.new(result["id"]).result[:participant]
         end
 
         def contact_id

@@ -19,12 +19,12 @@ module Decidim
           # enforce_permission_to :index, :civicrm_meetings
         end
 
-        def new
-          @form = form(Decidim::Civicrm::Admin::EventMeetingForm).instance
-        end
-
         def show
           # enforce_permission_to :show, :civicrm_meetings
+        end
+
+        def new
+          @form = form(Decidim::Civicrm::Admin::EventMeetingForm).instance
         end
 
         def create
@@ -38,7 +38,27 @@ module Decidim
 
             on(:invalid) do
               flash[:alert] = t(".error")
+              render action: "new"
+            end
+          end
+        end
+
+        def edit
+          @form = form(Decidim::Civicrm::Admin::EventMeetingForm).from_model(event_meeting)
+        end
+
+        def update
+          @form = form(Decidim::Civicrm::Admin::EventMeetingForm).from_params(params)
+          UpdateEventMeeting.call(@form, event_meeting) do
+            on(:ok) do
+              flash[:notice] = t(".success")
+
               redirect_to decidim_civicrm_admin.meetings_path
+            end
+
+            on(:invalid) do
+              flash[:alert] = t(".error")
+              render action: "edit"
             end
           end
         end
@@ -50,15 +70,16 @@ module Decidim
 
         def sync
           # enforce_permission_to :update, :civicrm_meetings
-          # if event_meeting.present?
-          SyncEventRegistrationsJob.perform_later(event_meeting.id)
-          flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
-          redirect_to decidim_civicrm_admin.meeting_path(event_meeting)
-          # else
-          #   SyncAllEventRegistrationsJob.perform_later(current_organization.id)
-          #   flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
-          #   redirect_to decidim_civicrm_admin.meetings_path
-          # end
+
+          if event_meeting.present?
+            SyncEventRegistrationsJob.perform_later(event_meeting.id)
+            flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
+            redirect_to decidim_civicrm_admin.meeting_path(event_meeting)
+          else
+            SyncAllEventRegistrationsJob.perform_later(current_organization.id)
+            flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
+            redirect_to decidim_civicrm_admin.meetings_path
+          end
 
           # TODO: send email when complete?
         end
@@ -104,7 +125,7 @@ module Decidim
         end
 
         def meeting_title(meeting)
-          "#{translated_attribute(meeting.participatory_space.title)} / #{translated_attribute(meeting.component.name)} / #{translated_attribute(meeting.title)}"
+          "#{meeting.id}: #{translated_attribute(meeting.participatory_space.title)} / #{translated_attribute(meeting.component.name)} / #{translated_attribute(meeting.title)}"
         end
 
         def meetings_list
@@ -114,7 +135,7 @@ module Decidim
         end
 
         def registrations
-          paginate(event_meeting.event_registrations.order("extra ->>'display_name' ASC"))
+          paginate(event_meeting.event_registrations.order("extra ->>'display_name' ASC", "extra ->>'register_date' ASC"))
         end
 
         def per_page

@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "decidim/civicrm/test/shared_contexts"
 
 module Decidim::Civicrm
   describe EventParsers::EventRegistrationParser, type: :class do
     subject { described_class.new(registration) }
+
+    include_context "with stubs example api"
+
+    let(:data) { JSON.parse(file_fixture("participant_valid_response.json").read) }
 
     let(:registration) { create :registration }
     let(:organization) { meeting.organization }
@@ -19,7 +24,7 @@ module Decidim::Civicrm
         contact_id: contact_id
       }
     end
-    let(:data) do
+    let(:parser_data) do
       {
         entity: "Participant",
         action: "create",
@@ -42,7 +47,7 @@ module Decidim::Civicrm
 
     it "returns data" do
       expect(subject.json).to eq(json)
-      expect(subject.data).to eq(data.merge(json))
+      expect(subject.data).to eq(parser_data.merge(json))
     end
 
     it "saves data" do

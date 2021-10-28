@@ -12,11 +12,35 @@ module Decidim
                  optional: true
 
       validates :civicrm_event_registration_id, presence: true
+
       delegate :meeting, to: :event
-      delegate :user, to: :meeting_registration
       delegate :contact, to: :user
 
       validate :same_meeting
+
+      def user
+        meeting_registration && meeting_registration.user
+      end
+
+      def name
+        extra["display_name"] || user&.name
+      end
+
+      def contact_id
+        extra["contact_id"] || contact&.id
+      end
+
+      def status
+        extra["participant_status"]
+      end
+
+      def register_date
+        extra["register_date"]&.to_date || created_at
+      end
+
+      def synchronized?
+        meeting_registration.present?
+      end
 
       private
 

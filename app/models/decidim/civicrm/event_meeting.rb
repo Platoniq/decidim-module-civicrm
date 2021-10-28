@@ -27,7 +27,7 @@ module Decidim
       end
 
       def abort_unless_removable
-        throw(:abort) unless removable?
+        throw(:abort) if civicrm_event_id.present?
       end
     end
   end

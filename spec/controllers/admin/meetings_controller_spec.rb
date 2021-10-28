@@ -51,15 +51,15 @@ module Decidim::Civicrm
       end
 
       context "when destroying a event meeting" do
-        let!(:event_meeting) { create :civicrm_event_meeting, organization: organization, meeting: meeting, removable: removable }
-        let(:removable) { true }
+        let!(:event_meeting) { create :civicrm_event_meeting, organization: organization, meeting: meeting, civicrm_event_id: civicrm_event_id }
+        let(:civicrm_event_id) { nil }
 
         it "destroys the event" do
           expect { delete :destroy, params: { id: event_meeting.id } }.to change(EventMeeting, :count).by(-1)
         end
 
         context "when not removable" do
-          let(:removable) { false }
+          let(:civicrm_event_id) { 123 }
 
           it "do not destroy the event" do
             expect { delete :destroy, params: { id: event_meeting.id } }.to raise_exception(ActiveRecord::RecordNotDestroyed)
