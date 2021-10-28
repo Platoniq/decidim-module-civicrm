@@ -25,7 +25,7 @@ es:
             members: Miembros
             name: Nombre
             participants: Participantes
-            sync: Sincroniza con CiViCRM
+            sync: Synchronize all with CiViCRM
             title: Grupos
             total_members: Miembros totales
           participatory_spaces:
@@ -39,6 +39,7 @@ es:
             contact: Contacto
             created_at: Creado el
             empty: No hay participantes de Decidim en este grupo.
+            id: CiViCRM Id
             name: Nombre
             nickname: Álias
             show_email: Muestra el email
@@ -49,24 +50,52 @@ es:
             success: La sincronización ha empezado
         meetings:
           create:
-            error: Error while creating meeting redirection
-            success: New meeting redirection created successfully
+            error: Error while creating sync meeting
+            success: New sync meeting created successfully
+          edit:
+            create: Update sync meeting
+            title: Edit sync meeting
           index:
             actions: Actions
-            active:
-              disable: Deactivate
-              enable: Activate
-            meeting: Meeting
-            new: New redirection
+            edit: Edit
+            event_id: CiViCRM Event ID
+            last_sync: Last synchronization
+            meeting: Decidim Meeting
+            new: New sync meeting
+            redirect_active:
+              disable: Deactivate redirection after join
+              enable: Activate redirection after join
+            redirect_url: Redirect URL
+            registrations: Registrations
             remove: Remove
-            title: Meeting registrations after joining
-            url: URL
+            sync: Synchronize all with CiViCRM
+            title: Meeting synchronization
+            total: Total registrations
           new:
-            create: Create redirection
-            title: New meeting redirection after joining
+            create: Create sync meeting
+            title: New sync meeting
+          show:
+            actions: Actions
+            contact: Contact
+            contact_id: CiViCRM Contact
+            created_at: Created at
+            empty: There are no Registrations in this meeting.
+            id: CiViCRM Id
+            name: Name
+            nickname: Nickname
+            show_email: Show email
+            status: CiViCRM Status
+            sync: Synchronize with CiViCRM
+            title: CiViCRM Registrations for Meeting %{meeting_name}
+            unsynchronized: Never logged yet
+          sync:
+            success: The synchronization has started
+          update:
+            error: Error while creating sync meeting
+            success: New sync meeting created successfully
         menu:
           groups: Grupos
-          meetings: Meeting registrations
+          meetings: Meetings
           verifications: Autorizaciones
       contact:
         errors:
