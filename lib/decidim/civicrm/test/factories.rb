@@ -49,10 +49,12 @@ FactoryBot.define do
     meeting factory: :meeting
     redirect_url { Faker::Internet.url }
     redirect_active { true }
+    civicrm_event_id { Faker::Number.between(from: 1, to: 100) }
   end
 
   factory :civicrm_event_registration, class: "Decidim::Civicrm::EventRegistration" do
     event_meeting factory: :civicrm_event_meeting
     meeting_registration factory: :meeting_registrationg
+    civicrm_event_registration_id { Faker::Number.between(from: 1, to: 100) }
   end
 end

@@ -10,6 +10,7 @@ module Decidim
 
       has_many :event_registrations, class_name: "Decidim::Civicrm::EventRegistration", dependent: :destroy
 
+      validates :civicrm_event_id, presence: true, unless: -> { redirect_url.present? }
       validate :same_organization
       before_destroy :abort_unless_removable
 

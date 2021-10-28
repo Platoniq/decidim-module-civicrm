@@ -11,6 +11,7 @@ module Decidim
                  class_name: "Decidim::Meetings::Registration",
                  optional: true
 
+      validates :civicrm_event_registration_id, presence: true
       delegate :meeting, to: :event
       delegate :user, to: :meeting_registration
       delegate :contact, to: :user

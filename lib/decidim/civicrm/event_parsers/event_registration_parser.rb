@@ -15,7 +15,7 @@ module Decidim
 
         def json
           {
-            "event_id": event.id,
+            "event_id": event.civicrm_event_id,
             "contact_id": contact_id
           }
         end
@@ -24,7 +24,7 @@ module Decidim
           @model_class.create!({
                                  civicrm_event_registration_id: result["id"],
                                  event_meeting: event,
-                                 registration: @resource,
+                                 meeting_registration: @resource,
                                  data: result
                                })
         end

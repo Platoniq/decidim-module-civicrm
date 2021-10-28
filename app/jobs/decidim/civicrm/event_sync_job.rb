@@ -14,7 +14,6 @@ module Decidim
                   when "decidim.events.meetings.meeting_registration_confirmed"
                     EventParsers::EventRegistrationParser.new(Decidim::Meetings::Registration.find_by(user: data[:affected_users]&.first, meeting: data[:resource]))
                   end
-        byebug
 
         return unless @parser
 
