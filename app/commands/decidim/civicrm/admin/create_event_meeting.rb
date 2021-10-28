@@ -4,7 +4,7 @@ module Decidim
   module Civicrm
     module Admin
       # A command with all the business logic for when a user starts following a resource.
-      class CreateMeetingRedirection < Rectify::Command
+      class CreateEventMeeting < Rectify::Command
         # Public: Initializes the command.
         #
         # form         - A form object with the params.
@@ -22,7 +22,7 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
 
-          create_meeting_redirection!
+          create_event_meeting!
 
           broadcast(:ok)
         end
@@ -31,12 +31,13 @@ module Decidim
 
         attr_reader :form
 
-        def create_meeting_redirection!
-          MeetingRedirection.create!(
+        def create_event_meeting!
+          EventMeeting.create!(
             decidim_meeting_id: form.meeting.id,
+            civicrm_event_id: form.civicrm_event_id,
             decidim_organization_id: form.meeting.organization.id,
-            url: form.url,
-            active: form.active
+            redirect_url: form.redirect_url,
+            redirect_active: form.redirect_active
           )
         end
       end

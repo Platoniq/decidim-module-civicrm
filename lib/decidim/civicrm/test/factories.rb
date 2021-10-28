@@ -44,10 +44,17 @@ FactoryBot.define do
     association :participatory_space, factory: :participatory_process
   end
 
-  factory :civicrm_meeting_redirection, class: "Decidim::Civicrm::MeetingRedirection" do
+  factory :civicrm_event_meeting, class: "Decidim::Civicrm::EventMeeting" do
     organization
     meeting factory: :meeting
-    url { Faker::Internet.url }
-    active { true }
+    redirect_url { Faker::Internet.url }
+    redirect_active { true }
+    civicrm_event_id { Faker::Number.between(from: 1, to: 100) }
+  end
+
+  factory :civicrm_event_registration, class: "Decidim::Civicrm::EventRegistration" do
+    event_meeting factory: :civicrm_event_meeting
+    meeting_registration factory: :meeting_registrationg
+    civicrm_event_registration_id { Faker::Number.between(from: 1, to: 100) }
   end
 end

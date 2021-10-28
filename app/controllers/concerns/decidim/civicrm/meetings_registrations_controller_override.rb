@@ -13,12 +13,12 @@ module Decidim
           Decidim::Meetings::Registration.find_by(meeting: meeting, user: current_user)
         end
 
-        def civicrm_meeting_redirection
-          Decidim::Civicrm::MeetingRedirection.find_by(meeting: meeting, active: true)&.url
+        def civicrm_event_meeting
+          Decidim::Civicrm::EventMeeting.find_by(meeting: meeting, redirect_active: true)&.redirect_url
         end
 
         def after_answer_path
-          url = civicrm_meeting_redirection
+          url = civicrm_event_meeting
           return url if url && registered_in_decidim?
 
           Decidim::EngineRouter.main_proxy(meeting.component).meeting_path(meeting)

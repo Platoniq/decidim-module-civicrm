@@ -7,15 +7,15 @@ module Decidim::Civicrm
     describe MeetingsController, type: :controller do
       routes { Decidim::Civicrm::AdminEngine.routes }
 
-      let(:organization) { create :organization }
+      let(:organization) { meeting.organization }
       let(:user) { create(:user, :admin, :confirmed, organization: organization) }
 
       let(:params) do
         {
-          meeting_redirection: {
+          event_meeting: {
             decidim_meeting_id: decidim_meeting_id,
-            url: url,
-            active: active
+            redirect_url: url,
+            redirect_active: active
           }
         }.with_indifferent_access
       end
@@ -30,22 +30,41 @@ module Decidim::Civicrm
         sign_in user, scope: :user
       end
 
-      context "when creating a meeting redirection" do
+      context "when creating a event meeting" do
         it "creates redirects back" do
           post :create, params: params
 
           expect(response).to redirect_to(meetings_path)
         end
 
-        it "creates a new meeting redirection" do
-          expect { post(:create, params: params) }.to change(MeetingRedirection, :count).by(1)
+        it "creates a new event meeting" do
+          expect { post(:create, params: params) }.to change(EventMeeting, :count).by(1)
         end
 
         context "and meeting does not exist" do
           let(:decidim_meeting_id) { nil }
 
-          it "do not create a new meeting redirection" do
-            expect { post(:create, params: params) }.to change(MeetingRedirection, :count).by(0)
+          it "do not create a new event meeting" do
+            expect { post(:create, params: params) }.to change(EventMeeting, :count).by(0)
+          end
+        end
+      end
+
+      context "when destroying a event meeting" do
+        let!(:event_meeting) { create :civicrm_event_meeting, organization: organization, meeting: meeting, civicrm_event_id: civicrm_event_id }
+        let(:civicrm_event_id) { nil }
+
+        it "destroys the event" do
+          expect { delete :destroy, params: { id: event_meeting.id } }.to change(EventMeeting, :count).by(-1)
+        end
+
+        context "when not removable" do
+          let(:civicrm_event_id) { 123 }
+
+          it "do not destroy the event" do
+            expect { delete :destroy, params: { id: event_meeting.id } }.to raise_exception(ActiveRecord::RecordNotDestroyed)
+
+            expect(EventMeeting.count).to eq(1)
           end
         end
       end
