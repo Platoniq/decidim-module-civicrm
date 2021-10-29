@@ -18,14 +18,14 @@ es:
             auto_sync:
               disable: No sincronizar automáticamente este grupo
               enable: Sincroniza automáticamente este grupo
-            civicrm_id: CiViCRM ID
+            civicrm_id: ID CiViCRM
             description: Descripción
             empty: No hay grupos sincronizados desde CiViCRM.
             last_sync: Última sincronización
             members: Miembros
             name: Nombre
             participants: Participantes
-            sync: Synchronize all with CiViCRM
+            sync: Sincronizarlo todo con CiViCRM
             title: Grupos
             total_members: Miembros totales
           participatory_spaces:
@@ -39,7 +39,7 @@ es:
             contact: Contacto
             created_at: Creado el
             empty: No hay participantes de Decidim en este grupo.
-            id: CiViCRM Id
+            id: Id CiViCRM
             name: Nombre
             nickname: Álias
             show_email: Muestra el email
@@ -50,52 +50,52 @@ es:
             success: La sincronización ha empezado
         meetings:
           create:
-            error: Error while creating sync meeting
-            success: New sync meeting created successfully
+            error: Error al crear la reunión sincronizada
+            success: La reunión sincronizada fue creada con éxito
           edit:
-            create: Update sync meeting
-            title: Edit sync meeting
+            create: Actualizar reunión sincronizada
+            title: Editar reunión sincronizada
           index:
-            actions: Actions
-            edit: Edit
-            event_id: CiViCRM Event ID
-            last_sync: Last synchronization
-            meeting: Decidim Meeting
-            new: New sync meeting
+            actions: Acciones
+            edit: Editar
+            event_id: ID del evento CiViCRM
+            last_sync: Última sincronización
+            meeting: Reunión Decidim
+            new: Nueva reunión sincronizada
             redirect_active:
-              disable: Deactivate redirection after join
-              enable: Activate redirection after join
-            redirect_url: Redirect URL
-            registrations: Registrations
-            remove: Remove
-            sync: Synchronize all with CiViCRM
-            title: Meeting synchronization
-            total: Total registrations
+              disable: Desactivar la redirección después de unirse
+              enable: Activar la redirección después de unirse
+            redirect_url: URL de redirección
+            registrations: Inscripciones
+            remove: Eliminar
+            sync: Sincronizarlo todo con CiViCRM
+            title: Sincronización de reuniones
+            total: Número total de inscripciones
           new:
-            create: Create sync meeting
-            title: New sync meeting
+            create: Crear una reunión sincronizada
+            title: Nueva reunión sincronizada
           show:
-            actions: Actions
-            contact: Contact
-            contact_id: CiViCRM Contact
-            created_at: Created at
-            empty: There are no Registrations in this meeting.
-            id: CiViCRM Id
-            name: Name
-            nickname: Nickname
-            show_email: Show email
-            status: CiViCRM Status
-            sync: Synchronize with CiViCRM
-            title: CiViCRM Registrations for Meeting %{meeting_name}
-            unsynchronized: Never logged yet
+            actions: Acciones
+            contact: Contacto
+            contact_id: Contacto CiViCRM
+            created_at: Creado el
+            empty: No hay ninguna inscripción en esta reunión.
+            id: Id CiViCRM
+            name: Nombre
+            nickname: Apodo
+            show_email: Mostrar email
+            status: Estado CiViCRM
+            sync: Sincronizar con CiViCRM
+            title: Inscripciones CiViCRM para la reunión %{meeting_name}
+            unsynchronized: Nunca ha iniciado sesión
           sync:
-            success: The synchronization has started
+            success: La sincronización ha empezado
           update:
-            error: Error while creating sync meeting
-            success: New sync meeting created successfully
+            error: Error al crear la reunión sincronizada
+            success: La reunión sincronizada fue creada con éxito
         menu:
           groups: Grupos
-          meetings: Meetings
+          meetings: Encuentros
           verifications: Autorizaciones
       contact:
         errors:
