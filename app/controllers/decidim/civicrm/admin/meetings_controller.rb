@@ -89,7 +89,7 @@ module Decidim
 
           return if event_meeting.blank?
 
-          event_meeting.active = !event_meeting.active
+          event_meeting.redirect_active = !event_meeting.redirect_active
           event_meeting.save!
           redirect_to decidim_civicrm_admin.meetings_path
         end

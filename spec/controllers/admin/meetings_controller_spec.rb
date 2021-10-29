@@ -68,6 +68,21 @@ module Decidim::Civicrm
           end
         end
       end
+
+      context "when toggle redirect_active to active" do
+        let!(:event_meeting) { create :civicrm_event_meeting, organization: organization, meeting: meeting, redirect_active: active }
+        let(:active) { false }
+
+        it "toggles" do
+          put :toggle_active, params: { id: event_meeting.id }
+
+          expect(event_meeting.reload.redirect_active).to eq(true)
+
+          put :toggle_active, params: { id: event_meeting.id }
+
+          expect(event_meeting.reload.redirect_active).to eq(false)
+        end
+      end
     end
   end
 end

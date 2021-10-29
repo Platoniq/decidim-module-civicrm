@@ -70,6 +70,11 @@ module Decidim
       {}
     end
 
+    # if false, no notifications will be send to users when joining a meeting
+    config_accessor :send_meeting_registration_notifications do
+      true
+    end
+
     class Error < StandardError; end
   end
 end
