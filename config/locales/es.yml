@@ -1,4 +1,3 @@
----
 es:
   decidim:
     authorization_handlers:
@@ -19,14 +18,14 @@ es:
             auto_sync:
               disable: No sincronizar automáticamente este grupo
               enable: Sincroniza automáticamente este grupo
-            civicrm_id: CiViCRM ID
+            civicrm_id: ID CiViCRM
             description: Descripción
             empty: No hay grupos sincronizados desde CiViCRM.
             last_sync: Última sincronización
             members: Miembros
             name: Nombre
             participants: Participantes
-            sync: Sincroniza con CiViCRM
+            sync: Sincronizarlo todo con CiViCRM
             title: Grupos
             total_members: Miembros totales
           participatory_spaces:
@@ -40,6 +39,7 @@ es:
             contact: Contacto
             created_at: Creado el
             empty: No hay participantes de Decidim en este grupo.
+            id: Id CiViCRM
             name: Nombre
             nickname: Álias
             show_email: Muestra el email
@@ -48,8 +48,54 @@ es:
             unsynchronized: Nunca logueado todavía
           sync:
             success: La sincronización ha empezado
+        meetings:
+          create:
+            error: Error al crear la reunión sincronizada
+            success: La reunión sincronizada fue creada con éxito
+          edit:
+            create: Actualizar reunión sincronizada
+            title: Editar reunión sincronizada
+          index:
+            actions: Acciones
+            edit: Editar
+            event_id: ID del evento CiViCRM
+            last_sync: Última sincronización
+            meeting: Reunión Decidim
+            new: Nueva reunión sincronizada
+            redirect_active:
+              disable: Desactivar la redirección después de unirse
+              enable: Activar la redirección después de unirse
+            redirect_url: URL de redirección
+            registrations: Inscripciones
+            remove: Eliminar
+            sync: Sincronizarlo todo con CiViCRM
+            title: Sincronización de reuniones
+            total: Número total de inscripciones
+          new:
+            create: Crear una reunión sincronizada
+            title: Nueva reunión sincronizada
+          show:
+            actions: Acciones
+            contact: Contacto
+            contact_id: Contacto CiViCRM
+            created_at: Creado el
+            empty: No hay ninguna inscripción en esta reunión.
+            id: Id CiViCRM
+            name: Nombre
+            nickname: Apodo
+            show_email: Mostrar email
+            status: Estado CiViCRM
+            sync: Sincronizar con CiViCRM
+            title: Inscripciones CiViCRM para la reunión %{meeting_name}
+            unsynchronized: Nunca ha iniciado sesión
+          sync:
+            success: La sincronización ha empezado
+          update:
+            error: Error al crear la reunión sincronizada
+            success: La reunión sincronizada fue creada con éxito
         menu:
           groups: Grupos
+          meetings: Encuentros
           verifications: Autorizaciones
       contact:
         errors:
