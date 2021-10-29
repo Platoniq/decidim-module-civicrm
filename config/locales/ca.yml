@@ -91,11 +91,11 @@ ca:
           sync:
             success: La sincronització ha començat
           update:
-            error: Error while creating sync meeting
-            success: New sync meeting created successfully
+            error: Error en crear una trobada sincronitzada
+            success: Nova trobada sincronizada creada correctament
         menu:
           groups: Grups
-          meetings: Meetings
+          meetings: Trobades
           verifications: Autoritzacions
       contact:
         errors:
