@@ -18,6 +18,7 @@ module Decidim
         Decidim::CreateOmniauthRegistration.include(Decidim::Civicrm::CreateOmniauthRegistrationOverride)
         Decidim::Admin::ResourcePermissionsController.include(Decidim::Civicrm::Admin::NeedsMultiselectSnippets)
         Decidim::Meetings::RegistrationsController.include(Decidim::Civicrm::MeetingsRegistrationsControllerOverride)
+        Decidim::Meetings::JoinMeeting.include(Decidim::Civicrm::JoinMeetingOverride)
       end
 
       initializer "decidim_civicrm.omniauth" do
