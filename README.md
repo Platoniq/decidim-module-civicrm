@@ -18,6 +18,7 @@ Features:
 - Contact & groups synchronization to internal Rails models
 - Administrator interface to enable which user/groups must be synchronized
 - Ability to sincronize users from groups in CiviCRM automatically with private participatory space members
+- Ability to redirect users to external url after joining a meeting (admin configurable)
 
 Install
 -------

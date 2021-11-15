@@ -1,0 +1,20 @@
+<h2 class="process-title-summary">
+  <%= t(".title") %>
+</h2>
+
+<%= decidim_form_for(@form, html: { class: "form new_event_meeting" }, url: decidim_civicrm_admin.meetings_path) do |f| %>
+  <div class="card">
+    <div class="card-section">
+      <div class="row column">
+        <%= f.select :decidim_meeting_id, meetings_list %>
+        <%= f.number_field :civicrm_event_id %>
+        <%= f.text_field :redirect_url %>
+        <%= f.check_box :redirect_active %>
+      </div>
+    </div>
+  </div>
+
+  <div class="button--double form-general-submit">
+    <%= f.submit t(".create") %>
+  </div>
+<% end %>

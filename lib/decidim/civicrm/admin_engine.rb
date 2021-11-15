@@ -24,6 +24,13 @@ module Decidim
           end
         end
 
+        resources :meetings do
+          collection do
+            get :sync
+            put :toggle_active
+          end
+        end
+
         root to: "groups#index"
       end
 

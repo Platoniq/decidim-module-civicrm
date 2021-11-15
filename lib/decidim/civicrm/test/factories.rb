@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "decidim/core/test/factories"
+require "decidim/meetings/test/factories"
 
 FactoryBot.define do
   factory :civicrm_contact, class: "Decidim::Civicrm::Contact" do
@@ -41,6 +42,20 @@ FactoryBot.define do
   factory :civicrm_group_participatory_space, class: "Decidim::Civicrm::GroupParticipatorySpace" do
     group factory: :civicrm_group
     association :participatory_space, factory: :participatory_process
+  end
+
+  factory :civicrm_event_meeting, class: "Decidim::Civicrm::EventMeeting" do
+    organization
+    meeting factory: :meeting
+    redirect_url { Faker::Internet.url }
+    redirect_active { true }
+    civicrm_event_id { Faker::Number.between(from: 1, to: 100) }
+  end
+
+  factory :civicrm_event_registration, class: "Decidim::Civicrm::EventRegistration" do
+    event_meeting factory: :civicrm_event_meeting
+    meeting_registration factory: :meeting_registrationg
+    civicrm_event_registration_id { Faker::Number.between(from: 1, to: 100) }
   end
 
   factory :civicrm_membership_type, class: "Decidim::Civicrm::MembershipType" do

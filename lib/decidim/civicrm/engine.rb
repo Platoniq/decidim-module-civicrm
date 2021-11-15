@@ -17,6 +17,12 @@ module Decidim
         # this adds a notification too when user logs in
         Decidim::CreateOmniauthRegistration.include(Decidim::Civicrm::CreateOmniauthRegistrationOverride)
         Decidim::Admin::ResourcePermissionsController.include(Decidim::Civicrm::Admin::NeedsMultiselectSnippets)
+        Decidim::Meetings::RegistrationsController.include(Decidim::Civicrm::MeetingsRegistrationsControllerOverride)
+        Decidim::Meetings::JoinMeeting.include(Decidim::Civicrm::JoinMeetingOverride)
+      end
+
+      routes do
+        root to: "authorizations#new"
       end
 
       initializer "decidim_civicrm.omniauth" do
@@ -72,8 +78,13 @@ module Decidim
         end
       end
 
-      routes do
-        root to: "authorizations#new"
+      initializer "decidim_civicrm.events_sync" do
+        next unless Decidim::Civicrm.auto_sync_meetings_event_attributes.is_a?(Hash)
+
+        # triggers civicrm api submissions for events
+        Decidim::EventsManager.subscribe(/^decidim\.events\./) do |event_name, data|
+          Decidim::Civicrm::EventSyncJob.perform_later(event_name, data)
+        end
       end
     end
   end

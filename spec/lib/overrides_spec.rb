@@ -17,6 +17,13 @@ checksums = [
     files: {
       "/app/controllers/decidim/admin/resource_permissions_controller.rb" => "689b3ae4ec504b98566461b805cba176"
     }
+  },
+  {
+    package: "decidim-meetings",
+    files: {
+      "/app/controllers/decidim/meetings/registrations_controller.rb" => "77274bb241d55cd570f563f967843a72",
+      "/app/commands/decidim/meetings/join_meeting.rb" => "9dc927220d761ef65bc303cf00327275"
+    }
   }
 ]
 
