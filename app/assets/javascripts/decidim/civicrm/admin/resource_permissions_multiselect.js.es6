@@ -12,7 +12,7 @@ $(() => {
   const select2InputTags = (queryStr) => {
     const $input = $(queryStr)
 
-    const $select = $('<select class="'+ $input.attr('class') + '" multiple="multiple"><select>');
+    const $select = $('<select class="'+ $input.attr('class') + '" style="width:100%" multiple="multiple"><select>');
     if ($input.val() != "") {
       const values = $input.val().split(',');
       values.forEach((item) =>  {
