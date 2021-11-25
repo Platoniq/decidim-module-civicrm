@@ -6,11 +6,11 @@ describe "Decidim CiViCRM Admin section", type: :system do
   let!(:organization) { create :organization }
   let!(:user) { create :user, :admin, organization: organization }
 
-  let!(:groups) { create_list :decidim_civicrm_group, 3, organization: organization }
-  let!(:membership_types) { create_list :decidim_civicrm_membership_type, 3, organization: organization }
+  let!(:groups) { create_list :civicrm_group, 3, organization: organization }
+  let!(:membership_types) { create_list :civicrm_membership_type, 3, organization: organization }
 
-  let!(:contact) { create :decidim_civicrm_contact, organization: organization }
-  let!(:group_membership) { create :decidim_civicrm_group_membership, contact: contact, group: groups.first, organization: organization }
+  let!(:contact) { create :civicrm_contact, organization: organization }
+  let!(:group_membership) { create :civicrm_group_membership, contact: contact, group: groups.first }
 
   before do
     switch_to_host(organization.host)
@@ -28,6 +28,7 @@ describe "Decidim CiViCRM Admin section", type: :system do
     within ".secondary-nav" do
       expect(page).to have_link("Groups")
       expect(page).to have_link("Membership Types")
+      expect(page).to have_link("Meetings")
     end
   end
 
@@ -38,7 +39,7 @@ describe "Decidim CiViCRM Admin section", type: :system do
 
     it "loads the page" do
       expect(page).to have_content("Groups")
-      expect(page).to have_link("Synchronize with CiViCRM")
+      expect(page).to have_link("Synchronize all with CiViCRM")
 
       within ".civicrm-groups" do
         expect(page).to have_content(groups[0].title)

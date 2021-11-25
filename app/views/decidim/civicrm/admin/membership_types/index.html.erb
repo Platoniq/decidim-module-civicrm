@@ -13,6 +13,8 @@
           <tr>
             <th><%= t(".id") %></th>
             <th><%= t(".name") %></th>
+            <th><%= t(".created_at") %></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -20,6 +22,8 @@
             <tr>
               <td><%= membership_type.id %></td>
               <td><%= membership_type.name %></td>
+              <td class="<%= last_sync_class(membership_type.created_at) %>"><%= l(membership_type.created_at, format: :decidim_short) if membership_type.created_at %>
+              <td></td>
             </tr>
           <% end %>
         </tbody>

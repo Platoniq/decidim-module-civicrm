@@ -10,14 +10,13 @@ module Decidim
 
         api_membership_types = Decidim::Civicrm::Api::ListMembershipTypes.new.result
 
-        Rails.logger.info "Decidim::Civicrm::SyncMembershipTypesJob: #{api_membership_types.count} membership_types to process"
+        Rails.logger.info "SyncMembershipTypesJob: #{api_membership_types.count} membership_types to process"
 
         api_membership_types.each { |data| update_membership_types(organization_id, data) }
 
-        Rails.logger.info "Decidim::Civicrm::SyncMembershipTypesJob: #{MembershipType.to_delete.count} membership_types to delete"
+        Rails.logger.info "SyncMembershipTypesJob: #{MembershipType.to_delete.count} membership_types to delete"
 
         MembershipType.clean_up_records(decidim_organization_id: organization_id)
-        MembershipType.update_translations
       end
 
       def update_membership_types(organization_id, data)
@@ -25,7 +24,7 @@ module Decidim
 
         return if civicrm_membership_type_id.blank?
 
-        Rails.logger.info "Decidim::Civicrm::SyncMembershipTypesJob: Creating / updating MembershipType #{data[:name]} \
+        Rails.logger.info "SyncMembershipTypesJob: Creating / updating MembershipType #{data[:name]} \
                            (civicrm id: #{civicrm_membership_type_id}) with data #{data}"
 
         membership_type = MembershipType.find_or_initialize_by(decidim_organization_id: organization_id, civicrm_membership_type_id: civicrm_membership_type_id)

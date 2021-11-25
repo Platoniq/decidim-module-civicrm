@@ -8,6 +8,7 @@ module Decidim
         include NeedsPermission
 
         helper_method :membership_types
+        helper CivicrmSyncHelpers
 
         layout "decidim/admin/civicrm"
 

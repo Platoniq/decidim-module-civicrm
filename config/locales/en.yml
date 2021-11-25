@@ -95,9 +95,22 @@ en:
           update:
             error: Error while creating sync meeting
             success: New sync meeting created successfully
+        membership_types:
+          index:
+            actions: Actions
+            created_at: Created at
+            empty: There are no memberships synchronized yet.
+            id: CiViCRM Id
+            last_sync: Last synchronization
+            name: Role
+            sync: Synchronize with CiViCRM
+            title: Membership Types from CiViCRM
+          sync:
+            success: The synchronization has started
         menu:
           groups: Groups
           meetings: Meetings
+          membership_types: Membership Types
           verifications: Authorizations
       contact:
         errors:

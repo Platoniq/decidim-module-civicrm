@@ -7,6 +7,16 @@ module Decidim
         class BaseQuery
           attr_reader :result, :request
 
+          def success?
+            return true if response.has_key?("values")
+
+            raise Decidim::Civicrm::Error, "Malformed response for #{self.class.name}: #{response.to_json}"
+          end
+
+          def response
+            @request.response
+          end
+
           protected
 
           def json_params(params)
@@ -21,16 +31,6 @@ module Decidim
 
           def default_query
             raise NotImplementedError
-          end
-
-          def success?
-            return true if response.has_key?("values")
-
-            raise Decidim::Civicrm::Error, "Malformed response for #{self.class.name}: #{response.to_json}"
-          end
-
-          def response
-            @request.response
           end
 
           def store_result

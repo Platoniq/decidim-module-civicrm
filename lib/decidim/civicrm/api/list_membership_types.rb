@@ -9,7 +9,6 @@ module Decidim
             entity: "MembershipType",
             json: json_params(query || default_query)
           )
-
           store_result
         end
 
