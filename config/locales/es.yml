@@ -50,18 +50,18 @@ es:
             success: La sincronización ha empezado
         meetings:
           create:
-            error: Error al crear la reunión sincronizada
-            success: La reunión sincronizada fue creada con éxito
+            error: Error al crear un encuentro sincronizado
+            success: El encuentro sincronizado fue creado con éxito
           edit:
-            create: Actualizar reunión sincronizada
-            title: Editar reunión sincronizada
+            create: Actualizar encuentro sincronizado
+            title: Editar encuentro sincronizado
           index:
             actions: Acciones
             edit: Editar
             event_id: ID del evento CiViCRM
             last_sync: Última sincronización
-            meeting: Reunión Decidim
-            new: Nueva reunión sincronizada
+            meeting: Encuentro Decidim
+            new: Nuevo encuentro sincronizado
             redirect_active:
               disable: Desactivar la redirección después de unirse
               enable: Activar la redirección después de unirse
@@ -69,30 +69,30 @@ es:
             registrations: Inscripciones
             remove: Eliminar
             sync: Sincronizarlo todo con CiViCRM
-            title: Sincronización de reuniones
+            title: Sincronización de encuentros
             total: Número total de inscripciones
           new:
-            create: Crear una reunión sincronizada
-            title: Nueva reunión sincronizada
+            create: Crear un encuentro sincronizado
+            title: Nuevo encuentro sincronizado
           show:
             actions: Acciones
             contact: Contacto
             contact_id: Contacto CiViCRM
             created_at: Creado el
-            empty: No hay ninguna inscripción en esta reunión.
+            empty: No hay ninguna inscripción en este encuentro.
             id: Id CiViCRM
             name: Nombre
             nickname: Apodo
             show_email: Mostrar email
             status: Estado CiViCRM
             sync: Sincronizar con CiViCRM
-            title: Inscripciones CiViCRM para la reunión %{meeting_name}
+            title: Inscripciones CiViCRM para el encuentro %{meeting_name}
             unsynchronized: Nunca ha iniciado sesión
           sync:
             success: La sincronización ha empezado
           update:
-            error: Error al crear la reunión sincronizada
-            success: La reunión sincronizada fue creada con éxito
+            error: Error al crear el encuentro sincronizado
+            success: El encuentro sincronizado fue creado con éxito
         menu:
           groups: Grupos
           meetings: Encuentros
