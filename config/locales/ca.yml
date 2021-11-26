@@ -1,15 +1,20 @@
 ca:
   decidim:
     authorization_handlers:
+      civicrm:
+        explanation: CiViCRM Membership
+        name: CiViCRM Membership
       civicrm_groups:
         explanation: Membres de CiViCRM Grups i/o Grups Intel·ligents
         fields:
           group: CiViCRM Grup
           groups: CiViCRM Grup IDs
-        name: Autorització amb CiViCRM Grups
-      civicrm_verification:
-        explanation: Membres de CiViCRM
-        name: Autorització amb CiViCRM
+        name: CiViCRM Groups
+      civicrm_membership_types:
+        explanation: CiViCRM Membership Types
+        fields:
+          membership_types: CiViCRM Membership Type IDs
+        name: CiViCRM Membership Types
     civicrm:
       admin:
         groups:
@@ -93,10 +98,26 @@ ca:
           update:
             error: Error en crear una trobada sincronitzada
             success: Nova trobada sincronizada creada correctament
+        membership_types:
+          index:
+            actions: Actions
+            created_at: Created at
+            empty: There are no memberships synchronized yet.
+            id: CiViCRM Id
+            last_sync: Last synchronization
+            name: Role
+            sync: Synchronize with CiViCRM
+            title: Membership Types from CiViCRM
+          sync:
+            success: The synchronization has started
         menu:
           groups: Grups
           meetings: Trobades
+          membership_types: Membership Types
           verifications: Autoritzacions
+      authorizations:
+        new:
+          no_action: No user action required
       contact:
         errors:
           not_unique: El contact ja existeix
