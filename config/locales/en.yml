@@ -2,15 +2,20 @@
 en:
   decidim:
     authorization_handlers:
+      civicrm:
+        explanation: CiViCRM Membership
+        name: CiViCRM Membership
       civicrm_groups:
         explanation: CiViCRM Groups and Intelligent Groups memberships
         fields:
           group: CiViCRM Group
           groups: CiViCRM Group IDs
-        name: Authorized with CiViCRM Groups
-      civicrm_verification:
-        explanation: CiViCRM membership
-        name: Authorized with CiViCRM
+        name: CiViCRM Groups
+      civicrm_membership_types:
+        explanation: CiViCRM Membership Types
+        fields:
+          membership_types: CiViCRM Membership Type IDs
+        name: CiViCRM Membership Types
     civicrm:
       admin:
         groups:
@@ -112,6 +117,9 @@ en:
           meetings: Meetings
           membership_types: Membership Types
           verifications: Authorizations
+      authorizations:
+        new:
+          no_action: No user action required
       contact:
         errors:
           not_unique: Contact is already taken

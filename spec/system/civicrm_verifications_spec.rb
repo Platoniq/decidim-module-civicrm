@@ -4,20 +4,12 @@ require "spec_helper"
 require "decidim/proposals/test/factories"
 
 describe "Restrict actions by CiviCRM verifications", type: :system do
-  include_context "with a component"
-
-  let(:manifest_name) { "proposals" }
   let(:options) { {} }
-  let(:authorization_options) do
-    {
-      authorization_handlers: {
-        handler_name => { "options" => options }
-      }
-    }
-  end
-
   let!(:organization) do
-    create(:organization, available_authorizations: %w(civicrm_basic civicrm_group civicrm_membership))
+    create(:organization, available_authorizations: %w(civicrm civicrm_groups civicrm_membership_types))
+  end
+  let(:participatory_process) do
+    create(:participatory_process, :with_steps, organization: organization)
   end
 
   let!(:user) { create(:user, :confirmed, organization: organization) }
@@ -27,15 +19,30 @@ describe "Restrict actions by CiviCRM verifications", type: :system do
     create(
       :proposal_component,
       :with_creation_enabled,
-      manifest: manifest,
-      participatory_space: participatory_space,
-      permissions: permissions
+      participatory_space: participatory_process
     )
   end
+  let!(:contact) { create :civicrm_contact, organization: organization, user: user, civicrm_contact_id: contact_id, civicrm_uid: uid }
+  let!(:identity) { create :identity, user: user, provider: Decidim::Civicrm::OMNIAUTH_PROVIDER_NAME, uid: uid }
+  let(:contact_id) { 1 }
+  let(:uid) { 3 }
+  let!(:authorization) { create(:authorization, :granted, user: user, name: handler_name, metadata: metadata) }
+  let(:group) { create :civicrm_group, organization: organization, civicrm_group_id: "1" }
+  let!(:group_membership) { create :civicrm_group_membership, contact: contact, group: group }
+  let!(:membership_type) { create :civicrm_membership_type, organization: organization, civicrm_membership_type_id: "2" }
 
   before do
     switch_to_host(organization.host)
     login_as user, scope: :user
+    permissions = {
+      create: {
+        authorization_handlers: {
+          handler_name => { "options" => options }
+        }
+      }
+    }
+    component.update!(permissions: permissions)
+
     visit main_component_path(component)
     click_link "New proposal"
   end
@@ -45,8 +52,6 @@ describe "Restrict actions by CiviCRM verifications", type: :system do
   end
 
   shared_examples "user is authorized" do
-    let!(:authorization) { create(:authorization, user: user, name: handler_name, metadata: metadata) }
-
     it do
       expect(page).to have_content "Create your proposal"
       expect(page).to have_selector ".new_proposal"
@@ -54,17 +59,14 @@ describe "Restrict actions by CiviCRM verifications", type: :system do
   end
 
   shared_examples "user is authorized with wrong metadata" do
-    let!(:authorization) { create(:authorization, user: user, name: handler_name, metadata: wrong_metadata) }
-
     it do
-      expect(page).to have_link "Not authorized"
+      expect(page).to have_content "Not authorized"
       expect(page).to have_content "isn't valid"
+      expect(page).not_to have_content "Create your proposal"
     end
   end
 
   shared_examples "user is not authorized" do
-    let!(:authorization) { nil }
-
     it do
       expect(page).to have_link "Authorize"
       expect(page).to have_content "you need to be authorized"
@@ -72,52 +74,57 @@ describe "Restrict actions by CiviCRM verifications", type: :system do
   end
 
   describe "Basic Verification" do
-    let!(:permissions) { { create: authorization_options } }
-
-    let(:handler_name) { "civicrm_basic" }
+    let(:handler_name) { "civicrm" }
     let(:options) { {} }
-    let(:metadata) { { "contact_id" => contact_id } }
-    let(:wrong_metadata) { { "another_field" => "1" } }
-
-    let(:contact_id) { 1 }
-    let!(:contact) { create :decidim_civicrm_contact, organization: organization, user: user, civicrm_contact_id: contact_id }
-    let!(:identity) { create :identity, user: user, provider: Decidim::Civicrm::PROVIDER_NAME, uid: contact_id }
+    let(:metadata) { { "contact_id" => contact_id, "uid" => uid } }
 
     it_behaves_like "user is authorized"
-    it_behaves_like "user is not authorized"
+
+    context "when no authorization" do
+      let!(:authorization) { nil }
+
+      it_behaves_like "user is not authorized"
+    end
   end
 
   describe "Membership Verification" do
-    let!(:permissions) { { create: authorization_options } }
-
-    let(:handler_name) { "civicrm_membership" }
-    let(:options) { { "civicrm_membership_types" => [1, 2] } }
-    let(:metadata) { { "civicrm_membership_types" => [2, 3] } }
-    let(:wrong_metadata) { { "civicrm_membership_types" => [3, 4] } }
+    let(:handler_name) { "civicrm_membership_types" }
+    let(:metadata) { { "membership_type_ids" => [2, 3] } }
+    let(:options) { { "membership_types" => "1, 2" } }
 
     it_behaves_like "user is authorized"
-    it_behaves_like "user is authorized with wrong metadata"
-    it_behaves_like "user is not authorized"
+
+    context "when wrong metadata" do
+      let(:metadata) { { "membership_types" => [3, 4] } }
+
+      it_behaves_like "user is authorized with wrong metadata"
+    end
+
+    context "when no authorization" do
+      let!(:authorization) { nil }
+
+      it_behaves_like "user is not authorized"
+    end
   end
 
   describe "Group Verification" do
-    let!(:permissions) { { create: authorization_options } }
-
-    let(:handler_name) { "civicrm_group" }
-    let(:options) { { "civicrm_groups" => [1, 2] } }
-    let(:metadata) { { "contact_id" => contact_id } }
-    let(:wrong_metadata) { { "contact_id" => "2" } }
-
-    let(:contact_id) { 1 }
-
-    let!(:identity) { create :identity, user: user, provider: Decidim::Civicrm::PROVIDER_NAME, uid: contact_id }
-    let!(:contact) { create :decidim_civicrm_contact, organization: organization, user: user, civicrm_contact_id: contact_id }
-    let(:group) { create :decidim_civicrm_group, organization: organization, civicrm_group_id: "1" }
-    let!(:group_membership) { create :decidim_civicrm_group_membership, organization: organization, contact: contact, group: group }
+    let(:handler_name) { "civicrm_groups" }
+    let(:metadata) { { "group_ids" => [1, 3] } }
+    let(:options) { { "groups" => "1, 2" } }
 
     it_behaves_like "user is authorized"
-    it_behaves_like "user is authorized with wrong metadata"
-    it_behaves_like "user is not authorized"
+
+    context "when wrong metadata" do
+      let(:metadata) { { "contact_id" => "2" } }
+
+      it_behaves_like "user is authorized with wrong metadata"
+    end
+
+    context "when no authorization" do
+      let!(:authorization) { nil }
+
+      it_behaves_like "user is not authorized"
+    end
   end
 
   def visit_proposal

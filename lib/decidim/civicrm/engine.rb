@@ -69,7 +69,7 @@ module Decidim
           # # Another automated verification method that stores all the groups obtained from civicrm
           Decidim::Verifications.register_workflow(:civicrm_groups) do |workflow|
             workflow.form = "Decidim::Civicrm::Verifications::CivicrmGroups"
-            workflow.action_authorizer = "Decidim::Civicrm::Verifications::Groups::GroupsActionAuthorizer"
+            workflow.action_authorizer = "Decidim::Civicrm::Verifications::GroupsActionAuthorizer"
 
             workflow.options do |options|
               options.attribute :groups, type: :string
@@ -77,14 +77,14 @@ module Decidim
           end
         end
 
-        if Decidim::Civicrm.authorizations.include?(:civicrm_memberships)
+        if Decidim::Civicrm.authorizations.include?(:civicrm_membership_types)
           # # Another automated verification method that stores all the memberships obtained from civicrm
-          Decidim::Verifications.register_workflow(:civicrm_memberships) do |workflow|
+          Decidim::Verifications.register_workflow(:civicrm_membership_types) do |workflow|
             workflow.form = "Decidim::Civicrm::Verifications::CivicrmMemberships"
-            workflow.action_authorizer = "Decidim::Civicrm::Verifications::Memberships::MembershipsActionAuthorizer"
+            workflow.action_authorizer = "Decidim::Civicrm::Verifications::MembershipTypesActionAuthorizer"
 
             workflow.options do |options|
-              options.attribute :memberships, type: :string
+              options.attribute :membership_types, type: :string
             end
           end
         end

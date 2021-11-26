@@ -35,7 +35,7 @@ module Decidim
 
     # authorizations enabled
     config_accessor :authorizations do
-      [:civicrm, :civicrm_groups, :civicrm_memberships]
+      [:civicrm, :civicrm_groups, :civicrm_membership_types]
     end
 
     # if false, no notifications will be send to users when automatic verifications are performed

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "verifications/groups_action_authorizer"
-require_relative "verifications/memberships_action_authorizer"
+require_relative "verifications/membership_types_action_authorizer"
 
 module Decidim
   module Civicrm

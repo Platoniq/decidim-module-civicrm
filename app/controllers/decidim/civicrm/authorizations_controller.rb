@@ -4,7 +4,7 @@ module Decidim
   module Civicrm
     class AuthorizationsController < Decidim::ApplicationController
       def new
-        flash[:alert] = t("authorizations.new.no_action", scope: "decidim.verifications")
+        flash[:alert] = t("authorizations.new.no_action", scope: "decidim.civicrm")
         redirect_to decidim_verifications.authorizations_path
       end
     end
