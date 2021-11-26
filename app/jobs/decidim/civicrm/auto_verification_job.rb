@@ -18,45 +18,34 @@ module Decidim
           return
         end
 
-        perform_civicrm_auth
-        perform_groups_auth
+        perform_auth("civicrm")
+        perform_auth("civicrm_groups")
+        perform_auth("civicrm_membership_types")
       end
 
       private
 
-      def perform_civicrm_auth
-        handler = Decidim::AuthorizationHandler.handler_for("civicrm", user: @contact.user)
+      def perform_auth(name)
+        handler = Decidim::AuthorizationHandler.handler_for(name, user: @contact.user)
         return unless handler
 
         Decidim::Verifications::AuthorizeUser.call(handler) do
           on(:ok) do
             Rails.logger.info "AutoVerificationJob: Success: created for user #{handler.user.id}"
-            notify_user(handler.user, :ok, handler) if Decidim::Civicrm.send_verification_notifications
+            notify_user(handler.user, :ok, handler)
           end
 
           on(:invalid) do
             Rails.logger.error "AutoVerificationJob: ERROR: failed for user #{handler&.user&.id}"
-            notify_user(handler.user, :invalild, handler) if Decidim::Civicrm.send_verification_notifications
-          end
-        end
-      end
-
-      def perform_groups_auth
-        handler = Decidim::AuthorizationHandler.handler_for("civicrm_groups", user: @contact.user)
-        return unless handler
-
-        Decidim::Verifications::AuthorizeUser.call(handler) do
-          on(:ok) do
-            Rails.logger.info "AutoVerificationJob: Success: Authorization created for user #{handler.user.id}"
-          end
-
-          on(:invalid) do
-            Rails.logger.error "AutoVerificationJob: ERROR: Authorization failed for user #{handler&.user&.id}"
+            notify_user(handler.user, :invalild, handler)
           end
         end
       end
 
       def notify_user(user, status, handler)
+        return unless Decidim::Civicrm.send_verification_notifications
+        return unless handler.handler_name == "civicrm"
+
         notification_class = status == :ok ? Decidim::Civicrm::Verifications::SuccessNotification : Decidim::Civicrm::Verifications::InvalidNotification
         Decidim::EventsManager.publish(
           event: "decidim.events.civicrm_verification.#{status}",

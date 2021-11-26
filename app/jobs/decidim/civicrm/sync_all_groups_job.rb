@@ -8,7 +8,7 @@ module Decidim
       def perform(organization_id)
         Group.prepare_cleanup
 
-        api_groups = Decidim::Civicrm::Api::ListGroups.new.result[:groups]
+        api_groups = Decidim::Civicrm::Api::ListGroups.new.result
 
         Rails.logger.info "SyncAllGroupsJob: #{api_groups.count} groups to process"
 
@@ -34,7 +34,7 @@ module Decidim
         group.extra = data
         group.marked_for_deletion = false
 
-        group.auto_sync_members = Decidim::Civicrm.auto_sync_groups.include?(civicrm_group_id.to_i) unless group.id
+        group.auto_sync_members = Decidim::Civicrm.auto_sync_groups&.include?(civicrm_group_id.to_i) unless group.id
 
         group.save!
 

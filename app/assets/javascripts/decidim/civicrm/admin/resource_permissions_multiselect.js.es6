@@ -7,6 +7,7 @@ $(() => {
    * Allows to use more than one group when configuring :civicrm_groups authorization handler
    * */
   const url_groups = "/admin/civicrm/groups";
+  const url_membership_types = "/admin/civicrm/membership_types";
   const url_participatory_spaces = "/admin/civicrm/groups/participatory_spaces"
   
   const select2InputTags = (queryStr) => {
@@ -43,6 +44,23 @@ $(() => {
     select2InputTags(input).select2({
       ajax: {
         url: url_groups,
+        delay: 100,
+        dataType: "json",
+        processResults: (data) => {
+          return {
+            results: data
+          }
+        }
+      },
+      multiple: true,
+      theme: "foundation"
+    });
+  });   
+
+  $("input[name$='[authorization_handlers_options][civicrm_membership_types][membership_types]'").each((idx, input) => {
+    select2InputTags(input).select2({
+      ajax: {
+        url: url_membership_types,
         delay: 100,
         dataType: "json",
         processResults: (data) => {

@@ -11,10 +11,13 @@ Decidim::Civicrm.configure do |config|
 
   # Configure omniauth secrets
   config.omniauth = {
+    enabled: true,
     client_id: ENV["CIVICRM_CLIENT_ID"],
     client_secret: ENV["CIVICRM_CLIENT_SECRET"],
     site: ENV["CIVICRM_SITE"]
   }
+
+  Rails.application.secrets[:omniauth][:civicrm] = config.omniauth
 
   # whether to send notifications to user when they auto-verified or not:
   # config.send_verification_notifications = false
