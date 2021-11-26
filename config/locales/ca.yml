@@ -2,19 +2,19 @@ ca:
   decidim:
     authorization_handlers:
       civicrm:
-        explanation: CiViCRM Membership
-        name: CiViCRM Membership
+        explanation: Membre del CiViCRM
+        name: Membre del CiViCRM
       civicrm_groups:
         explanation: Membres de CiViCRM Grups i/o Grups Intel·ligents
         fields:
           group: CiViCRM Grup
           groups: CiViCRM Grup IDs
-        name: CiViCRM Groups
+        name: Membre d'un grup del CiViCRM
       civicrm_membership_types:
-        explanation: CiViCRM Membership Types
+        explanation: Tipologia d'afiliació del CiViCRM
         fields:
-          membership_types: CiViCRM Membership Type IDs
-        name: CiViCRM Membership Types
+          membership_types: Id's de tipologia d'afiliació del CiViCRM
+        name: Tipologia d'afiliació del CiViCRM
     civicrm:
       admin:
         groups:
@@ -100,24 +100,24 @@ ca:
             success: Nova trobada sincronizada creada correctament
         membership_types:
           index:
-            actions: Actions
-            created_at: Created at
-            empty: There are no memberships synchronized yet.
-            id: CiViCRM Id
-            last_sync: Last synchronization
-            name: Role
-            sync: Synchronize with CiViCRM
-            title: Membership Types from CiViCRM
+            actions: Accions
+            created_at: Creat el
+            empty: No hi ha tipologies sincronitzades encara.
+            id: Id CiViCRM
+            last_sync: Última sincronització
+            name: Rol
+            sync: Sincronitza amb el CiViCRM
+            title: Tipus d'afiliació al CiViCRM
           sync:
-            success: The synchronization has started
+            success: La sincronització ha començat
         menu:
           groups: Grups
           meetings: Trobades
-          membership_types: Membership Types
+          membership_types: Tipus d'Afiliació
           verifications: Autoritzacions
       authorizations:
         new:
-          no_action: No user action required
+          no_action: No es requreix cap acció de l'usuari
       contact:
         errors:
           not_unique: El contact ja existeix
