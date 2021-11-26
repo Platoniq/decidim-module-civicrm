@@ -9,12 +9,12 @@ module Decidim::Civicrm
 
       let(:organization) { create :organization }
       let(:user) { create(:user, :admin, :confirmed, organization: organization) }
-      let!(:group1) { create :civicrm_group, organization: organization, auto_sync_members: true }
-      let!(:group2) { create :civicrm_group, organization: organization, auto_sync_members: true }
-      let!(:group3) { create :civicrm_group, organization: organization, auto_sync_members: false }
-      let!(:contact1) { create :civicrm_contact, organization: organization }
-      let!(:contact2) { create :civicrm_contact, organization: organization }
-      let!(:contact3) { create :civicrm_contact, organization: organization }
+      let!(:group1) { create :civicrm_group, organization: organization, civicrm_group_id: 1, auto_sync_members: true }
+      let!(:group2) { create :civicrm_group, organization: organization, civicrm_group_id: 2, auto_sync_members: true }
+      let!(:group3) { create :civicrm_group, organization: organization, civicrm_group_id: 3, auto_sync_members: false }
+      let!(:contact1) { create :civicrm_contact, civicrm_contact_id: 10, organization: organization }
+      let!(:contact2) { create :civicrm_contact, civicrm_contact_id: 11, organization: organization }
+      let!(:contact3) { create :civicrm_contact, civicrm_contact_id: 12, organization: organization }
       let!(:group_memberships) do
         [
           create(:civicrm_group_membership, contact: nil, group: group1, extra: { display_name: "AAAA" }),
