@@ -6,7 +6,6 @@ require "decidim/civicrm/api"
 require "decidim/civicrm/event_parsers"
 require "decidim/civicrm/engine"
 require "decidim/civicrm/verifications"
-require "decidim/civicrm/verifications/groups_action_authorizer"
 require "decidim/civicrm/version"
 
 module Decidim
@@ -36,7 +35,7 @@ module Decidim
 
     # authorizations enabled
     config_accessor :authorizations do
-      [:civicrm, :civicrm_groups]
+      [:civicrm, :civicrm_groups, :civicrm_membership_types]
     end
 
     # if false, no notifications will be send to users when automatic verifications are performed

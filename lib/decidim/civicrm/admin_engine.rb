@@ -18,6 +18,12 @@ module Decidim
           end
         end
 
+        resources :membership_types, only: [:index] do
+          collection do
+            get :sync
+          end
+        end
+
         resources :meetings do
           collection do
             get :sync

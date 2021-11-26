@@ -3,9 +3,9 @@
 module Decidim
   module Civicrm
     module Api
-      class ListContactMemberships < BaseQuery
+      class ListContactMemberships < Base::ListQuery
         def initialize(id, query = nil)
-          @request = Request.get(
+          @request = Base::Request.get(
             entity: "Membership",
             contact_id: id,
             json: json_params(query || default_query)
@@ -16,17 +16,12 @@ module Decidim
 
         def default_query
           {
-            options: { limit: 0 },
             return: "membership_type_id"
           }
         end
 
-        private
-
-        def parsed_response
-          {
-            membership_type_ids: response["values"].map { |v| v["membership_type_id"] }
-          }
+        def self.parse_item(item)
+          item["membership_type_id"].to_i
         end
       end
     end

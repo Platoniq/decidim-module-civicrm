@@ -7,12 +7,13 @@ $(() => {
    * Allows to use more than one group when configuring :civicrm_groups authorization handler
    * */
   const url_groups = "/admin/civicrm/groups";
+  const url_membership_types = "/admin/civicrm/membership_types";
   const url_participatory_spaces = "/admin/civicrm/groups/participatory_spaces"
   
-  const select2InputTags = (queryStr) => {
+  const select2InputTags = (queryStr, url) => {
     const $input = $(queryStr)
 
-    const $select = $('<select class="'+ $input.attr('class') + '" multiple="multiple"><select>');
+    const $select = $('<select class="'+ $input.attr('class') + '" style="width:100%" multiple="multiple"><select>');
     if ($input.val() != "") {
       const values = $input.val().split(',');
       values.forEach((item) =>  {
@@ -20,7 +21,7 @@ $(() => {
       })
       ;
       // load text via ajax
-      $.get(url_groups, { ids: values }, (data) => {
+      $.get(url, { ids: values }, (data) => {
         $select.val("");
         $select.contents("option").remove()
         data.forEach((item) => {
@@ -39,10 +40,29 @@ $(() => {
     return $select;
   };
 
+  // Groups multiselect permissions
   $("input[name$='[authorization_handlers_options][civicrm_groups][groups]'").each((idx, input) => {
-    select2InputTags(input).select2({
+    select2InputTags(input, url_groups).select2({
       ajax: {
         url: url_groups,
+        delay: 100,
+        dataType: "json",
+        processResults: (data) => {
+          return {
+            results: data
+          }
+        }
+      },
+      multiple: true,
+      theme: "foundation"
+    });
+  });   
+
+  // Memberships multiselect permissions
+  $("input[name$='[authorization_handlers_options][civicrm_membership_types][membership_types]'").each((idx, input) => {
+    select2InputTags(input, url_membership_types).select2({
+      ajax: {
+        url: url_membership_types,
         delay: 100,
         dataType: "json",
         processResults: (data) => {

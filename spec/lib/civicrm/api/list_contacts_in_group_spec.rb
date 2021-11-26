@@ -4,15 +4,15 @@ require "spec_helper"
 require "decidim/civicrm/test/shared_contexts"
 
 module Decidim
-  describe Civicrm::Api::ContactsInGroup, type: :class do
+  describe Civicrm::Api::ListContactsInGroup, type: :class do
     subject { described_class.new(1) }
 
     include_context "with stubs example api"
 
-    let(:data) { JSON.parse(file_fixture("contacts_in_group_valid_response.json").read) }
+    let(:data) { JSON.parse(file_fixture("list_contacts_in_group_valid_response.json").read) }
 
     describe "#result" do
-      it_behaves_like "returns array content"
+      it_behaves_like "returns mapped array ids", "contact_id"
     end
   end
 end

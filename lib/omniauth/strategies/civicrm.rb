@@ -12,6 +12,8 @@ module OmniAuth
       option :site, nil
       option :client_options, {}
 
+      option :with_locale_path_segment, false
+
       uid do
         raw_info["sub"]
       end
@@ -32,10 +34,13 @@ module OmniAuth
       def client
         options.client_options[:site] = options.site
 
-        locale_path_segment = "/#{request[:locale]}/"
+        base_url = options.site
 
-        options.client_options[:authorize_url] = URI.join(options.site, locale_path_segment, "oauth2/authorize").to_s
-        options.client_options[:token_url] = URI.join(options.site, locale_path_segment, "oauth2/token").to_s
+        base_url = URI.join(base_url, "/#{request[:locale]}/") if options.with_locale_path_segment
+
+        options.client_options[:authorize_url] = URI.join(base_url, "oauth2/authorize").to_s
+        options.client_options[:token_url] = URI.join(base_url, "oauth2/token").to_s
+
         super
       end
 

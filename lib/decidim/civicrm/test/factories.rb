@@ -57,4 +57,10 @@ FactoryBot.define do
     meeting_registration factory: :meeting_registrationg
     civicrm_event_registration_id { Faker::Number.between(from: 1, to: 100) }
   end
+
+  factory :civicrm_membership_type, class: "Decidim::Civicrm::MembershipType" do
+    organization
+    civicrm_membership_type_id { Faker::Number.unique.between(from: 1, to: 100) }
+    name { Faker::Lorem.word }
+  end
 end

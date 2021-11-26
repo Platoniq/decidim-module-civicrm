@@ -21,6 +21,10 @@ module Decidim
         Decidim::Meetings::JoinMeeting.include(Decidim::Civicrm::JoinMeetingOverride)
       end
 
+      routes do
+        root to: "authorizations#new"
+      end
+
       initializer "decidim_civicrm.omniauth" do
         next unless Decidim::Civicrm.omniauth && Decidim::Civicrm.omniauth[:client_id]
 
@@ -65,10 +69,22 @@ module Decidim
           # # Another automated verification method that stores all the groups obtained from civicrm
           Decidim::Verifications.register_workflow(:civicrm_groups) do |workflow|
             workflow.form = "Decidim::Civicrm::Verifications::CivicrmGroups"
-            workflow.action_authorizer = "Decidim::Civicrm::Verifications::Groups::GroupsActionAuthorizer"
+            workflow.action_authorizer = "Decidim::Civicrm::Verifications::GroupsActionAuthorizer"
 
             workflow.options do |options|
               options.attribute :groups, type: :string
+            end
+          end
+        end
+
+        if Decidim::Civicrm.authorizations.include?(:civicrm_membership_types)
+          # # Another automated verification method that stores all the memberships obtained from civicrm
+          Decidim::Verifications.register_workflow(:civicrm_membership_types) do |workflow|
+            workflow.form = "Decidim::Civicrm::Verifications::CivicrmMembershipTypes"
+            workflow.action_authorizer = "Decidim::Civicrm::Verifications::MembershipTypesActionAuthorizer"
+
+            workflow.options do |options|
+              options.attribute :membership_types, type: :string
             end
           end
         end

@@ -45,6 +45,7 @@ module Decidim
         @contact.decidim_user_id = form.decidim_user_id if form.decidim_user_id
         @contact.civicrm_uid = form.civicrm_uid if form.civicrm_uid
         @contact.extra = form.extra if form.extra
+        @contact.membership_types = form.membership_types if form.membership_types
         @contact.save!
       end
 

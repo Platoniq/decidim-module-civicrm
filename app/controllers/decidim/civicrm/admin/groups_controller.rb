@@ -122,7 +122,7 @@ module Decidim
         end
 
         def members
-          paginate(group.group_memberships.order("contact_id desc nulls last", "extra ->>'display_name' ASC"))
+          paginate(group.group_memberships.order(Arel.sql("contact_id desc nulls last"), Arel.sql("extra ->>'display_name' ASC")))
         end
 
         def per_page

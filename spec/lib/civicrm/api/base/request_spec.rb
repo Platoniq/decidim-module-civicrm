@@ -4,7 +4,7 @@ require "spec_helper"
 require "decidim/civicrm/test/shared_contexts"
 
 module Decidim
-  describe Civicrm::Api::Request, type: :class do
+  describe Civicrm::Api::Base::Request, type: :class do
     subject { described_class }
 
     include_context "with stubs example api"
