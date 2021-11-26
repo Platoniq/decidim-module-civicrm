@@ -1,15 +1,20 @@
 es:
   decidim:
     authorization_handlers:
+      civicrm:
+        explanation: CiViCRM Membership
+        name: CiViCRM Membership
       civicrm_groups:
         explanation: Miembros de CiViCRM Grupos y/o Grupos Inteligentes
         fields:
           group: CiViCRM Grupo
           groups: CiViCRM Grupo IDs
-        name: Autorización con CiViCRM Grupos
-      civicrm_verification:
-        explanation: Miembros de CiViCRM
-        name: Autorización con CiViCRM
+        name: CiViCRM Groups
+      civicrm_membership_types:
+        explanation: CiViCRM Membership Types
+        fields:
+          membership_types: CiViCRM Membership Type IDs
+        name: CiViCRM Membership Types
     civicrm:
       admin:
         groups:
@@ -93,10 +98,26 @@ es:
           update:
             error: Error al crear el encuentro sincronizado
             success: El encuentro sincronizado fue creado con éxito
+        membership_types:
+          index:
+            actions: Actions
+            created_at: Created at
+            empty: There are no memberships synchronized yet.
+            id: CiViCRM Id
+            last_sync: Last synchronization
+            name: Role
+            sync: Synchronize with CiViCRM
+            title: Membership Types from CiViCRM
+          sync:
+            success: The synchronization has started
         menu:
           groups: Grupos
           meetings: Encuentros
+          membership_types: Membership Types
           verifications: Autorizaciones
+      authorizations:
+        new:
+          no_action: No user action required
       contact:
         errors:
           not_unique: El contacto ya existe
