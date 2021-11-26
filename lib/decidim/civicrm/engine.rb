@@ -80,7 +80,7 @@ module Decidim
         if Decidim::Civicrm.authorizations.include?(:civicrm_membership_types)
           # # Another automated verification method that stores all the memberships obtained from civicrm
           Decidim::Verifications.register_workflow(:civicrm_membership_types) do |workflow|
-            workflow.form = "Decidim::Civicrm::Verifications::CivicrmMemberships"
+            workflow.form = "Decidim::Civicrm::Verifications::CivicrmMembershipTypes"
             workflow.action_authorizer = "Decidim::Civicrm::Verifications::MembershipTypesActionAuthorizer"
 
             workflow.options do |options|
