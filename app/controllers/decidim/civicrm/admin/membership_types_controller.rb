@@ -14,6 +14,12 @@ module Decidim
 
         def index
           # enforce_permission_to :index, :civicrm_membership_types
+          respond_to do |format|
+            format.html
+            format.json do
+              render json: memberships_list
+            end
+          end
         end
 
         def sync
@@ -27,6 +33,21 @@ module Decidim
         end
 
         private
+
+        def memberships_list
+          query = all_membership_types
+          query = if params[:ids]
+                    query.where(civicrm_membership_type_id: params[:ids])
+                  else
+                    query.where("name ILIKE ?", "%#{params[:q]}%")
+                  end
+          query.map do |item|
+            {
+              id: item.civicrm_membership_type_id,
+              text: item.name
+            }
+          end
+        end
 
         def membership_types
           paginate(all_membership_types)
