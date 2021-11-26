@@ -2,19 +2,19 @@ es:
   decidim:
     authorization_handlers:
       civicrm:
-        explanation: CiViCRM Membership
-        name: CiViCRM Membership
+        explanation: Miembros de CiViCRM
+        name: Miembros de CiViCRM
       civicrm_groups:
         explanation: Miembros de CiViCRM Grupos y/o Grupos Inteligentes
         fields:
           group: CiViCRM Grupo
           groups: CiViCRM Grupo IDs
-        name: CiViCRM Groups
+        name: Grupos CiViCRM
       civicrm_membership_types:
-        explanation: CiViCRM Membership Types
+        explanation: Tipos de membresía CiViCRM
         fields:
-          membership_types: CiViCRM Membership Type IDs
-        name: CiViCRM Membership Types
+          membership_types: IDs de tipos de membresía CiViCRM
+        name: Tipos de membresía CiViCRM
     civicrm:
       admin:
         groups:
@@ -100,24 +100,24 @@ es:
             success: El encuentro sincronizado fue creado con éxito
         membership_types:
           index:
-            actions: Actions
-            created_at: Created at
-            empty: There are no memberships synchronized yet.
-            id: CiViCRM Id
-            last_sync: Last synchronization
-            name: Role
-            sync: Synchronize with CiViCRM
-            title: Membership Types from CiViCRM
+            actions: Acciones
+            created_at: Creado el
+            empty: No hay membresías sincronizadas todavía.
+            id: Id CiViCRM
+            last_sync: Última sincronización
+            name: Rol
+            sync: Sincronizar con CiViCRM
+            title: Tipos de membresía de CiViCRM
           sync:
-            success: The synchronization has started
+            success: La sincronización ha empezado
         menu:
           groups: Grupos
           meetings: Encuentros
-          membership_types: Membership Types
+          membership_types: Tipo de membresia
           verifications: Autorizaciones
       authorizations:
         new:
-          no_action: No user action required
+          no_action: No se requiere acción de usuario
       contact:
         errors:
           not_unique: El contacto ya existe
