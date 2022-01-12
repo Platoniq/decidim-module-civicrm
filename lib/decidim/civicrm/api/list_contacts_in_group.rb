@@ -16,12 +16,15 @@ module Decidim
 
         def default_query
           {
-            return: "contact_id"
+            return: "contact_id,display_name"
           }
         end
 
         def self.parse_item(item)
-          item["contact_id"].to_i
+          {
+            contact_id: item["contact_id"].to_i,
+            display_name: item["display_name"]
+          }
         end
       end
     end
