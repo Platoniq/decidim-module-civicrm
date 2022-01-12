@@ -10,9 +10,14 @@ module Decidim
 
         group = Decidim::Civicrm::Group.find(group_id)
 
-        data = Decidim::Civicrm::Api::FindGroup.new(group.civicrm_group_id).result[:group]
+        Rails.logger.info "SyncGroupMembersJob: Process group #{group.title} (civicrm_group_id: #{group.civicrm_group_id})"
 
-        Rails.logger.info "SyncGroupMembersJob: Process group #{group.title} (civicrm id: #{group.civicrm_group_id})"
+        data = Decidim::Civicrm::Api::FindGroup.new(group.civicrm_group_id).result
+
+        if data.blank?
+          Rails.logger.error "SyncGroupMembersJob: No API Data found for group! (civicrm_group_id: #{group.civicrm_group_id})"
+          return
+        end
 
         update_group(group, data)
 
@@ -24,7 +29,7 @@ module Decidim
       end
 
       def update_group(group, data)
-        Rails.logger.info "SyncGroupMembersJob: Creating / updating Group #{group.title} (civicrm id: #{group.civicrm_group_id}) with data #{data}"
+        Rails.logger.info "SyncGroupMembersJob: Creating / updating Group #{group.title} (civicrm_group_id: #{group.civicrm_group_id}) with data #{data}"
 
         group.update!(
           title: data[:title],
@@ -37,13 +42,15 @@ module Decidim
       end
 
       def update_group_memberships(group)
-        Rails.logger.info "SyncGroupMembersJob: Updating group memberships for Group #{group.title} (civicrm id: #{group.civicrm_group_id})"
+        Rails.logger.info "SyncGroupMembersJob: Updating group memberships for Group #{group.title} (civicrm_group_id: #{group.civicrm_group_id})"
 
-        api_memberships_in_group = Decidim::Civicrm::Api::ListContactsInGroup.new(group.civicrm_group_id).result
+        api_contacts_in_group = Decidim::Civicrm::Api::ListContactsInGroup.new(group.civicrm_group_id).result
 
-        group.update!(civicrm_member_count: api_memberships_in_group.count)
+        Rails.logger.warning "SyncGroupMembersJob: No API memberships found for group! (civicrm_group_id: #{group.civicrm_group_id})" if api_contacts_in_group.blank?
 
-        api_memberships_in_group.each do |member|
+        group.update!(civicrm_member_count: api_contacts_in_group.count)
+
+        api_contacts_in_group.each do |member|
           update_group_membership(group, member)
         end
       end
@@ -51,7 +58,7 @@ module Decidim
       def update_group_membership(group, member)
         return unless group && member
 
-        Rails.logger.info "SyncGroupMembersJob: Creating / updating membership for Contact #{member[:contact_id]} for Group with civicrm id: #{group.civicrm_group_id}"
+        Rails.logger.info "SyncGroupMembersJob: Creating / updating membership for Contact #{member[:contact_id]} for Group with civicrm_group_id: #{group.civicrm_group_id}"
 
         membership = GroupMembership.find_or_create_by(civicrm_contact_id: member[:contact_id], group: group)
         membership.contact = Decidim::Civicrm::Contact.find_by(civicrm_contact_id: member[:contact_id], organization: group.organization)

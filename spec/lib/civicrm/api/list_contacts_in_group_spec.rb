@@ -12,7 +12,16 @@ module Decidim
     let(:data) { JSON.parse(file_fixture("list_contacts_in_group_valid_response.json").read) }
 
     describe "#result" do
-      it_behaves_like "returns mapped array ids", "contact_id"
+      it "returns array of objects" do
+        expect(subject.result).to be_a Array
+        data["values"].each do |member|
+          member = {
+            contact_id: member["contact_id"].to_i,
+            display_name: member["display_name"]
+          }
+          expect(subject.result).to include(member)
+        end
+      end
     end
   end
 end

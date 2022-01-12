@@ -5,16 +5,19 @@
   "values": [
     {
       "contact_id": "9999",
+      "display_name": "Name 9999",
       "contact_is_deleted": "0",
       "id": "9999"
     },
     {
       "contact_id": "777",
+      "display_name": "Name 777",
       "contact_is_deleted": "0",
       "id": "777"
     },
     {
       "contact_id": "6",
+      "display_name": "Name 6",
       "contact_is_deleted": "0",
       "id": "6"
     }
