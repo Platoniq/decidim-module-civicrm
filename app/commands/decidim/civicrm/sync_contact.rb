@@ -17,7 +17,7 @@ module Decidim
       #
       # Returns nothing.
       def call
-        return broadcast(:invalid) if form.invalid?
+        return broadcast(:invalid, form.errors.full_messages) if form.invalid?
 
         begin
           create_contact!
