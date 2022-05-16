@@ -3,16 +3,20 @@
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
-DECIDIM_VERSION = "0.24.3"
+
+# Inside the development app, the relative require has to be one level up, as
+# the Gemfile is copied to the development_app folder (almost) as is.
+base_path = ""
+base_path = "../" if File.basename(__dir__) == "development_app"
+require_relative "#{base_path}lib/decidim/civicrm/version"
+
+DECIDIM_VERSION = Decidim::Civicrm::DECIDIM_VERSION
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-civicrm", path: "."
 
 gem "bootsnap", "~> 1.4"
-
 gem "faker", "~> 2.14"
-
-gem "rake", "~> 13.0"
 gem "rspec", "~> 3.0"
 
 group :development, :test do
@@ -27,7 +31,7 @@ group :development do
   gem "rubocop-faker", "~> 1.1"
   gem "spring", "~> 2.0"
   gem "spring-watcher-listen", "~> 2.0"
-  gem "web-console", "~> 3.5"
+  gem "web-console"
 end
 
 group :test do

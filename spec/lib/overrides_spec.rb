@@ -9,7 +9,7 @@ checksums = [
   {
     package: "decidim-core",
     files: {
-      "/app/commands/decidim/create_omniauth_registration.rb" => "82b86ae7aa6a415383aad06cac80f1e9"
+      "/app/commands/decidim/create_omniauth_registration.rb" => "10fc028fa6a7bef9936e6f9edb9b167b"
     }
   },
   {
@@ -22,7 +22,7 @@ checksums = [
     package: "decidim-meetings",
     files: {
       "/app/controllers/decidim/meetings/registrations_controller.rb" => "77274bb241d55cd570f563f967843a72",
-      "/app/commands/decidim/meetings/join_meeting.rb" => "9dc927220d761ef65bc303cf00327275"
+      "/app/commands/decidim/meetings/join_meeting.rb" => "2465c6921c02ba517269e45cee2c53ae"
     }
   }
 ]

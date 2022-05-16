@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Decidim CiViCRM Admin section", type: :system do
   let!(:organization) { create :organization }
-  let!(:user) { create :user, :admin, organization: organization }
+  let!(:user) { create :user, :admin, :confirmed, organization: organization }
 
   let!(:groups) { create_list :civicrm_group, 3, organization: organization }
   let!(:membership_types) { create_list :civicrm_membership_type, 3, organization: organization }
@@ -14,7 +14,7 @@ describe "Decidim CiViCRM Admin section", type: :system do
 
   before do
     switch_to_host(organization.host)
-    sign_in user
+    login_as user, scope: :user
     visit decidim_admin.root_path
   end
 

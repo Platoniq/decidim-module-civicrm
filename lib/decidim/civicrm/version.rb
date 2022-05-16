@@ -3,8 +3,8 @@
 module Decidim
   # This holds the decidim-civicrm version.
   module Civicrm
-    def self.version
-      "0.3"
-    end
+    DECIDIM_VERSION = "0.26.1"
+    COMPAT_DECIDIM_VERSION = ">= 0.25.0, < 0.27"
+    VERSION = "0.4"
   end
 end

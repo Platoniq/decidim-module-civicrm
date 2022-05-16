@@ -1,7 +1,5 @@
-// = require select2
-// = require_self
-
 $(() => {
+
   /**
    * Used to override simple inputs in the resource permissions controller
    * Allows to use more than one group when configuring :civicrm_groups authorization handler
@@ -13,11 +11,11 @@ $(() => {
   const select2InputTags = (queryStr, url) => {
     const $input = $(queryStr)
 
-    const $select = $('<select class="'+ $input.attr('class') + '" style="width:100%" multiple="multiple"><select>');
+    const $select = $(`<select class="${$input.attr("class")}" style="width:100%" multiple="multiple"><select>`);
     if ($input.val() != "") {
-      const values = $input.val().split(',');
+      const values = $input.val().split(",");
       values.forEach((item) =>  {
-        $select.append('<option value="' + item + '" selected="selected">' + item + '</option>')
+        $select.append(`<option value="${item}" selected="selected">${item}</option>`)
       })
       ;
       // load text via ajax
@@ -25,7 +23,7 @@ $(() => {
         $select.val("");
         $select.contents("option").remove()
         data.forEach((item) => {
-         $select.append(new Option(item.text, item.id, true, true));
+          $select.append(new Option(item.text, item.id, true, true));
         });
         $select.trigger("change");
       }, "json");
@@ -101,7 +99,7 @@ $(() => {
   $submit.on("click", () => {
     $submit.attr("disabled", true);
     $submit.addClass("hollow");
-    $.post(window.location.href, {participatory_spaces: $spaces_selector.val(), _method: "PATCH"}, () =>{
+    $.post(window.location.href, {participatory_spaces: $spaces_selector.val(), _method: "PATCH"}, () => {
       $submit.removeClass("hollow");
     });
   });
