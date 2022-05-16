@@ -34,8 +34,8 @@ module Decidim
         root to: "groups#index"
       end
 
-      initializer "decidim_civicrm.assets" do |app|
-        app.config.assets.precompile += %w(decidim_admin_civicrm_manifest.js decidim_admin_civicrm_manifest.css)
+      initializer "decidim_civicrm.webpacker.assets_path" do
+        Decidim.register_assets_path File.expand_path("app/packs", root)
       end
 
       initializer "decidim.civicrm.mount_admin_engine" do

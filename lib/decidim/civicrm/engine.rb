@@ -11,7 +11,7 @@ module Decidim
       # Prepare a zone to create overrides
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
-      config.to_prepare do
+      config.after_initialize do
         Decidim::User.include(Decidim::Civicrm::CivicrmUserAddons)
         # omniauth only trigger notifications when a new user is registered
         # this adds a notification too when user logs in
