@@ -1,7 +1,7 @@
 {
-  "name": "decidim-module-notify",
-  "version": "1.1.0",
-  "description": "A conversation tracker for Decidim",
+  "name": "decidim-module-civicrm",
+  "version": "0.4",
+  "description": "A CiViCRM integration with Decidim",
   "scripts": {
     "lint": "eslint -c .eslintrc.json --ext .js app/packs/",
     "lint-fix": "eslint -c .eslintrc.json --ext .js app/packs/ --fix",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Platoniq/decidim-module-notify.git"
+    "url": "git+https://github.com/Platoniq/decidim-module-civicrm.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -25,9 +25,9 @@
   "author": "ivan@platoniq.net",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Platoniq/decidim-module-notify/issues"
+    "url": "https://github.com/Platoniq/decidim-module-civicrm/issues"
   },
-  "homepage": "https://github.com/Platoniq/decidim-module-notify#readme",
+  "homepage": "https://github.com/Platoniq/decidim-module-civicrm#readme",
   "stylelint": {
     "rules": {
       "at-rule-empty-line-before": [
