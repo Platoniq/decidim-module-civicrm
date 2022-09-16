@@ -85,8 +85,10 @@ Decidim::Civicrm.configure do |config|
 
   # Configure omniauth secrets
   config.omniauth =   {
+    enabled: Rails.application.secrets.dig(:omniauth, :civicrm, :enabled),
     client_id: Rails.application.secrets.dig(:omniauth, :civicrm, :client_id),
     client_secret: Rails.application.secrets.dig(:omniauth, :civicrm, :client_secret),
+    icon_path: "media/images/icon.png", # be sure to place the file under app/packs/images/icon.png
     site: Rails.application.secrets.dig(:omniauth, :civicrm, :site)
   }
 

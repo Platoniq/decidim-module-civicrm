@@ -27,9 +27,11 @@ module Decidim
     # setup a hash with :client_id, :client_secret and :site to enable omniauth authentication
     config_accessor :omniauth do
       {
+        enabled: ENV["CIVICRM_CLIENT_ID"].present?,
         client_id: ENV["CIVICRM_CLIENT_ID"].presence,
         client_secret: ENV["CIVICRM_CLIENT_SECRET"].presence,
-        site: ENV["CIVICRM_SITE"].presence
+        site: ENV["CIVICRM_SITE"].presence,
+        icon_path: "media/images/civicrm-icon.png"
       }
     end
 

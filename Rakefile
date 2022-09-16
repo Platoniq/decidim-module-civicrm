@@ -48,7 +48,6 @@ task :development_app do
     )
   end
 
-  install_initializer("development_app", "development")
   install_module("development_app")
   seed_db("development_app")
 end
