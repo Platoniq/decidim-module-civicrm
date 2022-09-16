@@ -26,6 +26,7 @@ Requirements
 - The OAuth2 integration requires that Drupal has installed the module https://www.drupal.org/project/oauth2_server. Create a new Oauth Server and then a client with a CLIENT_ID and  CLIENT_SECRET. Add to the callback redirect urls your site: https://YOURDOMAIN.TLD/users/auth/civicrm/callback
 - The CiViCRM API integration requires to generate an API key for a user, follow the instructions in https://docs.civicrm.org/sysadmin/en/latest/setup/api-keys/. Use the generated secret for a particular user for the CIVICRM_API_SECRET. Extract from your `civicrm.settings.php` the CIVICRM_SITE_KEY.
 
+![OAuth2 Login](features/login.png)
 
 Install
 -------
