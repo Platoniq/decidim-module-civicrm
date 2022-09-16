@@ -4,8 +4,8 @@
 Decidim::Civicrm.configure do |config|
   # Configure api credentials
   config.api = {
-    key: ENV["CIVICRM_VERIFICATION_API_KEY"],
-    secret: ENV["CIVICRM_VERIFICATION_SECRET"],
+    api_key: ENV["CIVICRM_VERIFICATION_API_KEY"],
+    site_key: ENV["CIVICRM_VERIFICATION_SITE_KEY"],
     url: ENV["CIVICRM_VERIFICATION_URL"]
   }
 

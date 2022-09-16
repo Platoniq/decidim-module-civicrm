@@ -3,8 +3,8 @@
 Decidim::Civicrm.configure do |config|
   # Configure api credentials
   config.api = {
-    key: Rails.application.secrets.dig(:civicrm, :api, :key),
-    secret: Rails.application.secrets.dig(:civicrm, :api, :secret),
+    api_key: Rails.application.secrets.dig(:civicrm, :api, :api_key),
+    site_key: Rails.application.secrets.dig(:civicrm, :api, :site_key),
     url: Rails.application.secrets.dig(:civicrm, :api, :url)
   }
 

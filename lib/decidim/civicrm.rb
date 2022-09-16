@@ -18,18 +18,18 @@ module Decidim
     # setup API credentials
     config_accessor :api do
       {
-        key: nil,
-        secret: nil,
-        url: nil
+        api_key: ENV["CIVICRM_API_KEY"].presence,
+        site_key: ENV["CIVICRM_SITE_KEY"].presence,
+        url: ENV["CIVICRM_API_URL"].presence
       }
     end
 
     # setup a hash with :client_id, :client_secret and :site to enable omniauth authentication
     config_accessor :omniauth do
       {
-        client_id: nil,
-        client_secret: nil,
-        site: nil
+        client_id: ENV["CIVICRM_CLIENT_ID"].presence,
+        client_secret: ENV["CIVICRM_CLIENT_SECRET"].presence,
+        site: ENV["CIVICRM_SITE"].presence
       }
     end
 
