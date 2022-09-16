@@ -58,12 +58,13 @@ By default, you can just get by using ENV vars to automatically configure the AP
 
 | ENV | Description | Example |
 |---|---|---|
-| CIVICRM_API_KEY | You user API key, [see how to generate one here](https://docs.civicrm.org/sysadmin/en/latest/setup/api-keys/).  | XXXXXXXX |
-| CIVICRM_SITE_KEY | Your CiViCRM installation key. Find it in your `civicrm.setttings.php` | XXXXXXXX |
-| CIVICRM_API_URL |  The URL for your CiViCRM v3 API. Go to https://YOURCIVICRM.SITE/en/civicrm/api3#explorer, run an example and you'll see the URL there. | https://YOURCIVICRM.SITE/sites/all/modules/civicrm/extern/rest.php |
-| CIVICRM_CLIENT_ID | In your Drupal, under the OAuth2 module administrator (https://YOURCIVICRM.SITE/en/admin/structure/oauth2-servers), create a new server and a new client. Define the client id and the client secret there | some_id_you_created |
-| CIVICRM_CLIENT_SECRET | Same as the previous one. | XXXXXXXX |
+| CIVICRM_API_KEY | You user API key, [see how to generate one here](https://docs.civicrm.org/sysadmin/en/latest/setup/api-keys/).  | `XXXXXXXX` |
+| CIVICRM_SITE_KEY | Your CiViCRM installation key. Find it in your `civicrm.setttings.php` | `XXXXXXXX` |
+| CIVICRM_API_URL |  The URL for your CiViCRM v3 API. Go to https://YOURCIVICRM.SITE/en/civicrm/api3#explorer, run an example and you'll see the URL there. | `https://YOURCIVICRM.SITE/sites/all/modules/civicrm/extern/rest.php` |
+| CIVICRM_CLIENT_ID | In your Drupal, under the OAuth2 module administrator (https://YOURCIVICRM.SITE/en/admin/structure/oauth2-servers), create a new server and a new client. Define the client id and the client secret there | `some_id_you_created` |
+| CIVICRM_CLIENT_SECRET | Same as the previous one. | `XXXXXXXX` |
 | CIVICRM_SITE | Just the main URL of your Drupal/CiViCRM site | https://YOURCIVICRM.SITE |
+| CIVICRM_ICON | **Optional**, defaults to the original CiViCRM logo. If you want to override it, place the image under your `app/packs/images/my-icon.png` and reference it here as `media/images/my-icon.png` | `media/images/civicrm-icon.png` |
 
 
 ### Alternate method

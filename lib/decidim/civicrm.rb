@@ -31,7 +31,7 @@ module Decidim
         client_id: ENV["CIVICRM_CLIENT_ID"].presence,
         client_secret: ENV["CIVICRM_CLIENT_SECRET"].presence,
         site: ENV["CIVICRM_SITE"].presence,
-        icon_path: "media/images/civicrm-icon.png"
+        icon_path: ENV["CIVICRM_ICON"].presence || "media/images/civicrm-icon.png"
       }
     end
 
