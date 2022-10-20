@@ -21,7 +21,7 @@ module OmniAuth
       info do
         {
           name: extra[:contact][:display_name],
-          nickname: raw_info["preferred_username"],
+          nickname: sanitized_nickname,
           email: raw_info["email"],
           image: raw_info["picture"]
         }
@@ -45,7 +45,7 @@ module OmniAuth
       end
 
       def callback_url
-        full_host + script_name + callback_path
+        full_host + callback_path
       end
 
       def raw_info
@@ -54,6 +54,11 @@ module OmniAuth
 
       def civicrm_info
         @civicrm_info ||= ::Decidim::Civicrm::Api::FindUser.new(uid).result
+      end
+
+      def sanitized_nickname
+        # TODO: restrict nicknamize to the current organization
+        Decidim::UserBaseEntity.nicknamize(raw_info["preferred_username"] || raw_info["email"])
       end
     end
   end
