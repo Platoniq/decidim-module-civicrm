@@ -24,7 +24,7 @@ module Decidim
           end
         end
 
-        resources :meetings do
+        resources :meeting_registrations do
           collection do
             get :sync
             put :toggle_active

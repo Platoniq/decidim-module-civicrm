@@ -55,7 +55,7 @@ en:
             unsynchronized: Never logged yet
           sync:
             success: The synchronization has started
-        meetings:
+        meeting_registrations:
           create:
             error: Error while creating sync meeting
             success: New sync meeting created successfully
@@ -69,6 +69,9 @@ en:
             last_sync: Last synchronization
             meeting: Decidim Meeting
             new: New sync meeting
+            no_meeting_events_html: There are no CiViCRM events associated with Decidim
+              meetings. <a href="%{create_path}">Create a new synchronized meeting</a>
+              to start.
             redirect_active:
               disable: Deactivate redirection after join
               enable: Activate redirection after join
@@ -76,7 +79,12 @@ en:
             registrations: Registrations
             remove: Remove
             sync: Synchronize all with CiViCRM
-            title: Meeting synchronization
+            sync_desc: With this feature you can pair meetings in Decidim with CiViCRM
+              events so when a user registers in a Decidim meeting, they will be redirected
+              to the provided link for registration. Furthermore, users registered
+              in that CiViCRM event will be syncronized with their equivalent Decidim
+              user in the paired Decidim meeting.
+            title: Meeting registrations synchronization
             total: Total registrations
           new:
             create: Create sync meeting
@@ -114,7 +122,7 @@ en:
             success: The synchronization has started
         menu:
           groups: Groups
-          meetings: Meetings
+          meeting_registrations: Meeting registrations
           membership_types: Membership Types
           verifications: Authorizations
       authorizations:

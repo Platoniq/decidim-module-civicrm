@@ -6,7 +6,7 @@
         <%= icon "external-link" %>
       <% end %>
 
-      <%= link_to t(".sync"), decidim_civicrm_admin.sync_meetings_path(id: event_meeting.id), class: "button tiny button--title" %>
+      <%= link_to t(".sync"), decidim_civicrm_admin.sync_meeting_registrations_path(id: event_meeting.id), class: "button tiny button--title" %>
     </h2>
   </div>
 
@@ -59,7 +59,7 @@
     <% else %>
       <p class="callout warning">
         <%= t(".empty") %>
-        <%= link_to t(".sync"), decidim_civicrm_admin.sync_meetings_path(id: event_meeting.id) %>
+        <%= link_to t(".sync"), decidim_civicrm_admin.sync_meeting_registrations_path(id: event_meeting.id) %>
       </p>
     <% end %>
   </div>

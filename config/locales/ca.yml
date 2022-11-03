@@ -53,7 +53,7 @@ ca:
             unsynchronized: Mai loguejat encara
           sync:
             success: La sincronització ha començat
-        meetings:
+        meeting_registrations:
           create:
             error: Error en crear una trobada sincronitzada
             success: Nova trobada sincronizada creada correctament
@@ -112,7 +112,7 @@ ca:
             success: La sincronització ha començat
         menu:
           groups: Grups
-          meetings: Trobades
+          meeting_registrations: Registre en trobades
           membership_types: Tipus d'Afiliació
           verifications: Autoritzacions
       authorizations:

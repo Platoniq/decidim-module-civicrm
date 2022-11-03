@@ -3,7 +3,7 @@
 module Decidim
   module Civicrm
     module Admin
-      class MeetingsController < Decidim::Admin::ApplicationController
+      class MeetingRegistrationsController < Decidim::Admin::ApplicationController
         include Paginable
         include NeedsPermission
         include TranslatableAttributes
@@ -33,7 +33,7 @@ module Decidim
             on(:ok) do
               flash[:notice] = t(".success")
 
-              redirect_to decidim_civicrm_admin.meetings_path
+              redirect_to decidim_civicrm_admin.meeting_registrations_path
             end
 
             on(:invalid) do
@@ -53,7 +53,7 @@ module Decidim
             on(:ok) do
               flash[:notice] = t(".success")
 
-              redirect_to decidim_civicrm_admin.meetings_path
+              redirect_to decidim_civicrm_admin.meeting_registrations_path
             end
 
             on(:invalid) do
@@ -65,7 +65,7 @@ module Decidim
 
         def destroy
           event_meeting.destroy!
-          redirect_to decidim_civicrm_admin.meetings_path
+          redirect_to decidim_civicrm_admin.meeting_registrations_path
         end
 
         def sync
@@ -78,7 +78,7 @@ module Decidim
           else
             SyncAllEventRegistrationsJob.perform_later(current_organization.id)
             flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
-            redirect_to decidim_civicrm_admin.meetings_path
+            redirect_to decidim_civicrm_admin.meeting_registrations_path
           end
 
           # TODO: send email when complete?
@@ -91,7 +91,7 @@ module Decidim
 
           event_meeting.redirect_active = !event_meeting.redirect_active
           event_meeting.save!
-          redirect_to decidim_civicrm_admin.meetings_path
+          redirect_to decidim_civicrm_admin.meeting_registrations_path
         end
 
         private
