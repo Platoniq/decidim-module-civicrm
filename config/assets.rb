@@ -19,5 +19,6 @@ Decidim::Webpacker.register_path("#{base_path}/app/packs")
 # SCSS files within the entrypoints, they become available for inclusion using
 # `stylesheet_pack_tag`.
 Decidim::Webpacker.register_entrypoints(
+  decidim_civicrm: "#{base_path}/app/packs/entrypoints/decidim_civicrm.js",
   decidim_admin_civicrm_selects: "#{base_path}/app/packs/entrypoints/decidim_admin_civicrm_selects.js"
 )

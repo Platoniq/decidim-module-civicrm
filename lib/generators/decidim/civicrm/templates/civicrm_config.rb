@@ -3,8 +3,8 @@
 Decidim::Civicrm.configure do |config|
   # Configure api credentials
   config.api = {
-    key: Rails.application.secrets.dig(:civicrm, :api, :key),
-    secret: Rails.application.secrets.dig(:civicrm, :api, :secret),
+    api_key: Rails.application.secrets.dig(:civicrm, :api, :api_key),
+    site_key: Rails.application.secrets.dig(:civicrm, :api, :site_key),
     url: Rails.application.secrets.dig(:civicrm, :api, :url)
   }
 
@@ -12,7 +12,8 @@ Decidim::Civicrm.configure do |config|
   config.omniauth = {
     client_id: Rails.application.secrets.dig(:omniauth, :civicrm, :client_id),
     client_secret: Rails.application.secrets.dig(:omniauth, :civicrm, :client_secret),
-    site: Rails.application.secrets.dig(:omniauth, :civicrm, :site)
+    site: Rails.application.secrets.dig(:omniauth, :civicrm, :site),
+    icon_path: Rails.application.secrets.dig(:omniauth, :civicrm, :icon_path)
   }
 
   # whether to send notifications to user when they auto-verified or not:

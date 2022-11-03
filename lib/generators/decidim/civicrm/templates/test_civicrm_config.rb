@@ -4,8 +4,8 @@
 Decidim::Civicrm.configure do |config|
   # Configure api credentials
   config.api = {
-    key: "test-api-key",
-    secret: "test-api-secret",
+    api_key: "test-api-key",
+    site_key: "test-site-key",
     url: "http://test.api.example.org"
   }
 

@@ -16,6 +16,8 @@ module Decidim
         # omniauth only trigger notifications when a new user is registered
         # this adds a notification too when user logs in
         Decidim::CreateOmniauthRegistration.include(Decidim::Civicrm::CreateOmniauthRegistrationOverride)
+        Decidim::Devise::SessionsController.include(Decidim::Civicrm::NeedsCivicrmSnippets)
+        Decidim::ApplicationController.include(Decidim::Civicrm::NeedsCivicrmSnippets)
         Decidim::Admin::ResourcePermissionsController.include(Decidim::Civicrm::Admin::NeedsMultiselectSnippets)
         Decidim::Meetings::RegistrationsController.include(Decidim::Civicrm::MeetingsRegistrationsControllerOverride)
         Decidim::Meetings::JoinMeeting.include(Decidim::Civicrm::JoinMeetingOverride)
@@ -26,13 +28,17 @@ module Decidim
       end
 
       initializer "decidim_civicrm.omniauth" do
-        next unless Decidim::Civicrm.omniauth && Decidim::Civicrm.omniauth[:client_id]
+        next unless Decidim::Civicrm.omniauth && Decidim::Civicrm.omniauth[:enabled].present?
+
+        # Decidim use the secrets configuration to decide whether to show the omniauth provider
+        Rails.application.secrets[:omniauth][Decidim::Civicrm::OMNIAUTH_PROVIDER_NAME.to_sym] = Decidim::Civicrm.omniauth
 
         Rails.application.config.middleware.use OmniAuth::Builder do
           provider Decidim::Civicrm::OMNIAUTH_PROVIDER_NAME,
                    client_id: Decidim::Civicrm.omniauth[:client_id],
                    client_secret: Decidim::Civicrm.omniauth[:client_secret],
                    site: Decidim::Civicrm.omniauth[:site],
+                   icon_path: Decidim::Civicrm.omniauth[:icon_path],
                    scope: "openid profile email"
         end
       end

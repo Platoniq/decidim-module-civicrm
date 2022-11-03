@@ -26,8 +26,8 @@ module Decidim
 
       def self.credentials
         {
-          api_key: config[:key],
-          key: config[:secret]
+          api_key: config[:api_key],
+          key: config[:site_key]
         }
       end
 

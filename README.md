@@ -7,7 +7,7 @@ Decidim CiviCRM integration module
 
 This module provides certain integrations in order to use [CiviCRM](https://civicrm.org/) with Decidim.
 
-Currently, the implementation supported is using CiviCRM 5.3 with Drupal 7.8.
+Currently, the implementation supported is using CiviCRM 5.x with Drupal 7.x.
 
 Features:
 --------
@@ -19,6 +19,14 @@ Features:
 - Administrator interface to enable which user/groups must be synchronized
 - Ability to sincronize users from groups in CiviCRM automatically with private participatory space members
 - Ability to redirect users to external url after joining a meeting (admin configurable)
+
+Requirements
+------------ 
+
+- The OAuth2 integration requires that Drupal has installed the module https://www.drupal.org/project/oauth2_server. Create a new Oauth Server and then a client with a CLIENT_ID and  CLIENT_SECRET. Add to the callback redirect urls your site: https://YOURDOMAIN.TLD/users/auth/civicrm/callback
+- The CiViCRM API integration requires to generate an API key for a user, follow the instructions in https://docs.civicrm.org/sysadmin/en/latest/setup/api-keys/. Use the generated secret for a particular user for the CIVICRM_API_SECRET. Extract from your `civicrm.settings.php` the CIVICRM_SITE_KEY.
+
+![OAuth2 Login](features/login.png)
 
 Install
 -------
@@ -47,8 +55,24 @@ bundle exec rails db:migrate
 
 ## Configuration
 
+By default, you can just get by using ENV vars to automatically configure the API and the OAuth2 integration.
 
-Customize your integration by creating an initializer (ie: `config/initializes/decidim_civicrm.rb`) and set some of the variables:
+| ENV | Description | Example |
+|---|---|---|
+| CIVICRM_API_KEY | You user API key, [see how to generate one here](https://docs.civicrm.org/sysadmin/en/latest/setup/api-keys/).  | `XXXXXXXX` |
+| CIVICRM_SITE_KEY | Your CiViCRM installation key. Find it in your `civicrm.setttings.php` | `XXXXXXXX` |
+| CIVICRM_API_URL |  The URL for your CiViCRM v3 API. Go to https://YOURCIVICRM.SITE/en/civicrm/api3#explorer, run an example and you'll see the URL there. | `https://YOURCIVICRM.SITE/sites/all/modules/civicrm/extern/rest.php` |
+| CIVICRM_CLIENT_ID | In your Drupal, under the OAuth2 module administrator (https://YOURCIVICRM.SITE/en/admin/structure/oauth2-servers), create a new server and a new client. Define the client id and the client secret there | `some_id_you_created` |
+| CIVICRM_CLIENT_SECRET | Same as the previous one. | `XXXXXXXX` |
+| CIVICRM_SITE | Just the main URL of your Drupal/CiViCRM site | https://YOURCIVICRM.SITE |
+| CIVICRM_ICON | **Optional**, defaults to the original CiViCRM logo. If you want to override it, place the image under your `app/packs/images/my-icon.png` and reference it here as `media/images/my-icon.png` | `media/images/civicrm-icon.png` |
+
+
+### Alternate method
+
+There's more configuration options on this module (see [lib/decidim/civicrm.rb](lib/decidim/civicrm.rb)). 
+
+In order to further customize your integration, you can create an initializer (ie: `config/initializes/decidim_civicrm.rb`) and set some of the variables:
 
 ```ruby
 # config/initializers/decidim_civicrm.rb
@@ -56,15 +80,17 @@ Customize your integration by creating an initializer (ie: `config/initializes/d
 Decidim::Civicrm.configure do |config|
   # Configure api credentials
   config.api =   {
-    key: Rails.application.secrets.dig(:civicrm, :api, :key),
-    secret: Rails.application.secrets.dig(:civicrm, :api, :secret),
+    api_key: Rails.application.secrets.dig(:civicrm, :api, :api_key),
+    site_key: Rails.application.secrets.dig(:civicrm, :api, :site_key),
     url: Rails.application.secrets.dig(:civicrm, :api, :url)
   }
 
   # Configure omniauth secrets
   config.omniauth =   {
+    enabled: Rails.application.secrets.dig(:omniauth, :civicrm, :enabled),
     client_id: Rails.application.secrets.dig(:omniauth, :civicrm, :client_id),
     client_secret: Rails.application.secrets.dig(:omniauth, :civicrm, :client_secret),
+    icon_path: "media/images/icon.png", # be sure to place the file under app/packs/images/icon.png
     site: Rails.application.secrets.dig(:omniauth, :civicrm, :site)
   }
 
@@ -72,12 +98,12 @@ Decidim::Civicrm.configure do |config|
   config.send_verification_notifications = false
 
   # Optional: enable or disable verification methods (all enableD by default)
-  config.authorizations = [:civicrm, :civicrm_groups]
+  config.authorizations = [:civicrm, :civicrm_groups, :civicrm_membership_types]
 end
 
 ```
 
-> **IMPORTANT**: Remember to activate the verification methods (civicrm and civicrm_groups) in the Decidim `/system` admin page
+> **IMPORTANT**: Remember to activate the verification methods (civicrm, civicrm_groups and civicrm_membership_types) in the Decidim `/system` admin page
 
 
 ## Contributing
