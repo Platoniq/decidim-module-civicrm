@@ -50,6 +50,12 @@ FactoryBot.define do
     redirect_url { Faker::Internet.url }
     redirect_active { true }
     civicrm_event_id { Faker::Number.between(from: 1, to: 100) }
+
+    trait :minimal do
+      meeting { nil }
+      redirect_url { nil }
+      redirect_active { false }
+    end
   end
 
   factory :civicrm_event_registration, class: "Decidim::Civicrm::EventRegistration" do

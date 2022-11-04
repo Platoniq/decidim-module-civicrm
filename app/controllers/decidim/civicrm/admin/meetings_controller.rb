@@ -17,6 +17,12 @@ module Decidim
 
         def index
           # enforce_permission_to :index, :civicrm_meetings
+          respond_to do |format|
+            format.html
+            format.json do
+              render json: event_meetings
+            end
+          end
         end
 
         def show
