@@ -23,6 +23,8 @@ module Decidim
         # rubocop:enable Layout/LineLength
 
         def self.parse_item(item)
+          return {} unless item.is_a?(Hash)
+
           {
             id: item["id"].to_i,
             title: item["title"] || item["event_title"],

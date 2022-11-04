@@ -74,7 +74,7 @@ module Decidim
           if event_meeting.present?
             SyncEventRegistrationsJob.perform_later(event_meeting.id)
             flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
-            redirect_to decidim_civicrm_admin.meeting_path(event_meeting)
+            redirect_to decidim_civicrm_admin.meeting_registration_path(event_meeting)
           else
             SyncAllEventRegistrationsJob.perform_later(current_organization.id)
             flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")

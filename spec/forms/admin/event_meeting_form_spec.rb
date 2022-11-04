@@ -10,7 +10,7 @@ module Decidim::Civicrm
 
       include_context "with stubs example api"
 
-      let(:data) { JSON.parse(file_fixture("event_valid_response.json").read) }
+      let(:data) { JSON.parse(file_fixture("find_event_valid_response.json").read) }
 
       let(:attributes) do
         {

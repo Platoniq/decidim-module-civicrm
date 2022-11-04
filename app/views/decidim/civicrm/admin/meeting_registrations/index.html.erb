@@ -54,7 +54,7 @@
 
               <%= icon_link_to "pencil", decidim_civicrm_admin.edit_meeting_registration_path(id: event_meeting.id), t(".edit"), class: "action-icon--pencil" %>
               <%= icon_link_to "reload", decidim_civicrm_admin.sync_meeting_registrations_path(id: event_meeting.id), t(".sync"), class: "action-icon--reload" %>
-              <%= icon_link_to "people", decidim_civicrm_admin.meeting_path(event_meeting), t(".registrations"), class: "action-icon" %>
+              <%= icon_link_to "people", decidim_civicrm_admin.meeting_registration_path(event_meeting), t(".registrations"), class: "action-icon" %>
 
               <% unless event_meeting.civicrm_event_id.present? %>
                 <%= icon_link_to "x", decidim_civicrm_admin.meeting_path(event_meeting), t(".remove"), class: "action-icon action-icon--remove", method: :delete %>

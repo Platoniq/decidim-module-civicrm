@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::Civicrm
   module Admin
-    describe MeetingsController, type: :controller do
+    describe MeetingRegistrationsController, type: :controller do
       routes { Decidim::Civicrm::AdminEngine.routes }
 
       let(:organization) { meeting.organization }
@@ -34,7 +34,7 @@ module Decidim::Civicrm
         it "creates redirects back" do
           post :create, params: params
 
-          expect(response).to redirect_to(meetings_path)
+          expect(response).to redirect_to(meeting_registrations_path)
         end
 
         it "creates a new event meeting" do
