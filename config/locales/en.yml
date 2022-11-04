@@ -18,6 +18,8 @@ en:
         name: CiViCRM Membership Types
     civicrm:
       admin:
+        disabled: Disabled
+        enabled: Enabled
         groups:
           index:
             actions: Actions
@@ -55,6 +57,34 @@ en:
             unsynchronized: Never logged yet
           sync:
             success: The synchronization has started
+        info:
+          index:
+            api: CiViCRM API
+            api_html: Allows to synchronize users and groups from CiViCRM to Decidim.
+            authorizations: Authorizations
+            authorizations_html: CiViCRM authorizations methods enabled for user verification.
+            description: Description
+            feature: Feature
+            info_html: 'This plugin allows to integrate several aspects of CiViCRM
+              with Decidim. Current enabled features are:'
+            omniauth: OAuth login button
+            omniauth_html: Adds a OAuth "login with CiViCRM" button to the login page
+            publish_meeting_registrations: Publish meeting registrations
+            publish_meeting_registrations_html: Send the user registered in a Decidim
+              meeting as a EventRegistration in the CiViCRM API.<br>Only the paired
+              meeting/events will be affected.
+            publish_meetings_as_events: Publish meetings as events
+            publish_meetings_as_events_html: If active, every meeting published in
+              Decidim will be sent to the CiViCRM API as an event.<br>This will pair
+              every newly created Decidim meeting with a new CiViCRM event.
+            send_meeting_registration_notifications: Send a notification when registered
+            send_meeting_registration_notifications_html: Send the user a notification
+              after registering into Decidm Meeting.
+            send_verification_notifications: Send a notification when verified
+            send_verification_notifications_html: Send the user a notification that
+              it has been verified using one of the CiViCRM authorization methods.
+            status: Status
+            title: CiViCRM Module Configuration
         meeting_registrations:
           create:
             error: Error while creating sync meeting
@@ -163,32 +193,9 @@ en:
             title: Membership Types from CiViCRM
           sync:
             success: The synchronization has started
-        info:
-          index:
-            title: CiViCRM Module Configuration
-            description: Description
-            info_html: "This plugin allows to integrate several aspects of CiViCRM with Decidim. Current enabled features are:"
-            api: CiViCRM API
-            api_html: Allows to synchronize users and groups from CiViCRM to Decidim.
-            authorizations: Authorizations
-            authorizations_html: CiViCRM authorizations methods enabled for user verification.  
-            publish_meetings_as_events: Publish meetings as events
-            publish_meetings_as_events_html: If active, every meeting published in Decidim will be sent to the CiViCRM API as an event.<br>This will pair every newly created Decidim meeting with a new CiViCRM event.
-            send_verification_notifications: Send a notification when verified
-            send_verification_notifications_html: Send the user a notification that it has been verified using one of the CiViCRM authorization methods.
-            send_meeting_registration_notifications: Send a notification when registered
-            send_meeting_registration_notifications_html: Send the user a notification after registering into Decidm Meeting.
-            publish_meeting_registrations: Publish meeting registrations
-            publish_meeting_registrations_html: Send the user registered in a Decidim meeting as a EventRegistration in the CiViCRM API.<br>Only the paired meeting/events will be affected.
-            feature: Feature
-            status: Status
-            omniauth: OAuth login button
-            omniauth_html: Adds a OAuth "login with CiViCRM" button to the login page
-        enabled: Enabled
-        disabled: Disabled
         menu:
-          info: Configuration
           groups: Groups
+          info: Configuration
           meeting_registrations: Meeting registrations
           meetings: Meetings
           membership_types: Membership Types
