@@ -24,6 +24,12 @@ module Decidim
           end
         end
 
+        resources :meetings do
+          collection do
+            get :sync
+          end
+        end
+
         resources :meeting_registrations do
           collection do
             get :sync

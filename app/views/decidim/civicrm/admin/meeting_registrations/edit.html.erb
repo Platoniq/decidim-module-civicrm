@@ -2,7 +2,7 @@
   <%= t(".title") %>
 </h2>
 
-<%= decidim_form_for(@form, html: { class: "form new_event_meeting" }, url: decidim_civicrm_admin.meeting_path(event_meeting)) do |f| %>
+<%= decidim_form_for(@form, html: { class: "form new_event_meeting" }, url: decidim_civicrm_admin.meeting_registration_path(event_meeting)) do |f| %>
   <div class="card">
     <div class="card-section">
       <div class="row column">

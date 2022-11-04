@@ -16,26 +16,33 @@
         <thead>
           <tr>
             <th><%= t(".meeting") %></th>
-            <th><%= t(".event_id") %></th>
+            <th><%= t(".event") %></th>
             <th><%= t(".redirect_url") %></th>
             <th><%= t(".total") %></th>
             <th><%= t(".last_sync") %></th>
+            <th><%= t(".redirect") %></th>
             <th><%= t(".actions") %></th>
           </tr>
         </thead>
         <tbody>
+          <% console %>
           <% event_meetings.each do |event_meeting| %>
             <tr>
               <td>
-                <%= link_to public_meeting_registration_path(event_meeting.meeting), target: :blank do %>
+                <%= link_to public_meeting_path(event_meeting.meeting), target: :blank do %>
                   <%= meeting_title(event_meeting.meeting) %>
                   <%= icon "external-link" %>
                 <% end %>
               </td>
-              <td><%= event_meeting.civicrm_event_id %></td>
+              <td><%= "#{event_meeting.civicrm_event_id} - #{event_meeting.title}" %></td>
               <td><%= event_meeting.redirect_url %></td>
               <td><%= event_meeting.civicrm_registrations_count %></td>
-              <td class="<%= last_sync_class(event_meeting.last_sync) %>"><%= l(event_meeting.last_sync, format: :decidim_short) if event_meeting.last_sync %>
+              <td class="<%= last_sync_class(event_meeting.last_sync) %>"><%= l(event_meeting.last_sync, format: :decidim_short) if event_meeting.last_sync %></td>
+              <td><% if event_meeting.redirect_active? %>
+                <%= icon "check", class: "action-icon text-success" %>
+              <% else %>
+                <%= icon "x", class: "action-icon text-muted" %>
+              <% end %></td>
               <td class="table-list__actions">
               <% if event_meeting.redirect_url.present? %>
                 <% if event_meeting.redirect_active? %>

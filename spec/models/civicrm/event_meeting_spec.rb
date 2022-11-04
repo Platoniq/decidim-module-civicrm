@@ -36,13 +36,64 @@ module Decidim::Civicrm
       let(:meeting) { nil }
       let(:organization) { create :organization }
 
+      it { is_expected.to be_valid }
+    end
+
+    context "when no meeting and no event_id" do
+      let(:event_id) { nil }
+      let(:meeting) { nil }
+      let(:organization) { create :organization }
+
       it { is_expected.to be_invalid }
+
+      context "and there's no redirect_url" do
+        let(:url) { nil }
+
+        it { is_expected.to be_invalid }
+      end
     end
 
     context "when meeting organization is different than organization" do
       let(:organization) { create :organization }
 
       it { is_expected.to be_invalid }
+    end
+
+    shared_examples "duplicated event" do
+      it { is_expected.to be_invalid }
+
+      it "can't be created" do
+        expect { subject.save! }.to raise_error(ActiveRecord::RecordInvalid)
+      end
+    end
+
+    shared_examples "saved event" do
+      it { is_expected.to be_valid }
+
+      it "can be created" do
+        expect { subject.save! }.not_to raise_error(ActiveRecord::RecordInvalid)
+      end
+    end
+
+    context "when event exists" do
+      let(:event_organization) { organization }
+      let!(:event) { create :civicrm_event_meeting, organization: event_organization, meeting: meeting, redirect_url: url, redirect_active: active, civicrm_event_id: event_id }
+
+      it_behaves_like "duplicated event"
+
+      context "and no meeting" do
+        let(:meeting) { nil }
+        let(:organization) { create :organization }
+
+        it_behaves_like "duplicated event"
+
+        context "and another organization" do
+          let(:meeting) { nil }
+          let(:event_organization) { create :organization }
+
+          it_behaves_like "saved event"
+        end
+      end
     end
   end
 end

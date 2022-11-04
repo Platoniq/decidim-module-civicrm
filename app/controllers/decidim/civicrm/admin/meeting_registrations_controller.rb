@@ -49,7 +49,7 @@ module Decidim
 
         def update
           @form = form(Decidim::Civicrm::Admin::EventMeetingForm).from_params(params)
-          UpdateEventMeeting.call(@form, event_meeting) do
+          CreateEventMeeting.call(@form, event_meeting) do
             on(:ok) do
               flash[:notice] = t(".success")
 
@@ -97,7 +97,7 @@ module Decidim
         private
 
         def all_event_meetings
-          Decidim::Civicrm::EventMeeting.where(organization: current_organization)
+          Decidim::Civicrm::EventMeeting.where(organization: current_organization).where.not(decidim_meeting_id: nil)
         end
 
         def event_meetings

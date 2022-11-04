@@ -17,6 +17,10 @@ module Decidim
             @request.response
           end
 
+          def self.to_bool(val)
+            ActiveRecord::Type::Boolean.new.deserialize(val)
+          end
+
           protected
 
           def json_params(params)

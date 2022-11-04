@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title">
+      <%= t(".meetings_title") %>
+
+      <%= link_to t(".sync"), decidim_civicrm_admin.sync_meetings_path, class: "button tiny button--title" %>
+    </h2>
+  </div>
+  <div class="card-section">
+    <p class="help-text">
+      <%= t(".sync_desc") %>
+    </p>
+    <% if event_meetings.any? %>
+      <table class="table-list civicrm-meetings">
+        <thead>
+          <tr>
+            <th><%= t(".event_id") %></th>
+            <th><%= t(".event_type") %></th>
+            <th><%= t(".title") %></th>
+            <th><%= t(".start_date") %></th>
+            <th><%= t(".end_date") %></th>
+            <th><%= t(".active") %></th>
+            <th><%= t(".public") %></th>
+            <th><%= t(".updated_at") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% event_meetings.each do |event_meeting| %>
+            <tr>
+              <td><%= event_meeting.civicrm_event_id %></td>
+              <td><%= event_meeting.event_type %></td>
+              <td><%= event_meeting.title || event_meeting.summary %></td>
+              <td><%= l(event_meeting.start_date, format: :decidim_short) if event_meeting.start_date %></td>
+              <td><%= l(event_meeting.end_date, format: :decidim_short) if event_meeting.end_date %></td>
+              <td><% if event_meeting.public? %>
+                <%= icon "check", class: "action-icon text-success" %>
+              <% else %>
+                <%= icon "x", class: "action-icon text-muted" %>
+              <% end %></td>
+              <td><% if event_meeting.active? %>
+                <%= icon "check", class: "action-icon text-success" %>
+              <% else %>
+                <%= icon "x", class: "action-icon text-muted" %>
+              <% end %></td>
+              <td class="<%= last_sync_class(event_meeting.updated_at) %>"><%= l(event_meeting.updated_at, format: :decidim_short) if event_meeting.updated_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate event_meetings, theme: "decidim" %>
+    <% else %>
+    <div class="callout warning">
+      <%= t(".no_meeting_events_html", sync_path: decidim_civicrm_admin.sync_meetings_path) %>
+    <% end %>
+  </div>
+</div>

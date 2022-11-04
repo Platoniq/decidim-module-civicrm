@@ -16,7 +16,11 @@ module Decidim
             response = instance.connection.get Decidim::Civicrm::Api.url do |request|
               request.params = instance.base_params.merge(params)
 
-              # puts [request.path, URI.encode_www_form(request.params.sort)].join("/?") # DEBUG, to obtain the correct URL for stub_request
+              # DEBUG, to obtain the correct URL for stub_request
+              safe_params = request.params.dup
+              safe_params[:api_key] = "API_KEY"
+              safe_params[:key] = "KEY"
+              Rails.logger.info "CiViCRM Request: #{[request.path, URI.encode_www_form(safe_params)].join("/?")}"
             end
 
             raise Decidim::Civicrm::Error, response.reason_phrase unless response.success?
