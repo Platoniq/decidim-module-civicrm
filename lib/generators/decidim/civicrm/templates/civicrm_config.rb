@@ -20,5 +20,5 @@ Decidim::Civicrm.configure do |config|
   # config.send_verification_notifications = false
 
   # array with civirm group ids that will automatically (cron based) syncronize contact memberships
-  config.auto_sync_groups = Rails.application.secrets.dig(:civicrm, :auto_sync_groups)
+  config.default_sync_groups = Rails.application.secrets.dig(:civicrm, :default_sync_groups)
 end

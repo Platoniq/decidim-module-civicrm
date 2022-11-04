@@ -12,15 +12,18 @@ module Decidim
   # This namespace holds the logic of the `decidim-civicrm` module.
   module Civicrm
     include ActiveSupport::Configurable
+    def self.to_bool(val)
+      ActiveRecord::Type::Boolean.new.deserialize(val.to_s.downcase)
+    end
 
     OMNIAUTH_PROVIDER_NAME = "civicrm"
 
     # setup API credentials
     config_accessor :api do
       {
-        api_key: ENV["CIVICRM_API_KEY"].presence,
-        site_key: ENV["CIVICRM_SITE_KEY"].presence,
-        url: ENV["CIVICRM_API_URL"].presence
+        api_key: ENV["CIVICRM_API_KEY"].to_s.presence,
+        site_key: ENV["CIVICRM_SITE_KEY"].to_s.presence,
+        url: ENV["CIVICRM_API_URL"].to_s.presence
       }
     end
 
@@ -42,38 +45,40 @@ module Decidim
 
     # if false, no notifications will be send to users when automatic verifications are performed
     config_accessor :send_verification_notifications do
-      true
+      ENV.has_key?("CIVICRM_VERIFICATION_NOTIFICATIONS") && Decidim::Civicrm.to_bool(ENV["CIVICRM_VERIFICATION_NOTIFICATIONS"]) || true
     end
 
     # array with civirm group ids that will automatically (cron based) syncronize contact memberships
     # note that admins can override these groups in the app
-    config_accessor :auto_sync_groups do
+    config_accessor :default_sync_groups do
       []
     end
 
-    # Hash with default correspondences between decidim_meeting_id => civicrm_event_id
-    # New meetings created in decidim will generate a new event in CiViCRM automatically
+    # Set it true to create a new event in CiViCRM automatically every time a new meeting is created in Decidim
     # set to false to disable this functionality
-    config_accessor :auto_sync_meetings do
-      {}
+    config_accessor :publish_meetings_as_events do
+      Decidim::Civicrm.to_bool(ENV["CIVICRM_PUBLISH_MEETINGS"])
     end
 
+    # If you have some custom fields in your CiVICRM events and want them in the Decidim database
     # set extra attributes to send when creating a event from a meeting in CiViCRM
     # ie:
     # { template_id: 2 }
-    config_accessor :auto_sync_meetings_event_attributes do
+    config_accessor :publish_extra_event_attributes do
       {}
     end
 
     # unless false, meeting registrations will be posted to CiViCRM and syncronized back according to the status
+    # It requires to the admin to pair each Decidim meeting with a CiVICRM event.
+    # (This happens automatically if publish_meetings_as_events is true)
     # set to false to disable this functionality
-    config_accessor :auto_sync_meeting_registrations do
-      {}
+    config_accessor :publish_meeting_registrations do
+      ENV.has_key?("CIVICRM_PUBLISH_MEETING_REGISTRATIONS") && Decidim::Civicrm.to_bool(ENV["CIVICRM_PUBLISH_MEETING_REGISTRATIONS"]) || true
     end
 
     # if false, no notifications will be send to users when joining a meeting
     config_accessor :send_meeting_registration_notifications do
-      true
+      Decidim::Civicrm.to_bool(ENV["CIVICRM_REGISTRATION_NOTIFICATIONS"])
     end
 
     class Error < StandardError; end

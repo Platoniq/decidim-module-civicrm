@@ -18,7 +18,7 @@ module Decidim
           end
 
           def self.to_bool(val)
-            ActiveRecord::Type::Boolean.new.deserialize(val)
+            Decidim::Civicrm.to_bool(val)
           end
 
           protected

@@ -39,7 +39,7 @@ module Decidim::Civicrm
 
     before do
       subject.result = result
-      allow(Decidim::Civicrm).to receive(:auto_sync_meetings_event_attributes).and_return(attributes)
+      allow(Decidim::Civicrm).to receive(:publish_extra_event_attributes).and_return(attributes)
     end
 
     it "is valid" do

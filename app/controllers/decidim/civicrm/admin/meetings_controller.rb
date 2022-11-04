@@ -10,7 +10,7 @@ module Decidim
 
         layout "decidim/admin/civicrm"
 
-        helper CivicrmSyncHelpers
+        helper CivicrmHelpers
         helper Decidim::Messaging::ConversationHelper
 
         helper_method :event_meetings, :event_meeting, :meetings, :meetings_list, :meeting_title, :public_meeting_path

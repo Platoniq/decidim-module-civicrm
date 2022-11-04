@@ -32,16 +32,8 @@
               <td><%= event_meeting.title || event_meeting.summary %></td>
               <td><%= l(event_meeting.start_date, format: :decidim_short) if event_meeting.start_date %></td>
               <td><%= l(event_meeting.end_date, format: :decidim_short) if event_meeting.end_date %></td>
-              <td><% if event_meeting.public? %>
-                <%= icon "check", class: "action-icon text-success" %>
-              <% else %>
-                <%= icon "x", class: "action-icon text-muted" %>
-              <% end %></td>
-              <td><% if event_meeting.active? %>
-                <%= icon "check", class: "action-icon text-success" %>
-              <% else %>
-                <%= icon "x", class: "action-icon text-muted" %>
-              <% end %></td>
+              <td><%= check_icon event_meeting.public? %></td>
+              <td><%= check_icon event_meeting.active? %></td>
               <td class="<%= last_sync_class(event_meeting.updated_at) %>"><%= l(event_meeting.updated_at, format: :decidim_short) if event_meeting.updated_at %></td>
             </tr>
           <% end %>
