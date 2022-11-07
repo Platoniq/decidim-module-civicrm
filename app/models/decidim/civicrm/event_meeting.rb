@@ -48,6 +48,10 @@ module Decidim
         @active ||= extra["is_active"].present?
       end
 
+      def url
+        "#{Decidim::Civicrm.omniauth[:site]}/#{I18n.locale}/civicrm/event/info?id=#{extra["id"]}"
+      end
+
       # V3 API does not return the EventType, so we use the ID
       # Note (not suported here) that V4 API returns the name of the event type by using event_type_id:name
       def event_type
