@@ -23,6 +23,7 @@ module Decidim
         valid_memberships = @group.group_memberships.filter_map { |u| u&.contact&.decidim_user_id }
         @group.group_participatory_spaces.each do |item|
           next unless (space = item.participatory_space)
+          next unless space.respond_to?(:participatory_space_private_users)
 
           # remove non existing members
           space.participatory_space_private_users.each do |prv_user|
