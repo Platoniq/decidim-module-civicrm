@@ -29,7 +29,7 @@ module Decidim
         handler = Decidim::AuthorizationHandler.handler_for(name, user: @contact.user)
         return unless handler
 
-        Decidim::Verifications::AuthorizeUser.call(handler) do
+        Decidim::Verifications::AuthorizeUser.call(handler, @contact.organization) do
           on(:ok) do
             Rails.logger.info "AutoVerificationJob: Success: created for user #{handler.user.id}"
             notify_user(handler.user, :ok, handler)

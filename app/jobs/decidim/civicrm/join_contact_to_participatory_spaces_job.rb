@@ -16,6 +16,7 @@ module Decidim
         @contact.groups.each do |group|
           group.group_participatory_spaces.each do |item|
             next unless (space = item.participatory_space)
+            next unless space.respond_to?(:participatory_space_private_users)
 
             # TODO: use CreateParticipatorySpacePrivateUser to notify users if enabled by config var
             Decidim::ParticipatorySpacePrivateUser.find_or_create_by(decidim_user_id: @contact.decidim_user_id, privatable_to: space)
