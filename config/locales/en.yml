@@ -206,6 +206,24 @@ en:
       contact:
         errors:
           not_unique: Contact is already taken
+    events:
+      civicrm_verification:
+        verifications:
+          invalid:
+            email_intro: It has not been possible to grant you the "CiViCRM Membership"
+              authorization.
+            email_outro: Please, contact the support at your platform to check what
+              has gone wrong.
+            email_subject: Authorization error
+            notification_title: Invalid authorization with the "CiViCRM Membership"
+              method
+          ok:
+            email_intro: You have been granted the "CiViCRM Membership" authorization.
+            email_outro: You can now perform all actions that require the "CiViCRM
+              Membership" authorization.
+            email_subject: Authorization successful
+            notification_title: Successful authorization with the "CiViCRM Membership"
+              method
     system:
       organizations:
         omniauth_settings:
