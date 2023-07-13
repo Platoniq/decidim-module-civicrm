@@ -45,7 +45,7 @@ module Decidim
 
     # if false, no notifications will be send to users when automatic verifications are performed
     config_accessor :send_verification_notifications do
-      ENV.has_key?("CIVICRM_VERIFICATION_NOTIFICATIONS") && Decidim::Civicrm.to_bool(ENV["CIVICRM_VERIFICATION_NOTIFICATIONS"]) || true
+      ENV.has_key?("CIVICRM_VERIFICATION_NOTIFICATIONS") ? Decidim::Civicrm.to_bool(ENV["CIVICRM_VERIFICATION_NOTIFICATIONS"]) : true
     end
 
     # array with civirm group ids that will automatically (cron based) syncronize contact memberships
@@ -73,7 +73,7 @@ module Decidim
     # (This happens automatically if publish_meetings_as_events is true)
     # set to false to disable this functionality
     config_accessor :publish_meeting_registrations do
-      ENV.has_key?("CIVICRM_PUBLISH_MEETING_REGISTRATIONS") && Decidim::Civicrm.to_bool(ENV["CIVICRM_PUBLISH_MEETING_REGISTRATIONS"]) || true
+      ENV.has_key?("CIVICRM_PUBLISH_MEETING_REGISTRATIONS") ? Decidim::Civicrm.to_bool(ENV["CIVICRM_PUBLISH_MEETING_REGISTRATIONS"]) : true
     end
 
     # if false, no notifications will be send to users when joining a meeting

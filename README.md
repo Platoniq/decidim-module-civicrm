@@ -1,9 +1,9 @@
 Decidim CiviCRM integration module
 ==================================
 
-[![[CI] Test](https://github.com/Platoniq/decidim-module-civicrm/actions/workflows/test.yml/badge.svg)](https://github.com/Platoniq/decidim-module-civicrm/actions/workflows/test.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/9b7a27a36e3b59e07293/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-civicrm/maintainability)
-[![codecov](https://codecov.io/gh/Platoniq/decidim-module-civicrm/branch/main/graph/badge.svg)](https://codecov.io/gh/Platoniq/decidim-module-civicrm)
+[![[CI] Test](https://github.com/openpoke/decidim-module-civicrm/actions/workflows/test.yml/badge.svg)](https://github.com/openpoke/decidim-module-civicrm/actions/workflows/test.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/84ade81f01bacb0013b0/maintainability)](https://codeclimate.com/github/openpoke/decidim-module-civicrm/maintainability)
+[![codecov](https://codecov.io/gh/openpoke/decidim-module-civicrm/branch/main/graph/badge.svg)](https://codecov.io/gh/openpoke/decidim-module-civicrm)
 
 This module provides certain integrations in order to use [CiviCRM](https://civicrm.org/) with Decidim.
 
@@ -34,8 +34,7 @@ Install
 Add into the `Gemfile`
 
 ```ruby
-gem "decidim-civicrm", git: "https://github.com/Platoniq/decidim-module-civicrm", branch: "main"
-
+gem "decidim-civicrm", github: "openpoke/decidim-module-civicrm"
 ```
 
 Install dependencies:
@@ -46,11 +45,9 @@ bundle
 
 Install (and run) migrations:
 
-
 ```
 bundle exec rails decidim_civicrm:install:migrations
 bundle exec rails db:migrate
-
 ```
 
 ## Configuration
@@ -111,7 +108,7 @@ end
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Platoniq/decidim-module-civicrm.
+Bug reports and pull requests are welcome on GitHub at https://github.com/openpoke/decidim-module-civicrm.
 
 ### Developing
 
