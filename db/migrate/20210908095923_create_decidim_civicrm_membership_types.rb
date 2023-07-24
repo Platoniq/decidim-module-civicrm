@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDecidimCivicrmMembershipTypes < ActiveRecord::Migration[5.2]
   def change
     create_table :decidim_civicrm_membership_types do |t|

@@ -13,7 +13,7 @@ module Decidim::Civicrm
       end
 
       it "is invalid" do
-        expect(subject.valid?).to eq(false)
+        expect(subject.valid?).to be(false)
       end
     end
   end

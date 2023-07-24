@@ -20,10 +20,10 @@ module Decidim
 
       # returns a formatted list of all participatory spaces linked to this groups for automatic sync
       def participatory_spaces
-        group_participatory_spaces.map do |item|
+        group_participatory_spaces.to_h do |item|
           i18n_name = I18n.t("decidim.admin.menu.#{item.participatory_space.manifest.name}")
           ["#{item.participatory_space_type}.#{item.participatory_space_id}", "#{i18n_name}: #{translated_attribute(item.participatory_space.title)}"]
-        end.to_h
+        end
       end
     end
   end

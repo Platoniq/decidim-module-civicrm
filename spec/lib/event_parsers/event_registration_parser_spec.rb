@@ -42,7 +42,7 @@ module Decidim::Civicrm
     end
 
     it "is valid" do
-      expect(subject.valid?).to eq(true)
+      expect(subject.valid?).to be(true)
     end
 
     it "returns data" do
@@ -71,7 +71,7 @@ module Decidim::Civicrm
       let(:contact_id) { nil }
 
       it "is invalid" do
-        expect(subject.valid?).to eq(false)
+        expect(subject.valid?).to be(false)
       end
     end
   end

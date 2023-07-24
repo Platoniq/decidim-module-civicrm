@@ -4,17 +4,17 @@
 Decidim::Civicrm.configure do |config|
   # Configure api credentials
   config.api = {
-    key: ENV["CIVICRM_VERIFICATION_API_KEY"],
-    secret: ENV["CIVICRM_VERIFICATION_SECRET"],
-    url: ENV["CIVICRM_VERIFICATION_URL"]
+    key: ENV.fetch("CIVICRM_VERIFICATION_API_KEY", nil),
+    secret: ENV.fetch("CIVICRM_VERIFICATION_SECRET", nil),
+    url: ENV.fetch("CIVICRM_VERIFICATION_URL", nil)
   }
 
   # Configure omniauth secrets
   config.omniauth = {
     enabled: true,
-    client_id: ENV["CIVICRM_CLIENT_ID"],
-    client_secret: ENV["CIVICRM_CLIENT_SECRET"],
-    site: ENV["CIVICRM_SITE"]
+    client_id: ENV.fetch("CIVICRM_CLIENT_ID", nil),
+    client_secret: ENV.fetch("CIVICRM_CLIENT_SECRET", nil),
+    site: ENV.fetch("CIVICRM_SITE", nil)
   }
 
   Rails.application.secrets[:omniauth][:civicrm] = config.omniauth

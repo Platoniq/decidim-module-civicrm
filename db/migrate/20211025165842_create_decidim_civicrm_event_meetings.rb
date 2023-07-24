@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDecidimCivicrmEventMeetings < ActiveRecord::Migration[5.2]
   def change
     create_table :decidim_civicrm_event_meetings do |t|
