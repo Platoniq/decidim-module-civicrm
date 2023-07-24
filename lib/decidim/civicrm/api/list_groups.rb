@@ -6,9 +6,11 @@ module Decidim
       class ListGroups < Base::ListQuery
         def initialize(query = nil)
           @request = Base::Request.get(
-            entity: "Group",
-            is_active: 1,
-            json: json_params(query || default_query)
+            {
+              entity: "Group",
+              is_active: 1,
+              json: json_params(query || default_query)
+            }
           )
 
           store_result

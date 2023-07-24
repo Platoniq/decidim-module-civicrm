@@ -6,9 +6,11 @@ module Decidim
       class ListContactMemberships < Base::ListQuery
         def initialize(id, query = nil)
           @request = Base::Request.get(
-            entity: "Membership",
-            contact_id: id,
-            json: json_params(query || default_query)
+            {
+              entity: "Membership",
+              contact_id: id,
+              json: json_params(query || default_query)
+            }
           )
 
           store_result
