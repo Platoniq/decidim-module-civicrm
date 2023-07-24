@@ -17,7 +17,7 @@ module Decidim::Meetings
              questionnaire: nil)
     end
 
-    let(:user) { create :user, :confirmed, organization: organization, email_on_notification: false }
+    let(:user) { create :user, :confirmed, organization: organization, notifications_sending_frequency: "real_time" }
     let(:registration_form) { Decidim::Meetings::JoinMeetingForm.new }
 
     context "when everything is ok" do
@@ -28,8 +28,9 @@ module Decidim::Meetings
       it "sends an email confirming the registration" do
         perform_enqueued_jobs { subject.call }
 
-        email = last_email
-        email_body = last_email_body
+        expect(ActionMailer::Base.deliveries.count).to eq(2)
+        email = emails.first
+        email_body = email_body(emails.first)
         last_registration = Registration.last
         expect(email.subject).to include("confirmed")
         expect(email_body).to include(last_registration.code)
@@ -53,8 +54,7 @@ module Decidim::Meetings
       it "do not send an email confirming the registration" do
         perform_enqueued_jobs { subject.call }
 
-        expect(last_email).to be_nil
-        expect(last_email_body).to be_nil
+        expect(ActionMailer::Base.deliveries.count).to eq(1)
       end
     end
   end
