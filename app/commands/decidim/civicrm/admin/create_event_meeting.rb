@@ -4,7 +4,7 @@ module Decidim
   module Civicrm
     module Admin
       # A command with all the business logic for when a user starts following a resource.
-      class CreateEventMeeting < Rectify::Command
+      class CreateEventMeeting < Decidim::Command
         # Public: Initializes the command.
         #
         # form         - A form object with the params.

@@ -1,6 +1,6 @@
 {
   "name": "decidim-module-civicrm",
-  "version": "0.4",
+  "version": "0.5",
   "description": "A CiViCRM integration with Decidim",
   "scripts": {
     "lint": "eslint -c .eslintrc.json --ext .js app/packs/",
@@ -190,7 +190,6 @@
   },
   "devDependencies": {
     "eslint": "^7.32.0",
-    "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.2.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.22.0",

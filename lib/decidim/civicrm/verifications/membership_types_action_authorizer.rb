@@ -9,7 +9,7 @@ module Decidim
 
           status_code = :unauthorized
 
-          return [status_code, { fields: { "membership_types": "..." } }] if authorization_membership_types.blank?
+          return [status_code, { fields: { membership_types: "..." } }] if authorization_membership_types.blank?
           return [:ok, {}] if belongs_to_membership_type?
 
           [status_code, {}]

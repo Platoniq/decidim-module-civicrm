@@ -2,7 +2,7 @@
 
 module Decidim
   module Civicrm
-    class SyncContact < Rectify::Command
+    class SyncContact < Decidim::Command
       # Public: Initializes the command.
       #
       # form - A contact form

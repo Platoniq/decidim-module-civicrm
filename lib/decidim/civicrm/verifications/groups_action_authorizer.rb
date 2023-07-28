@@ -9,7 +9,7 @@ module Decidim
 
           status_code = :unauthorized
 
-          return [status_code, { fields: { "groups": "..." } }] if authorization_groups.blank?
+          return [status_code, { fields: { groups: "..." } }] if authorization_groups.blank?
           return [:ok, {}] if belongs_to_group?
 
           [status_code, {}]

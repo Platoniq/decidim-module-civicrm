@@ -6,9 +6,11 @@ module Decidim
       class FindParticipant < Base::FindQuery
         def initialize(id, query = nil)
           @request = Base::Request.get(
-            entity: "Participant",
-            id: id,
-            json: json_params(query || default_query)
+            {
+              entity: "Participant",
+              id: id,
+              json: json_params(query || default_query)
+            }
           )
 
           store_result

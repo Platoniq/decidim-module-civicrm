@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDecidimCivicrmContacts < ActiveRecord::Migration[5.2]
   def change
     create_table :decidim_civicrm_contacts do |t|
@@ -12,7 +14,7 @@ class CreateDecidimCivicrmContacts < ActiveRecord::Migration[5.2]
 
       t.timestamps
 
-      t.index ["decidim_organization_id", "civicrm_contact_id"], name: "index_unique_civicrm_contact_and_organization", unique: true
+      t.index %w(decidim_organization_id civicrm_contact_id), name: "index_unique_civicrm_contact_and_organization", unique: true
     end
   end
 end
