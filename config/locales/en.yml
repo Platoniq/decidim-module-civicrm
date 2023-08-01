@@ -203,6 +203,10 @@ en:
       authorizations:
         new:
           no_action: No user action required
+      errors:
+        not_found: Contact not found in CiViCRM
+        no_membership: No membership found in CiViCRM
+        no_group: No groups found in CiViCRM
       contact:
         errors:
           not_unique: Contact is already taken
