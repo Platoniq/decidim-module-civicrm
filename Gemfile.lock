@@ -2,9 +2,9 @@ PATH
   remote: .
   specs:
     decidim-civicrm (0.26.8)
-      decidim-admin (~> 0.26.8)
-      decidim-core (~> 0.26.8)
-      decidim-verifications (~> 0.26.8)
+      decidim-admin (>= 0.26.1, < 0.27)
+      decidim-core (>= 0.26.1, < 0.27)
+      decidim-verifications (>= 0.26.1, < 0.27)
 
 GEM
   remote: https://rubygems.org/
