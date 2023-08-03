@@ -58,6 +58,11 @@ en:
           sync:
             success: The synchronization has started
         info:
+          create:
+            not_a_civicrm_authorization: Not a CiViCRM authorization
+            not_found_authorization: Authorization not registered
+            regenerating_authorizations: All authorization of type "%{name}" will
+              be regenerated, please wait a few minutes.
           index:
             api: CiViCRM API
             api_html: Allows to synchronize users and groups from CiViCRM to Decidim.
@@ -77,6 +82,7 @@ en:
             publish_meetings_as_events_html: If active, every meeting published in
               Decidim will be sent to the CiViCRM API as an event.<br>This will pair
               every newly created Decidim meeting with a new CiViCRM event.
+            regenerate_authorizations: Rebuild all authorizations of this type
             send_meeting_registration_notifications: Send a notification when registered
             send_meeting_registration_notifications_html: Send the user a notification
               after registering into Decidm Meeting.
@@ -85,11 +91,6 @@ en:
               it has been verified using one of the CiViCRM authorization methods.
             status: Status
             title: CiViCRM Module Configuration
-            regenerate_authorizations: Rebuild all authorizations of this type 
-          create:
-            not_found_authorization: Authorization not registered
-            not_a_civicrm_authorization: Not a CiViCRM authorization
-            regenerating_authorizations: All authorization of type "%{name}" will be regenerated, please wait a few minutes.
         meeting_registrations:
           create:
             error: Error while creating sync meeting
@@ -208,31 +209,30 @@ en:
       authorizations:
         new:
           no_action: No user action required
-      errors:
-        not_found: Contact not found in CiViCRM
-        no_membership: No membership found in CiViCRM
-        no_group: No groups found in CiViCRM
       contact:
         errors:
           not_unique: Contact is already taken
+      errors:
+        no_group: No groups found in CiViCRM
+        no_membership: No membership found in CiViCRM
+        not_found: Contact not found in CiViCRM
     events:
       civicrm_verification:
-        verifications:
-          invalid:
-            email_intro: It has not been possible to grant you the "CiViCRM Membership"
-              authorization.
-            email_outro: Please, contact the support at your platform to check what
-              has gone wrong.
-            email_subject: Authorization error
-            notification_title: Invalid authorization with the "CiViCRM Membership"
-              method
-          ok:
-            email_intro: You have been granted the "CiViCRM Membership" authorization.
-            email_outro: You can now perform all actions that require the "CiViCRM
-              Membership" authorization.
-            email_subject: Authorization successful
-            notification_title: Successful authorization with the "CiViCRM Membership"
-              method
+        invalid:
+          email_intro: It has not been possible to grant you the "CiViCRM Membership"
+            authorization.
+          email_outro: Please, contact the support at your platform to check what
+            has gone wrong.
+          email_subject: Authorization error
+          notification_title: Invalid authorization with the "CiViCRM Membership"
+            method
+        ok:
+          email_intro: You have been granted the "CiViCRM Membership" authorization.
+          email_outro: You can now perform all actions that require the "CiViCRM
+            Membership" authorization.
+          email_subject: Authorization successful
+          notification_title: Successful authorization with the "CiViCRM Membership"
+            method
     system:
       organizations:
         omniauth_settings:

@@ -39,7 +39,7 @@ module Decidim
 
           on(:invalid) do
             Rails.logger.error "AutoVerificationJob: ERROR: failed for user #{handler&.user&.id}"
-            notify_user(handler.user, :invalild, handler)
+            notify_user(handler.user, :invalid, handler)
           end
         end
       end
