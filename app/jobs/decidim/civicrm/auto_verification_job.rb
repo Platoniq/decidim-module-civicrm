@@ -29,6 +29,8 @@ module Decidim
         handler = Decidim::AuthorizationHandler.handler_for(name, user: @contact.user)
         return unless handler
 
+        destroy_existing!(handler)
+
         Decidim::Verifications::AuthorizeUser.call(handler, @contact.organization) do
           on(:ok) do
             Rails.logger.info "AutoVerificationJob: Success: created for user #{handler.user.id}"
@@ -57,6 +59,13 @@ module Decidim
             errors: handler.errors.full_messages
           }
         )
+      end
+
+      def destroy_existing!(handler)
+        Decidim::Authorization.find_by(
+          user: handler.user,
+          name: handler.handler_name
+        )&.destroy!
       end
     end
   end

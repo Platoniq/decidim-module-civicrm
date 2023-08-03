@@ -10,7 +10,7 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
-        resources :info, only: :index
+        resources :info, only: [:index, :create]
         resources :groups, only: [:index, :show, :update] do
           collection do
             get :sync

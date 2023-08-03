@@ -85,6 +85,11 @@ en:
               it has been verified using one of the CiViCRM authorization methods.
             status: Status
             title: CiViCRM Module Configuration
+            regenerate_authorizations: Rebuild all authorizations of this type 
+          create:
+            not_found_authorization: Authorization not registered
+            not_a_civicrm_authorization: Not a CiViCRM authorization
+            regenerating_authorizations: All authorization of type "%{name}" will be regenerated, please wait a few minutes.
         meeting_registrations:
           create:
             error: Error while creating sync meeting
