@@ -6,7 +6,7 @@ module Decidim
       queue_as :default
 
       def perform(workflow_name, organization_id)
-        @workflow_name = workflow_name
+        @workflow_name = workflow_name.to_s
         unless Decidim::Civicrm.authorizations.include?(workflow_name&.to_sym)
           Rails.logger.error "RebuildVerificationsJob: ERROR: workflow_name is not a CiViCRM authorization (#{workflow_name})"
           return
