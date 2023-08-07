@@ -13,7 +13,7 @@ module Decidim
           return
         end
 
-        unless @contact&.user
+        unless @contact&.user&.organization == @contact&.organization
           Rails.logger.error "AutoVerificationJob: ERROR: user relationship not found for contact #{contact_id}"
           return
         end
