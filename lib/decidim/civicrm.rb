@@ -78,7 +78,7 @@ module Decidim
 
     # if false, no notifications will be send to users when joining a meeting
     config_accessor :send_meeting_registration_notifications do
-      Decidim::Civicrm.to_bool(ENV["CIVICRM_REGISTRATION_NOTIFICATIONS"])
+      ENV.has_key?("CIVICRM_REGISTRATION_NOTIFICATIONS") ? Decidim::Civicrm.to_bool(ENV["CIVICRM_REGISTRATION_NOTIFICATIONS"]) : true
     end
 
     class Error < StandardError; end

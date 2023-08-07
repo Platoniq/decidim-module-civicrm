@@ -2,11 +2,13 @@
 
 require "spec_helper"
 
-describe Decidim::Civicrm::Verifications::InvalidNotification do
-  include_context "when a simple event"
+module Decidim::Civicrm::Verifications
+  describe InvalidNotification do
+    include_context "when a simple event"
 
-  let(:event_name) { "decidim.events.civicrm_verification.invalid" }
-  let(:resource) { create :user }
+    let(:event_name) { "decidim.events.civicrm_verification.invalid" }
+    let(:resource) { create :user }
 
-  it_behaves_like "a simple event", true
+    it_behaves_like "a simple event", true
+  end
 end

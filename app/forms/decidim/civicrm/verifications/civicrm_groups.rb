@@ -21,7 +21,7 @@ module Decidim
         private
 
         def user_has_groups
-          errors.add(:user, "decidim.civicrm.errors.no_groups") if civicrm_groups.blank?
+          errors.add(:user, I18n.t("decidim.civicrm.errors.no_groups")) if civicrm_groups.blank?
         end
 
         def civicrm_groups

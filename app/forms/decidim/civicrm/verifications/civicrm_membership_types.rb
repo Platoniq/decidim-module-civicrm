@@ -23,7 +23,7 @@ module Decidim
         private
 
         def user_has_memberships
-          errors.add(:user, "decidim.civicrm.errors.no_membership") if civicrm_membership_types.blank?
+          errors.add(:user, I18n.t("decidim.civicrm.errors.no_memberships")) if civicrm_membership_types.blank?
         end
 
         def civicrm_membership_types

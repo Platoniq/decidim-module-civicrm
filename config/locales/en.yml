@@ -213,8 +213,8 @@ en:
         errors:
           not_unique: Contact is already taken
       errors:
-        no_group: No groups found in CiViCRM
-        no_membership: No membership found in CiViCRM
+        no_groups: No groups found in CiViCRM
+        no_memberships: No membership found in CiViCRM
         not_found: Contact not found in CiViCRM
     events:
       civicrm_verification:
@@ -228,8 +228,8 @@ en:
             method
         ok:
           email_intro: You have been granted the "CiViCRM Membership" authorization.
-          email_outro: You can now perform all actions that require the "CiViCRM
-            Membership" authorization.
+          email_outro: You can now perform all actions that require the "CiViCRM Membership"
+            authorization.
           email_subject: Authorization successful
           notification_title: Successful authorization with the "CiViCRM Membership"
             method

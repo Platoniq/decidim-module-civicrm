@@ -11,6 +11,11 @@ module Decidim::Civicrm
       include_context "with stubs example api"
 
       let(:data) { JSON.parse(file_fixture("find_user_valid_response.json").read) }
+      let!(:membership_type) { create :civicrm_membership_type, organization: user.organization, civicrm_membership_type_id: type_id }
+      let!(:contact) { create :civicrm_contact, user: user, organization: user.organization, civicrm_contact_id: contact_id, membership_types: types }
+      let(:types) { [type_id] }
+      let(:type_id) { data["values"].first["api.Membership.get"]["values"].first["id"] }
+      let(:contact_id) { data["id"] }
 
       let(:attributes) do
         {
@@ -19,8 +24,12 @@ module Decidim::Civicrm
       end
       let(:user) { create :user }
 
-      context "when everything is OK" do
-        it { is_expected.to be_valid }
+      it { is_expected.to be_valid }
+
+      context "when no memberships" do
+        let(:types) { [] }
+
+        it { is_expected.to be_invalid }
       end
     end
   end
