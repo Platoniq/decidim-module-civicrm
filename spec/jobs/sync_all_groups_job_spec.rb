@@ -29,7 +29,7 @@ module Decidim::Civicrm
     context "when there are groups from other organizations" do
       let(:other_organization) { create :organization }
       let!(:group) { create :civicrm_group, organization: organization, civicrm_group_id: 3 }
-      let!(:other_group) { create :civicrm_group, organization: other_organization, civicrm_group_id: 4 }
+      let!(:other_group) { create :civicrm_group, organization: other_organization, civicrm_group_id: 4, marked_for_deletion: true }
 
       it "deletes only events from this organization" do
         expect(Group.pluck(:civicrm_group_id)).to match_array([3, 4])

@@ -16,7 +16,7 @@ module Decidim
 
         Rails.logger.info "SyncAllEventsJob: #{EventMeeting.to_delete.count} events to delete"
 
-        EventMeeting.clean_up_records
+        EventMeeting.clean_up_records(decidim_organization_id: organization_id)
       end
 
       def update_event(organization_id, data)

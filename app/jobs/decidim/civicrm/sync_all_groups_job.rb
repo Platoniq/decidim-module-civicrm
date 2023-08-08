@@ -17,7 +17,7 @@ module Decidim
         Rails.logger.info "SyncAllGroupsJob: #{Group.to_delete.count} groups to delete"
         Rails.logger.info "SyncAllGroupsJob: #{GroupMembership.to_delete.count} group memberships to delete"
 
-        Group.clean_up_records
+        Group.clean_up_records(decidim_organization_id: organization_id)
       end
 
       def update_group(organization_id, data)
