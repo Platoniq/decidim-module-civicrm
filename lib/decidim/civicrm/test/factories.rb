@@ -60,7 +60,7 @@ FactoryBot.define do
 
   factory :civicrm_event_registration, class: "Decidim::Civicrm::EventRegistration" do
     event_meeting factory: :civicrm_event_meeting
-    meeting_registration factory: :meeting_registrationg
+    meeting_registration factory: :registration
     civicrm_event_registration_id { Faker::Number.between(from: 1, to: 100) }
   end
 

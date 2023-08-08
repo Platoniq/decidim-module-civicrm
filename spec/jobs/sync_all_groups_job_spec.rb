@@ -21,6 +21,7 @@ module Decidim::Civicrm
       let!(:group) { create :civicrm_group, organization: organization, civicrm_group_id: 3 }
 
       it "deletes the groups" do
+        expect(Group.pluck(:civicrm_group_id)).to match_array([3])
         expect { subject.perform_now(organization.id) }.to change(Group, :count).from(1).to(2)
         expect(Group.pluck(:civicrm_group_id)).to match_array([1, 2])
       end

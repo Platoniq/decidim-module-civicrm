@@ -22,6 +22,7 @@ module Decidim::Civicrm
       let!(:event) { create :civicrm_event_meeting, meeting: meeting, organization: organization, civicrm_event_id: 15 }
 
       it "deletes the events" do
+        expect(EventMeeting.pluck(:civicrm_event_id)).to match_array([15])
         expect { subject.perform_now(organization.id) }.to change(EventMeeting, :count).from(1).to(3)
         expect(EventMeeting.pluck(:civicrm_event_id)).to match_array([11, 12, 13])
       end
