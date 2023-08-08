@@ -7,7 +7,7 @@ module Decidim
         def initialize(registration)
           @resource = registration
           @resource_type = :registration
-          @resource_id = @resource.id
+          @resource_id = @resource&.id
           @entity = "Participant"
           @action = "create"
           @model_class = EventRegistration

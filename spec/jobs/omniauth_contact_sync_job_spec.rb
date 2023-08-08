@@ -44,8 +44,6 @@ module Decidim::Civicrm
 
       context "and has group memberships" do
         let!(:group) { create :civicrm_group, organization: organization }
-        let!(:other_group) { create :civicrm_group, organization: organization }
-        let!(:external_group) { create :civicrm_group }
         let(:group_membership) { create :civicrm_group_membership, group: group, contact: nil, civicrm_contact_id: contact_id }
 
         it "updates existing group memberships" do

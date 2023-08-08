@@ -7,7 +7,7 @@ module Decidim
         def initialize(meeting)
           @resource = meeting
           @resource_type = "Decidim::Meetings::Meeting"
-          @resource_id = @resource.id
+          @resource_id = @resource&.id
           @entity = "Event"
           @action = "create"
           @model_class = EventMeeting
