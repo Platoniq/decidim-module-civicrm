@@ -62,7 +62,7 @@ module Decidim::Civicrm
           let(:civicrm_event_id) { 123 }
 
           it "do not destroy the event" do
-            expect { delete :destroy, params: { id: event_meeting.id } }.to raise_exception(ActiveRecord::RecordNotDestroyed)
+            expect { delete :destroy, params: { id: event_meeting.id } }.not_to change(EventMeeting, :count)
 
             expect(EventMeeting.count).to eq(1)
           end

@@ -64,7 +64,11 @@ module Decidim
         end
 
         def destroy
-          event_meeting.destroy!
+          if event_meeting.civicrm_event_id.present?
+            flash[:alert] = t(".error")
+          else
+            event_meeting.destroy!
+          end
           redirect_to decidim_civicrm_admin.meeting_registrations_path
         end
 

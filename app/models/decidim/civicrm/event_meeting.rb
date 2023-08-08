@@ -14,7 +14,6 @@ module Decidim
       validates :civicrm_event_id, uniqueness: { scope: :organization }, allow_nil: true
       validates :meeting, presence: true, unless: -> { civicrm_event_id.present? }
       validate :same_organization
-      before_destroy :abort_unless_removable
 
       def last_sync
         @last_sync ||= event_registrations.select(:updated_at).order(updated_at: :desc).last&.updated_at
@@ -64,10 +63,6 @@ module Decidim
         return if !meeting || !organization
 
         errors.add(:organization, :invalid) unless organization == meeting.organization
-      end
-
-      def abort_unless_removable
-        throw(:abort) if civicrm_event_id.present?
       end
     end
   end

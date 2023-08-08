@@ -6,7 +6,7 @@ module Decidim
       queue_as :default
 
       def perform(organization_id)
-        EventMeeting.prepare_cleanup
+        EventMeeting.prepare_cleanup(decidim_organization_id: organization_id)
 
         api_events = Decidim::Civicrm::Api::ListEvents.new.result
 
@@ -30,7 +30,6 @@ module Decidim
 
         event.extra = data
         event.marked_for_deletion = false
-
         event.save!
 
         Rails.logger.info "SyncAllEventsJob: Created EventMeeting ID #{event.id}"

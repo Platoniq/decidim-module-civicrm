@@ -95,6 +95,8 @@ en:
           create:
             error: Error while creating sync meeting
             success: New sync meeting created successfully
+          destroy:
+            error: Error while deleting sync meeting
           edit:
             create: Update sync meeting
             title: Edit sync meeting
