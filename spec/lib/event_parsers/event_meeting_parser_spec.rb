@@ -9,7 +9,7 @@ module Decidim::Civicrm
 
     include_context "with stubs example api"
 
-    let(:data) { JSON.parse(file_fixture("event_valid_response.json").read) }
+    let(:data) { JSON.parse(file_fixture("find_event_valid_response.json").read) }
 
     let(:meeting) { create :meeting }
     let(:json) do
@@ -39,7 +39,7 @@ module Decidim::Civicrm
 
     before do
       subject.result = result
-      allow(Decidim::Civicrm).to receive(:auto_sync_meetings_event_attributes).and_return(attributes)
+      allow(Decidim::Civicrm).to receive(:publish_extra_event_attributes).and_return(attributes)
     end
 
     it "is valid" do

@@ -32,10 +32,8 @@ module Decidim
         attr_reader :form
 
         def create_event_meeting!
-          EventMeeting.create!(
+          EventMeeting.find_or_initialize_by(civicrm_event_id: form.civicrm_event_id, organization: form.meeting.organization).update!(
             decidim_meeting_id: form.meeting.id,
-            civicrm_event_id: form.civicrm_event_id,
-            decidim_organization_id: form.meeting.organization.id,
             redirect_url: form.redirect_url,
             redirect_active: form.redirect_active
           )

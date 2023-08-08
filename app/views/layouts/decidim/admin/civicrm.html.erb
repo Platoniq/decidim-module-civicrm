@@ -4,6 +4,9 @@
       <%= t ".title" %>
     </div>
     <ul>
+      <li <% if is_active_link?(decidim_civicrm_admin.info_index_path) %> class="is-active" <% end %>>
+        <%= link_to t("menu.info", scope: "decidim.civicrm.admin"), decidim_civicrm_admin.info_index_path %>
+      </li>
       <li <% if is_active_link?(decidim_civicrm_admin.groups_path) %> class="is-active" <% end %>>
         <%= link_to t("menu.groups", scope: "decidim.civicrm.admin"), decidim_civicrm_admin.groups_path %>
       </li>
@@ -12,6 +15,9 @@
       </li>
       <li <% if is_active_link?(decidim_civicrm_admin.meetings_path) %> class="is-active" <% end %>>
         <%= link_to t("menu.meetings", scope: "decidim.civicrm.admin"), decidim_civicrm_admin.meetings_path %>
+      </li>
+      <li <% if is_active_link?(decidim_civicrm_admin.meeting_registrations_path) %> class="is-active" <% end %>>
+        <%= link_to t("menu.meeting_registrations", scope: "decidim.civicrm.admin"), decidim_civicrm_admin.meeting_registrations_path %>
       </li>
     </ul>
   </div>

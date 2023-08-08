@@ -7,7 +7,7 @@ module Decidim
         def initialize(meeting)
           @resource = meeting
           @resource_type = "Decidim::Meetings::Meeting"
-          @resource_id = @resource.id
+          @resource_id = @resource&.id
           @entity = "Event"
           @action = "create"
           @model_class = EventMeeting
@@ -18,7 +18,7 @@ module Decidim
             start_date: @resource.start_time.strftime("%Y%m%d"),
             end_date: @resource.end_time.strftime("%Y%m%d"),
             title: title
-          }.merge(Decidim::Civicrm.auto_sync_meetings_event_attributes)
+          }.merge(extra_attributes)
         end
 
         def save!
@@ -33,8 +33,14 @@ module Decidim
 
         private
 
+        def extra_attributes
+          return {} unless Decidim::Civicrm.publish_extra_event_attributes.is_a?(Hash)
+
+          Decidim::Civicrm.publish_extra_event_attributes
+        end
+
         def extra_data
-          @extra_data ||= Decidim::Civicrm::Api::FindEvent.new(result["id"]).result[:event]
+          @extra_data ||= Decidim::Civicrm::Api::FindEvent.new(result["id"]).result
         end
 
         def title

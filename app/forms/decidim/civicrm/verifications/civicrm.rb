@@ -21,10 +21,6 @@ module Decidim
           )
         end
 
-        # def to_partial_path
-        #   "civicrm/form"
-        # end
-
         protected
 
         def organization
@@ -44,7 +40,7 @@ module Decidim
         end
 
         def user_valid
-          errors.add(:user, "decidim.civicrm.errors.not_found") if civicrm_contact.blank? && civicrm_api_contact.blank?
+          errors.add(:user, I18n.t("decidim.civicrm.errors.not_found")) if civicrm_contact.blank? && civicrm_api_contact.blank?
         end
       end
     end

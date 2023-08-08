@@ -9,7 +9,7 @@ module Decidim
         include NeedsMultiselectSnippets
 
         helper_method :membership_types
-        helper CivicrmSyncHelpers
+        helper CivicrmHelpers
 
         layout "decidim/admin/civicrm"
 

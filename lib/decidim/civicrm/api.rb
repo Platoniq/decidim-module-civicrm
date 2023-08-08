@@ -15,6 +15,7 @@ require_relative "api/list_contacts_in_group"
 require_relative "api/list_contact_memberships"
 require_relative "api/list_groups"
 require_relative "api/list_membership_types"
+require_relative "api/list_events"
 
 module Decidim
   module Civicrm

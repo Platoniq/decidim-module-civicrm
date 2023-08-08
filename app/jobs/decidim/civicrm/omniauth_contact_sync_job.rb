@@ -6,9 +6,9 @@ module Decidim
       queue_as :default
 
       def perform(data)
-        user = Decidim::User.find(data[:user_id])
+        user = Decidim::User.find_by(id: data[:user_id])
 
-        return unless user.civicrm_identity?
+        return unless user&.civicrm_identity?
 
         Decidim::Civicrm::SyncContact.call(contact_form(user, data)) do
           on(:ok) do |contact|

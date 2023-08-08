@@ -10,13 +10,19 @@ module Decidim
 
         layout "decidim/admin/civicrm"
 
-        helper CivicrmSyncHelpers
+        helper CivicrmHelpers
         helper Decidim::Messaging::ConversationHelper
 
-        helper_method :event_meetings, :event_meeting, :meetings, :meetings_list, :meeting_title, :registrations, :public_meeting_path
+        helper_method :event_meetings, :event_meeting, :meetings, :meetings_list, :meeting_title, :public_meeting_path
 
         def index
           # enforce_permission_to :index, :civicrm_meetings
+          respond_to do |format|
+            format.html
+            format.json do
+              render json: event_meetings
+            end
+          end
         end
 
         def show
@@ -27,56 +33,15 @@ module Decidim
           @form = form(Decidim::Civicrm::Admin::EventMeetingForm).instance
         end
 
-        def create
-          @form = form(Decidim::Civicrm::Admin::EventMeetingForm).from_params(params)
-          CreateEventMeeting.call(@form) do
-            on(:ok) do
-              flash[:notice] = t(".success")
-
-              redirect_to decidim_civicrm_admin.meetings_path
-            end
-
-            on(:invalid) do
-              flash[:alert] = t(".error")
-              render action: "new"
-            end
-          end
-        end
-
-        def edit
-          @form = form(Decidim::Civicrm::Admin::EventMeetingForm).from_model(event_meeting)
-        end
-
-        def update
-          @form = form(Decidim::Civicrm::Admin::EventMeetingForm).from_params(params)
-          UpdateEventMeeting.call(@form, event_meeting) do
-            on(:ok) do
-              flash[:notice] = t(".success")
-
-              redirect_to decidim_civicrm_admin.meetings_path
-            end
-
-            on(:invalid) do
-              flash[:alert] = t(".error")
-              render action: "edit"
-            end
-          end
-        end
-
-        def destroy
-          event_meeting.destroy!
-          redirect_to decidim_civicrm_admin.meetings_path
-        end
-
         def sync
           # enforce_permission_to :update, :civicrm_meetings
 
           if event_meeting.present?
-            SyncEventRegistrationsJob.perform_later(event_meeting.id)
+            SyncEventsJob.perform_later(event_meeting.id)
             flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
             redirect_to decidim_civicrm_admin.meeting_path(event_meeting)
           else
-            SyncAllEventRegistrationsJob.perform_later(current_organization.id)
+            SyncAllEventsJob.perform_later(current_organization.id)
             flash[:notice] = t("success", scope: "decidim.civicrm.admin.meetings.sync")
             redirect_to decidim_civicrm_admin.meetings_path
           end
@@ -108,34 +73,6 @@ module Decidim
           return if params[:id].blank?
 
           @event_meeting ||= all_event_meetings.find(params[:id])
-        end
-
-        def meetings
-          return @meetings if @meetings
-
-          classes = Decidim.participatory_space_manifests.pluck :model_class_name
-          components = []
-          classes.each do |klass|
-            spaces = klass.safe_constantize.where(organization: current_organization)
-            spaces.each do |space|
-              components.concat Decidim::Component.where(participatory_space: space).pluck(:id)
-            end
-          end
-          @meetings = Decidim::Meetings::Meeting.where(decidim_component_id: components)
-        end
-
-        def meeting_title(meeting)
-          "#{meeting.id}: #{translated_attribute(meeting.participatory_space.title)} / #{translated_attribute(meeting.component.name)} / #{translated_attribute(meeting.title)}"
-        end
-
-        def meetings_list
-          @meetings_list ||= meetings.map do |meeting|
-            [meeting_title(meeting), meeting.id]
-          end
-        end
-
-        def registrations
-          paginate(event_meeting.event_registrations.order("extra ->>'display_name' ASC", "extra ->>'register_date' ASC"))
         end
 
         def per_page

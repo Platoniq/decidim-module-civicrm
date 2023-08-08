@@ -15,11 +15,18 @@ shared_context "with stubs example api" do
   let(:params) do
     {}
   end
+  let(:return_data) do
+    [{
+      status: http_status,
+      body: data.to_json,
+      headers: {}
+    }]
+  end
 
   before do
     allow(Decidim::Civicrm::Api).to receive(:url).and_return(url)
     stub_request(http_method, /api\.example\.org/)
-      .to_return(status: http_status, body: data.to_json, headers: {})
+      .to_return(return_data)
   end
 end
 

@@ -11,16 +11,22 @@ module Decidim
       # Prepare a zone to create overrides
       # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
       # overrides
-      config.after_initialize do
+      config.to_prepare do
         Decidim::User.include(Decidim::Civicrm::CivicrmUserAddons)
         # omniauth only trigger notifications when a new user is registered
         # this adds a notification too when user logs in
         Decidim::CreateOmniauthRegistration.include(Decidim::Civicrm::CreateOmniauthRegistrationOverride)
-        Decidim::Devise::SessionsController.include(Decidim::Civicrm::NeedsCivicrmSnippets)
-        Decidim::ApplicationController.include(Decidim::Civicrm::NeedsCivicrmSnippets)
-        Decidim::Admin::ResourcePermissionsController.include(Decidim::Civicrm::Admin::NeedsMultiselectSnippets)
-        Decidim::Meetings::RegistrationsController.include(Decidim::Civicrm::MeetingsRegistrationsControllerOverride)
         Decidim::Meetings::JoinMeeting.include(Decidim::Civicrm::JoinMeetingOverride)
+      end
+
+      # controllers and helpers overrides
+      initializer "decidim_civicrm.overrides", after: "decidim.action_controller" do
+        config.to_prepare do
+          Decidim::Devise::SessionsController.include(Decidim::Civicrm::NeedsCivicrmSnippets)
+          Decidim::ApplicationController.include(Decidim::Civicrm::NeedsCivicrmSnippets)
+          Decidim::Admin::ResourcePermissionsController.include(Decidim::Civicrm::Admin::NeedsMultiselectSnippets)
+          Decidim::Meetings::RegistrationsController.include(Decidim::Civicrm::MeetingsRegistrationsControllerOverride)
+        end
       end
 
       routes do
@@ -97,8 +103,6 @@ module Decidim
       end
 
       initializer "decidim_civicrm.events_sync" do
-        next unless Decidim::Civicrm.auto_sync_meetings_event_attributes.is_a?(Hash)
-
         # triggers civicrm api submissions for events
         Decidim::EventsManager.subscribe(/^decidim\.events\./) do |event_name, data|
           Decidim::Civicrm::EventSyncJob.perform_later(event_name, data)

@@ -8,7 +8,7 @@ module Decidim
         include NeedsPermission
         include NeedsMultiselectSnippets
 
-        helper CivicrmSyncHelpers
+        helper CivicrmHelpers
         helper Decidim::Messaging::ConversationHelper
 
         helper_method :group, :groups, :members, :all_participatory_spaces

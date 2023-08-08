@@ -15,14 +15,14 @@ checksums = [
   {
     package: "decidim-admin",
     files: {
-      "/app/controllers/decidim/admin/resource_permissions_controller.rb" => "689b3ae4ec504b98566461b805cba176"
+      "/app/controllers/decidim/admin/resource_permissions_controller.rb" => "ef48d0cd3a04fb9783f84bb7f61893d3"
     }
   },
   {
     package: "decidim-meetings",
     files: {
       "/app/controllers/decidim/meetings/registrations_controller.rb" => "77274bb241d55cd570f563f967843a72",
-      "/app/commands/decidim/meetings/join_meeting.rb" => "2465c6921c02ba517269e45cee2c53ae"
+      "/app/commands/decidim/meetings/join_meeting.rb" => "3c0477dc5ba6f164e78f4b06a320a4ed"
     }
   }
 ]

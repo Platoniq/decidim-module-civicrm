@@ -4,6 +4,8 @@ module Decidim
   module Civicrm
     module Verifications
       class CivicrmGroups < Decidim::Civicrm::Verifications::Civicrm
+        validate :user_has_groups
+
         def metadata
           super.merge(
             group_ids: civicrm_groups.pluck(:civicrm_group_id)
@@ -17,6 +19,10 @@ module Decidim
         end
 
         private
+
+        def user_has_groups
+          errors.add(:user, I18n.t("decidim.civicrm.errors.no_groups")) if civicrm_groups.blank?
+        end
 
         def civicrm_groups
           @civicrm_groups ||= Decidim::Civicrm::Group.joins(:group_memberships)

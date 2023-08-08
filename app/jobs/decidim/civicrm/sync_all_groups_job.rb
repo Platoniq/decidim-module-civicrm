@@ -6,7 +6,7 @@ module Decidim
       queue_as :default
 
       def perform(organization_id)
-        Group.prepare_cleanup
+        Group.prepare_cleanup(decidim_organization_id: organization_id)
 
         api_groups = Decidim::Civicrm::Api::ListGroups.new.result
 
@@ -17,7 +17,7 @@ module Decidim
         Rails.logger.info "SyncAllGroupsJob: #{Group.to_delete.count} groups to delete"
         Rails.logger.info "SyncAllGroupsJob: #{GroupMembership.to_delete.count} group memberships to delete"
 
-        Group.clean_up_records
+        Group.clean_up_records(decidim_organization_id: organization_id)
       end
 
       def update_group(organization_id, data)
@@ -34,7 +34,7 @@ module Decidim
         group.extra = data
         group.marked_for_deletion = false
 
-        group.auto_sync_members = Decidim::Civicrm.auto_sync_groups&.include?(civicrm_group_id.to_i) unless group.id
+        group.auto_sync_members = Decidim::Civicrm.default_sync_groups&.include?(civicrm_group_id.to_i) unless group.id
 
         group.save!
 

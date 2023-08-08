@@ -10,7 +10,7 @@ module Decidim
 
         event_meeting = Decidim::Civicrm::EventMeeting.find(event_meeting_id)
 
-        data = Decidim::Civicrm::Api::FindEvent.new(event_meeting.civicrm_event_id).result[:event]
+        data = Decidim::Civicrm::Api::FindEvent.new(event_meeting.civicrm_event_id).result
 
         Rails.logger.info "SyncEventRegistrationsJob: Process event_meeting #{event_meeting.id} (civicrm id: #{event_meeting.civicrm_event_id})"
 

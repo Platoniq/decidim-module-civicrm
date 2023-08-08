@@ -13,7 +13,7 @@ module Decidim
           return
         end
 
-        unless @contact&.user
+        unless @contact&.user&.organization == @contact&.organization
           Rails.logger.error "AutoVerificationJob: ERROR: user relationship not found for contact #{contact_id}"
           return
         end
@@ -29,7 +29,9 @@ module Decidim
         handler = Decidim::AuthorizationHandler.handler_for(name, user: @contact.user)
         return unless handler
 
-        Decidim::Verifications::AuthorizeUser.call(handler) do
+        destroy_existing!(handler)
+
+        Decidim::Verifications::AuthorizeUser.call(handler, @contact.organization) do
           on(:ok) do
             Rails.logger.info "AutoVerificationJob: Success: created for user #{handler.user.id}"
             notify_user(handler.user, :ok, handler)
@@ -37,7 +39,7 @@ module Decidim
 
           on(:invalid) do
             Rails.logger.error "AutoVerificationJob: ERROR: failed for user #{handler&.user&.id}"
-            notify_user(handler.user, :invalild, handler)
+            notify_user(handler.user, :invalid, handler)
           end
         end
       end
@@ -57,6 +59,13 @@ module Decidim
             errors: handler.errors.full_messages
           }
         )
+      end
+
+      def destroy_existing!(handler)
+        Decidim::Authorization.find_by(
+          user: handler.user,
+          name: handler.handler_name
+        )&.destroy!
       end
     end
   end

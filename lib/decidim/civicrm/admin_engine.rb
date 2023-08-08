@@ -10,6 +10,7 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
+        resources :info, only: [:index, :create]
         resources :groups, only: [:index, :show, :update] do
           collection do
             get :sync
@@ -18,20 +19,26 @@ module Decidim
           end
         end
 
-        resources :membership_types, only: [:index] do
+        resources :membership_types, only: :index do
           collection do
             get :sync
           end
         end
 
-        resources :meetings do
+        resources :meetings, only: :index do
+          collection do
+            get :sync
+          end
+        end
+
+        resources :meeting_registrations do
           collection do
             get :sync
             put :toggle_active
           end
         end
 
-        root to: "groups#index"
+        root to: "info#index"
       end
 
       initializer "decidim_civicrm.webpacker.assets_path" do
@@ -47,10 +54,10 @@ module Decidim
       initializer "decidim.civicrm.admin_menu" do
         Decidim.menu :admin_menu do |menu|
           menu.item I18n.t("menu.civicrm", scope: "decidim.admin", default: "CiViCRM"),
-                    decidim_civicrm_admin.groups_path,
+                    decidim_civicrm_admin.info_index_path,
                     icon_name: "people",
                     position: 5.75,
-                    active: is_active_link?(decidim_civicrm_admin.groups_path, :inclusive),
+                    active: is_active_link?(decidim_civicrm_admin.info_index_path, :inclusive),
                     if: defined?(current_user) && current_user&.read_attribute("admin")
         end
       end

@@ -26,8 +26,8 @@ module Decidim
         extra["display_name"] || user&.name
       end
 
-      def contact_id
-        extra["contact_id"] || contact&.id
+      def civicrm_contact_id
+        extra["contact_id"] || contact&.civicrm_contact_id
       end
 
       def status

@@ -53,7 +53,7 @@ es:
             unsynchronized: Nunca logueado todavía
           sync:
             success: La sincronización ha empezado
-        meetings:
+        meeting_registrations:
           create:
             error: Error al crear un encuentro sincronizado
             success: El encuentro sincronizado fue creado con éxito
@@ -112,7 +112,7 @@ es:
             success: La sincronización ha empezado
         menu:
           groups: Grupos
-          meetings: Encuentros
+          meetings: Registro en encuentros
           membership_types: Tipo de membresia
           verifications: Autorizaciones
       authorizations:

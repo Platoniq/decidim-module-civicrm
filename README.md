@@ -1,9 +1,9 @@
 Decidim CiviCRM integration module
 ==================================
 
-[![[CI] Test](https://github.com/Platoniq/decidim-module-civicrm/actions/workflows/test.yml/badge.svg)](https://github.com/Platoniq/decidim-module-civicrm/actions/workflows/test.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/9b7a27a36e3b59e07293/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-civicrm/maintainability)
-[![codecov](https://codecov.io/gh/Platoniq/decidim-module-civicrm/branch/main/graph/badge.svg)](https://codecov.io/gh/Platoniq/decidim-module-civicrm)
+[![[CI] Test](https://github.com/openpoke/decidim-module-civicrm/actions/workflows/test.yml/badge.svg)](https://github.com/openpoke/decidim-module-civicrm/actions/workflows/test.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/84ade81f01bacb0013b0/maintainability)](https://codeclimate.com/github/openpoke/decidim-module-civicrm/maintainability)
+[![codecov](https://codecov.io/gh/openpoke/decidim-module-civicrm/branch/main/graph/badge.svg)](https://codecov.io/gh/openpoke/decidim-module-civicrm)
 
 This module provides certain integrations in order to use [CiviCRM](https://civicrm.org/) with Decidim.
 
@@ -34,8 +34,7 @@ Install
 Add into the `Gemfile`
 
 ```ruby
-gem "decidim-civicrm", git: "https://github.com/Platoniq/decidim-module-civicrm", branch: "main"
-
+gem "decidim-civicrm", github: "openpoke/decidim-module-civicrm"
 ```
 
 Install dependencies:
@@ -46,11 +45,9 @@ bundle
 
 Install (and run) migrations:
 
-
 ```
 bundle exec rails decidim_civicrm:install:migrations
 bundle exec rails db:migrate
-
 ```
 
 ## Configuration
@@ -66,7 +63,10 @@ By default, you can just get by using ENV vars to automatically configure the AP
 | CIVICRM_CLIENT_SECRET | Same as the previous one. | `XXXXXXXX` |
 | CIVICRM_SITE | Just the main URL of your Drupal/CiViCRM site | https://YOURCIVICRM.SITE |
 | CIVICRM_ICON | **Optional**, defaults to the original CiViCRM logo. If you want to override it, place the image under your `app/packs/images/my-icon.png` and reference it here as `media/images/my-icon.png` | `media/images/civicrm-icon.png` |
-
+| CIVICRM_VERIFICATION_NOTIFICATIONS | If true, sends notification to the user once has been verified with one CiViCRM authorization. Default is `true`. | `true`, `1`, `0`, `False` |
+| CIVICRM_PUBLISH_MEETINGS | If true, publishes every meeting created in Decidim to CiViCRM via POST request in the Events API. Default is `false`. | `true`, `1`, `0`, `False` |
+| CIVICRM_PUBLISH_MEETING_REGISTRATIONS | If true, publishes every registration to a meeting in Decidim to CiViCRM via POST request in the EventRegistrations API. Note that only paired Meeting/events (admins can do it manually or activate the previous env var for doing it automatically). Defaulte is `true`.  | `true`, `1`, `0`, `False` |
+| CIVICRM_REGISTRATION_NOTIFICATIONS | If true, every time a user registers to a meeting will receive and email. Default is `false`. | `true`, `1`, `0`, `False` |
 
 ### Alternate method
 
@@ -108,7 +108,7 @@ end
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Platoniq/decidim-module-civicrm.
+Bug reports and pull requests are welcome on GitHub at https://github.com/openpoke/decidim-module-civicrm.
 
 ### Developing
 
