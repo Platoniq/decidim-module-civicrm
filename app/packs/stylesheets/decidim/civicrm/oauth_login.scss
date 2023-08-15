@@ -1,17 +1,14 @@
-.social-register,
-.button--social.button--social--mini {
-  &.button--civicrm {
-    .button--social__icon {
-      padding: 4px;
+.button--civicrm {
+  .button--social__icon {
+    padding: 4px;
 
-      .icon {
-        display: inline-block !important;
-        background: white;
-        width: 36px;
-        height: auto;
-        padding: 2px;
-        border-radius: 3px;
-      }
+    .icon {
+      display: inline-block !important;
+      background: white;
+      width: 36px;
+      height: auto;
+      padding: 2px;
+      border-radius: 3px;
     }
   }
 }

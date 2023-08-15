@@ -11,10 +11,10 @@ module Decidim
 
           attr_accessor :response
 
-          def self.get(params, verify_ssl: true)
+          def self.get(params = {}, verify_ssl: true)
             instance = Request.new(verify_ssl: verify_ssl)
             response = instance.connection.get Decidim::Civicrm::Api.url do |request|
-              request.params = instance.base_params.merge(params)
+              request.params = instance.base_params.merge(**params)
 
               # DEBUG, to obtain the correct URL for stub_request
               safe_params = request.params.dup
