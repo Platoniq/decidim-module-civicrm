@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "omniauth/civicrm"
+require "deface"
 
 module Decidim
   module Civicrm
@@ -17,6 +18,7 @@ module Decidim
         # this adds a notification too when user logs in
         Decidim::CreateOmniauthRegistration.include(Decidim::Civicrm::CreateOmniauthRegistrationOverride)
         Decidim::Meetings::JoinMeeting.include(Decidim::Civicrm::JoinMeetingOverride)
+        Decidim::UpdateAccount.include(Decidim::Civicrm::UpdateAccountOverride)
       end
 
       # controllers and helpers overrides
