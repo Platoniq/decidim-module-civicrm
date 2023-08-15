@@ -6,9 +6,11 @@ module Decidim
       class FindGroup < Base::FindQuery
         def initialize(id, query = nil)
           @request = Base::Request.get(
-            entity: "Group",
-            group_id: id,
-            json: json_params(query || default_query)
+            {
+              entity: "Group",
+              group_id: id,
+              json: json_params(query || default_query)
+            }
           )
 
           store_result

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDecidimCivicrmGroups < ActiveRecord::Migration[5.2]
   def change
     create_table :decidim_civicrm_groups do |t|
@@ -9,12 +11,11 @@ class CreateDecidimCivicrmGroups < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :description
       t.jsonb :extra, default: {}
-      
 
       t.boolean :marked_for_deletion, default: false
       t.boolean :auto_sync_members, default: false
 
-      t.index ["decidim_organization_id", "civicrm_group_id"], name: "index_unique_civicrm_group_and_organization", unique: true
+      t.index %w(decidim_organization_id civicrm_group_id), name: "index_unique_civicrm_group_and_organization", unique: true
       t.timestamps
     end
   end

@@ -6,8 +6,10 @@ module Decidim
       class ListMembershipTypes < Base::ListQuery
         def initialize(query = nil)
           @request = Base::Request.get(
-            entity: "MembershipType",
-            json: json_params(query || default_query)
+            {
+              entity: "MembershipType",
+              json: json_params(query || default_query)
+            }
           )
           store_result
         end

@@ -6,9 +6,11 @@ module Decidim
       class FindContact < Base::FindQuery
         def initialize(id, query = nil)
           @request = Base::Request.get(
-            entity: "Contact",
-            contact_id: id,
-            json: json_params(query || default_query)
+            {
+              entity: "Contact",
+              contact_id: id,
+              json: json_params(query || default_query)
+            }
           )
 
           store_result

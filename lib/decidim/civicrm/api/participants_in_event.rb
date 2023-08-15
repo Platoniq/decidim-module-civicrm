@@ -6,9 +6,11 @@ module Decidim
       class ParticipantsInEvent < Base::ListQuery
         def initialize(id, query = nil)
           @request = Base::Request.get(
-            entity: "Participant",
-            event_id: id,
-            json: json_params(query || default_query)
+            {
+              entity: "Participant",
+              event_id: id,
+              json: json_params(query || default_query)
+            }
           )
 
           store_result
