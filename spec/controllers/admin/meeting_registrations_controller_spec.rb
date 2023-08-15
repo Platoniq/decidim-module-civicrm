@@ -34,7 +34,7 @@ module Decidim::Civicrm
         it "creates redirects back" do
           post :create, params: params
 
-          expect(response).to redirect_to(meeting_registrations_path)
+          expect(response).to redirect_to("/admin/civicrm#{meeting_registrations_path}")
         end
 
         it "creates a new event meeting" do
@@ -45,7 +45,7 @@ module Decidim::Civicrm
           let(:decidim_meeting_id) { nil }
 
           it "do not create a new event meeting" do
-            expect { post(:create, params: params) }.to change(EventMeeting, :count).by(0)
+            expect { post(:create, params: params) }.not_to change(EventMeeting, :count)
           end
         end
       end
@@ -76,11 +76,11 @@ module Decidim::Civicrm
         it "toggles" do
           put :toggle_active, params: { id: event_meeting.id }
 
-          expect(event_meeting.reload.redirect_active).to eq(true)
+          expect(event_meeting.reload.redirect_active).to be(true)
 
           put :toggle_active, params: { id: event_meeting.id }
 
-          expect(event_meeting.reload.redirect_active).to eq(false)
+          expect(event_meeting.reload.redirect_active).to be(false)
         end
       end
     end

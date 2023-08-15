@@ -45,7 +45,7 @@ module Decidim
 
     # if false, no notifications will be send to users when automatic verifications are performed
     config_accessor :send_verification_notifications do
-      ENV.has_key?("CIVICRM_VERIFICATION_NOTIFICATIONS") ? Decidim::Civicrm.to_bool(ENV["CIVICRM_VERIFICATION_NOTIFICATIONS"]) : true
+      ENV.has_key?("CIVICRM_VERIFICATION_NOTIFICATIONS") ? Decidim::Civicrm.to_bool(ENV.fetch("CIVICRM_VERIFICATION_NOTIFICATIONS", nil)) : true
     end
 
     # array with civirm group ids that will automatically (cron based) syncronize contact memberships
@@ -57,7 +57,7 @@ module Decidim
     # Set it true to create a new event in CiViCRM automatically every time a new meeting is created in Decidim
     # set to false to disable this functionality
     config_accessor :publish_meetings_as_events do
-      Decidim::Civicrm.to_bool(ENV["CIVICRM_PUBLISH_MEETINGS"])
+      Decidim::Civicrm.to_bool(ENV.fetch("CIVICRM_PUBLISH_MEETINGS", nil))
     end
 
     # If you have some custom fields in your CiVICRM events and want them in the Decidim database
@@ -73,12 +73,12 @@ module Decidim
     # (This happens automatically if publish_meetings_as_events is true)
     # set to false to disable this functionality
     config_accessor :publish_meeting_registrations do
-      ENV.has_key?("CIVICRM_PUBLISH_MEETING_REGISTRATIONS") ? Decidim::Civicrm.to_bool(ENV["CIVICRM_PUBLISH_MEETING_REGISTRATIONS"]) : true
+      ENV.has_key?("CIVICRM_PUBLISH_MEETING_REGISTRATIONS") ? Decidim::Civicrm.to_bool(ENV.fetch("CIVICRM_PUBLISH_MEETING_REGISTRATIONS", nil)) : true
     end
 
     # if false, no notifications will be send to users when joining a meeting
     config_accessor :send_meeting_registration_notifications do
-      ENV.has_key?("CIVICRM_REGISTRATION_NOTIFICATIONS") ? Decidim::Civicrm.to_bool(ENV["CIVICRM_REGISTRATION_NOTIFICATIONS"]) : true
+      ENV.has_key?("CIVICRM_REGISTRATION_NOTIFICATIONS") ? Decidim::Civicrm.to_bool(ENV.fetch("CIVICRM_REGISTRATION_NOTIFICATIONS", nil)) : true
     end
 
     class Error < StandardError; end

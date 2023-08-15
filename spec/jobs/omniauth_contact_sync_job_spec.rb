@@ -47,7 +47,7 @@ module Decidim::Civicrm
         let(:group_membership) { create :civicrm_group_membership, group: group, contact: nil, civicrm_contact_id: contact_id }
 
         it "updates existing group memberships" do
-          expect(group_membership.contact).to eq(nil)
+          expect(group_membership.contact).to be_nil
           expect { subject.perform_now(data) }.not_to(change(GroupMembership, :count))
           expect(group_membership.reload.contact).to eq(contact)
         end

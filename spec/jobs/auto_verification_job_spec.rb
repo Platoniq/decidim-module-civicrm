@@ -44,21 +44,21 @@ module Decidim::Civicrm
       it "destroys and rebuilds the authorizations" do
         expect { subject.perform_now(contact.id) }.to(change { Decidim::Authorization.pluck(:created_at) })
       end
-    end
 
-    context "when no contact" do
-      it "does nothing" do
-        expect { subject.perform_now(0) }.not_to(change { Decidim::Authorization.count })
-      end
-    end
-
-    context "when contact user is another organization" do
-      before do
-        contact.update(user: create(:user))
+      context "when no contact" do
+        it "does nothing" do
+          expect { subject.perform_now(0) }.not_to(change(Decidim::Authorization, :count))
+        end
       end
 
-      it "does nothing" do
-        expect { subject.perform_now(contact.id) }.not_to(change { Decidim::Authorization.count })
+      context "when contact user is another organization" do
+        before do
+          contact.update(user: create(:user))
+        end
+
+        it "does nothing" do
+          expect { subject.perform_now(contact.id) }.not_to(change(Decidim::Authorization, :count))
+        end
       end
     end
   end
