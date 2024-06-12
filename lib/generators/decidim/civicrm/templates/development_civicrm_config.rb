@@ -7,7 +7,7 @@ Decidim::Civicrm.configure do |config|
     key: ENV.fetch("CIVICRM_VERIFICATION_API_KEY", nil),
     secret: ENV.fetch("CIVICRM_VERIFICATION_SECRET", nil),
     url: ENV.fetch("CIVICRM_VERIFICATION_URL", nil),
-    api_version: ENV.fetch("API_VERSION", nil)
+    version: ENV.fetch("CIVICRM_API_VERSION", nil)
   }
 
   # Configure omniauth secrets

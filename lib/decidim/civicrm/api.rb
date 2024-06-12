@@ -64,7 +64,7 @@ module Decidim
       end
 
       def self.version
-        config[:api_version]
+        config[:version]
       end
 
       def self.available_versions
