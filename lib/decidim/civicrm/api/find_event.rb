@@ -3,31 +3,16 @@
 module Decidim
   module Civicrm
     module Api
-      class FindEvent < Base::FindQuery
+      class FindEvent
+        attr_reader :result
+
         def initialize(id, query = nil)
-          @request = Base::Request.get(
-            {
-              entity: "Event",
-              id: id,
-              json: json_params(query || default_query)
-            }
-          )
-
-          store_result
-        end
-
-        def default_query
-          {
-            return: "event_id,title,event_title,event_type,start_date,evet_start_date,end_date,event_end_date"
-          }
-        end
-
-        private
-
-        def parsed_response
-          {
-            event: response["values"].first
-          }
+          @result = case Decidim::Civicrm::Api.version
+                    when Decidim::Civicrm::Api.available_versions[:v3]
+                      Decidim::Civicrm::Api::V3::FindEvent.new(id, query).result
+                    when Decidim::Civicrm::Api.available_versions[:v4]
+                      Decidim::Civicrm::Api::V4::FindEvent.new(id, query).result
+                    end
         end
       end
     end
