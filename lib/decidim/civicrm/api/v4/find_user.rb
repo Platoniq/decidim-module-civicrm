@@ -33,7 +33,7 @@ module Decidim
               },
               contact: {
                 id: item["uf_match.contact_id"],
-                display_name: item["email_primary.email"]
+                display_name: item["display_name"]
               },
               memberships: Array(item["membership.membership_type_id:label"])
             }
