@@ -26,12 +26,14 @@ module Decidim
 
           def parsed_response
             response_hash = response["values"].first
-            response_hash["display_name"] = response_hash.delete("contact_id.display_name")
-            response_hash["participant_status"] = response_hash.delete("status_id:label")
-            response_hash["participant_fee_level"] = response_hash.delete("fee_level")
-            response_hash["participant_fee_amount"] = response_hash.delete("fee_amount")
-            response_hash["participant_fee_currency"] = response_hash.delete("fee_currency")
-            response_hash["participant_id"] = response_hash["id"]
+            if response_hash
+              response_hash["display_name"] = response_hash.delete("contact_id.display_name")
+              response_hash["participant_status"] = response_hash.delete("status_id:label")
+              response_hash["participant_fee_level"] = response_hash.delete("fee_level")
+              response_hash["participant_fee_amount"] = response_hash.delete("fee_amount")
+              response_hash["participant_fee_currency"] = response_hash.delete("fee_currency")
+              response_hash["participant_id"] = response_hash["id"]
+            end
             {
               participant: response_hash
             }

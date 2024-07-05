@@ -26,9 +26,11 @@ module Decidim
 
           def parsed_response
             response_hash = response["values"].first
-            response_hash["event_title"] = response_hash["title"]
-            response_hash["event_start_date"] = response_hash["start_date"]
-            response_hash["event_end_date"] = response_hash["end_date"]
+            if response_hash
+              response_hash["event_title"] = response_hash["title"]
+              response_hash["event_start_date"] = response_hash["start_date"]
+              response_hash["event_end_date"] = response_hash["end_date"]
+            end
             {
               event: response_hash
             }
