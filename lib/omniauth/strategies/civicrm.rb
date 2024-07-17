@@ -20,8 +20,8 @@ module OmniAuth
 
       info do
         {
-          name: parsed_name(extra[:contact][:display_name]),
-          nickname: parsed_nickname(raw_info["preferred_username"]),
+          name: parsed_name,
+          nickname: parsed_nickname,
           email: raw_info["email"],
           image: raw_info["picture"]
         }
@@ -56,12 +56,12 @@ module OmniAuth
         @civicrm_info ||= ::Decidim::Civicrm::Api::FindUser.new(uid).result
       end
 
-      def parsed_name(expr)
-        expr.gsub(/[^\w\-]/, "")
+      def parsed_name
+        extra[:contact][:display_name].gsub(/[<>?%&^*#@()\[\]=+:;"{}\\|]/, "")
       end
 
-      def parsed_nickname(expr)
-        expr.gsub(/[<>?%&$\^*#@()\[\]=+:;., "{}\\|]/, "")
+      def parsed_nickname
+        Decidim::UserBaseEntity.nicknamize(raw_info["preferred_username"])
       end
     end
   end
