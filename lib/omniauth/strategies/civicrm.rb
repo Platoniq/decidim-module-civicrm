@@ -61,7 +61,7 @@ module OmniAuth
       end
 
       def parsed_nickname
-        Decidim::UserBaseEntity.nicknamize(raw_info["preferred_username"])
+        ::Decidim::UserBaseEntity.nicknamize(raw_info["preferred_username"])
       end
     end
   end
